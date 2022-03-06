@@ -8,7 +8,7 @@ entity "Uživatel" as user {
     --
     Jméno : text
     Přijmení : text
-    Fotografie : obrázek
+    Fotografie : text    
 }
 
 entity "Jízda" as ride {
@@ -17,7 +17,7 @@ entity "Jízda" as ride {
     Start : text
     Cíl : text
     Čas začátku : datum
-    Čas konce : datum
+    Trvání : číslo
 }
 
 entity "Auto" as car {
@@ -27,7 +27,7 @@ entity "Auto" as car {
     Výrobce : text
     Typ : text
     Datum registrace : datum
-    Fotografie : obrázek
+    Fotografie : text
     Počet sedadel : číslo
 }
 

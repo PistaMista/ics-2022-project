@@ -1,5 +1,15 @@
-# Rules in this file were initially inferred by Visual Studio IntelliCode from the C:\Users\GrandFrajer\projects\ics\project codebase based on best match to current usage at 06.03.2022
-# You can modify the rules from these initially generated values to suit your own policies
-# You can learn more about editorconfig here: https://docs.microsoft.com/en-us/visualstudio/ide/editorconfig-code-style-settings-reference
-[*.cs]
 
+root = true
+
+[*]
+tab_width = 4
+end_of_line = lf
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+[Makefile]
+indent_style = tab
+
+[!Makefile]
+indent_style = space

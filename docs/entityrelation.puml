@@ -1,0 +1,38 @@
+@startuml entityrelation
+!theme mars
+hide circle
+skinparam linetype ortho
+
+entity "Uživatel" as user {
+    id : číslo <<pk>>
+    --
+    Jméno : text
+    Přijmení : text
+    Fotografie : obrázek
+}
+
+entity "Jízda" as ride {
+    id : číslo <<pk>>
+    --
+    Start : text
+    Cíl : text
+    Čas začátku : datum
+    Čas konce : datum
+}
+
+entity "Auto" as car {
+    id : číslo <<pk>>
+    --
+    SPZ : text
+    Výrobce : text
+    Typ : text
+    Datum registrace : datum
+    Fotografie : obrázek
+    Počet sedadel : číslo
+}
+
+user ||--o{ car : Vlastní
+car ||--o{ ride : Využije
+user ||--o{ ride : Řídí
+user }o--o{ ride : Jede
+@enduml

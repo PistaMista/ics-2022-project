@@ -1,0 +1,23 @@
+@startuml usecase
+!theme mars
+
+left to right direction
+actor Nepřihlašený as guest
+actor Přihlašený as user
+actor Řidič as driver
+user <|-- driver
+
+guest --> (Vytvořit účet)
+guest --> (Přihlasit se k účtu)
+
+user --> (Spravovat účet)
+user --> (Spravovat auta)
+user --> (Přidat jízdu)
+user --> (Přidat se k jízdě)
+user --> (Odebrat se z jízdy)
+user --> (Zobrazit spolujízdy)
+
+driver --> (Odebrat spolujezdce)
+driver --> (Upravit jízdu)
+driver --> (Zrušit jízdu)
+@enduml

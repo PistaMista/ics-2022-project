@@ -12,6 +12,14 @@ public class SqliteDbContextFactory : IDbContextFactory<CarRideDbContext>
     private readonly string _connectionString;
     private readonly bool _seedDemoData;
 
+    public SqliteDbContextFactory()
+    {
+        var folder = Environment.SpecialFolder.LocalApplicationData;
+        var path = Environment.GetFolderPath(folder);
+
+        _connectionString = $"Data Source={Path.Join(path, "CarRide.db")}";
+    }
+
     public SqliteDbContextFactory(string connectionString, bool seedDemoData = false)
     {
         _connectionString = connectionString;

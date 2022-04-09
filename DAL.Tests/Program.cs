@@ -11,10 +11,7 @@ namespace DAL.Tests
     {
         static void Main(string[] args)
         {
-            var contextFactory = new SqliteDbContextFactory(
-                connectionString:
-                    @"Data Source=..\DAL\CarRide.db" //TODO Change this path to point to the proper db file 
-            );
+            var contextFactory = new SqliteDbContextFactory();
 
             using (var ctx = contextFactory.CreateDbContext())
             {
@@ -40,8 +37,12 @@ namespace DAL.Tests
 
                 ctx.Add(Lubomir);
 
+                var builder = new DbContextOptionsBuilder<CarRideDbContext>();
+                var folder = Environment.SpecialFolder.LocalApplicationData;
+                var path = Environment.GetFolderPath(folder);
+                Console.WriteLine(path);
 
-                //ctx.SaveChanges();
+                ctx.SaveChanges();
             }
         }
     }

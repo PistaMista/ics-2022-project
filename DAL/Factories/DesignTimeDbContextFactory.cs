@@ -19,7 +19,7 @@ public class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<CarRideDbC
         var builder = new DbContextOptionsBuilder<CarRideDbContext>();
 
         builder.UseSqlite(
-            connectionString: @"Data Source=CarRide.db;"
+            connectionString: @"Data Source=CarRide.db;" //TODO Change this path to export the database file to the same folder as the binary
         );
 
         return new CarRideDbContext(builder.Options);

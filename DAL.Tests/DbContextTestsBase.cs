@@ -16,7 +16,7 @@ public class DbContextTestsBase : IAsyncLifetime
 
         // DbContextFactory = new DbContextTestingInMemoryFactory(GetType().Name, seedTestingData: true);
         // DbContextFactory = new DbContextLocalDBTestingFactory(GetType().FullName!, seedTestingData: true);
-        DbContextFactory = new SqliteDbContextTestingFactory(GetType().FullName!, seedTestingData: true);
+        DbContextFactory = new SqliteDbContextTestingFactory(GetType().FullName!, seedTestingData: false);
 
         CarRideDbContextSUT = DbContextFactory.CreateDbContext();
     }

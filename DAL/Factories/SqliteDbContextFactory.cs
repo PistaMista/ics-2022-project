@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DAL.Factories;
 
-public class SqliteDbContextFactory
+public class SqliteDbContextFactory : IDbContextFactory<CarRideDbContext>
 {
     private readonly string _connectionString;
     private readonly bool _seedDemoData;

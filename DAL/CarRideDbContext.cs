@@ -19,19 +19,26 @@ public class CarRideDbContext : DbContext
         _seedDemoData = seedDemoData;
     }
 
-    public DbSet<CarEntity> IngredientAmountEntities => Set<CarEntity>();
-    public DbSet<UserEntity> Recipes => Set<UserEntity>();
-    public DbSet<RideEntity> Ingredients => Set<RideEntity>();
+    public DbSet<CarEntity> Cars => Set<CarEntity>();
+    public DbSet<UserEntity> Users => Set<UserEntity>();
+    public DbSet<RideEntity> Rides => Set<RideEntity>();
 
-    //protected override void OnModelCreating(ModelBuilder modelBuilder)
-    //{
-    //    base.OnModelCreating(modelBuilder);
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        base.OnModelCreating(modelBuilder);
 
-    //    if (_seedDemoData)
-    //    {
-    //        CarSeeds.Seed(modelBuilder);
-    //        RideSeeds.Seed(modelBuilder);
-    //        UserSeeds.Seed(modelBuilder);
-    //    }
-    //}
+        modelBuilder.Entity<UserEntity>().HasMany(x => x.RidesDriver).WithOne(x => x.Driver);
+ 
+
+        if (_seedDemoData)
+        {
+            CarSeeds.Seed(modelBuilder);
+            RideSeeds.Seed(modelBuilder);
+            UserSeeds.Seed(modelBuilder);
+        }
+
+        
+    }
+
+    protected override void OnConfiguring(DbContextOptionsBuilder builder) => builder.UseSqlite();
 }

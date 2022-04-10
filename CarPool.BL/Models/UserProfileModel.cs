@@ -15,8 +15,7 @@ public record UserProfileModel(
     {
         public MapperProfile()
         {
-            CreateMap<UserEntity, UserProfileModel>()
-                .ReverseMap();
+            CreateMap<UserEntity, UserProfileModel>();
         }
     }
     public static UserProfileModel Empty => new(string.Empty, string.Empty, string.Empty);

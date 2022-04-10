@@ -3,13 +3,12 @@ using DAL.Entities;
 using Common.Enums;
 
 namespace CarPool.BL.Models;
-public record CarModel(
+public record CarInfoModel(
     string Manufacturer,
     CarType Type,
     string LicensePlate,
     int SeatCount,
-    string PhotoUrl,
-    DateTime RegistrationDate) : ModelBase
+    string PhotoUrl) : ModelBase
 {
     public string Manufacturer { get; } = Manufacturer;
     public CarType Type { get; } = Type;
@@ -21,10 +20,8 @@ public record CarModel(
     {
         public MapperProfile()
         {
-            CreateMap<CarEntity, CarModel>()
-                .ReverseMap(); 
-
+            CreateMap<CarEntity, CarInfoModel>();
         }
     }
-    public static CarModel Empty => new(string.Empty, CarType.None, string.Empty, 0, string.Empty, DateTime.MinValue);
+    public static CarInfoModel Empty => new(string.Empty, CarType.None, string.Empty, 0, string.Empty);
 }

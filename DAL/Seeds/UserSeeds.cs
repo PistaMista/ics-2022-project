@@ -19,7 +19,7 @@ public static class UserSeeds
         );
 
     public static readonly UserEntity Marie = new UserEntity(
-        Id: Guid.Parse("6860fad0-cd02-47b7-af5d-194288d2947b"),
+        Id: Guid.Parse("1dc05d92-5dde-42f6-82da-233abc47a056"),
         FirstName: "Marie",
         LastName: "Novakova",
         PhotoUrl: @"https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwp-media.familytoday.com%2F2016%2F04%2FfeaturedImageId23471.jpg&f=1&nofb=1"

@@ -42,7 +42,7 @@ namespace CarPool.BL.Tests
         }
 
         [Fact]
-        public async Task GetAll_Single_SeededSkoda()
+        public async Task GetAll_Single_SeededCar()
         {
             var cars = await _carFacadeSut.GetAsync();
             var car = cars.Single(i => i.Id == CarSeeds.CarEntity.Id);
@@ -51,7 +51,7 @@ namespace CarPool.BL.Tests
         }
 
         [Fact]
-        public async Task GetById_SeededSkoda()
+        public async Task GetById_SeededCar()
         {
             var car = await _carFacadeSut.GetAsync(CarSeeds.CarEntity.Id);
 
@@ -67,7 +67,7 @@ namespace CarPool.BL.Tests
         }
 
         [Fact]
-        public async Task SeededSkoda_DeleteById_Deleted()
+        public async Task SeededCar_DeleteById_Deleted()
         {
             await _carFacadeSut.DeleteAsync(CarSeeds.CarEntity.Id);
 

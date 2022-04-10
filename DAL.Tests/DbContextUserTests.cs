@@ -33,4 +33,26 @@ public class DbContextUserTests : DbContextTestsBase
 
         DeepAssert.Equal(lubomir, actualLubomir);
     }
+
+    [Fact]
+    public async Task AddNew_UserWithCar_Persisted()
+    {
+        var jane = UserSeeds.Marie with
+        {
+            FirstName = "Jane"
+        };
+
+        var skoda = CarSeeds.Skoda;
+        jane.Cars.Add(skoda);
+
+        CarRideDbContextSUT.Add(jane);
+        await CarRideDbContextSUT.SaveChangesAsync();
+
+        await using var dbx = await DbContextFactory.CreateDbContextAsync();
+        var actualJane = await dbx.Users
+            .Include(u => u.Cars)
+            .SingleAsync(u => u.Id == jane.Id);
+
+        DeepAssert.Equal(jane, actualJane);
+    }
 }

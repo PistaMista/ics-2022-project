@@ -16,10 +16,7 @@ namespace DAL.Tests;
 
 public class DbContextUserTests : DbContextTestsBase
 {
-    public DbContextUserTests(ITestOutputHelper output) : base(output)
-    {
-       
-    }
+    public DbContextUserTests(ITestOutputHelper output) : base(output) { }
 
     [Fact]
     public async Task AddNew_UserWithoutCarsOrRides_Persisted()
@@ -105,5 +102,23 @@ public class DbContextUserTests : DbContextTestsBase
             .SingleAsync(u => u.Id == lubomir.Id);
 
         DeepAssert.Equal(lubomir, actualLubomir);
+    }
+
+    [Fact]
+    public async Task GetById_User()
+    {
+        var entity = await CarRideDbContextSUT.Users.SingleAsync(u => u.Id == UserSeeds.UserEntity.Id);
+
+        DeepAssert.Equal(
+            expected:
+                UserSeeds.UserEntity with
+                {
+                    RidesDriver = new List<RideEntity>(),
+                    RidesPassenger = new List<RideEntity>(),
+                    Cars = new List<CarEntity>()
+                },
+            actual:
+                entity
+        );
     }
 }

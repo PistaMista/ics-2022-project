@@ -32,7 +32,6 @@ public static class RideSeeds
     public static void Seed(this ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<RideEntity>().HasData(
-            EmptyRideEntity,
             RideEntity
         );
     }

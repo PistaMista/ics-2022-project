@@ -36,7 +36,6 @@ public static class CarSeeds
     public static void Seed(this ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<CarEntity>().HasData(
-            EmptyCarEntity,
             CarEntity
         );
     }

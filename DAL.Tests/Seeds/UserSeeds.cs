@@ -25,16 +25,9 @@ public static class UserSeeds
         PhotoUrl: @"https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwp-media.familytoday.com%2F2016%2F04%2FfeaturedImageId23471.jpg&f=1&nofb=1"
         );
 
-    static UserSeeds()
-    {
-        UserEntity.Cars.Add(CarSeeds.CarEntity);
-        UserEntity.RidesDriver.Add(RideSeeds.RideEntity);
-    }
-
     public static void Seed(this ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<UserEntity>().HasData(
-           EmptyUserEntity,
            UserEntity
        );
     }

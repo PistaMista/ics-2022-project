@@ -23,6 +23,6 @@ public class SqliteDbContextTestingFactory : IDbContextFactory<CarRideDbContext>
         var builder = new DbContextOptionsBuilder<CarRideDbContext>();
         builder.UseSqlite($"Data Source={_databaseName};Cache=Shared");
 
-        return new CarRideDbContext(builder.Options, _seedTestingData);
+        return new CarRideTestingDbContext(builder.Options, _seedTestingData);
     }
 }

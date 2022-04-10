@@ -1,15 +1,11 @@
 using CarPool.BL.Models;
-using CarPool.DAL;
-using CarPool.DAL.Factories;
 using CarPool.DAL.Tests.Seeds;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
 using CarPool.BL.Facades;
 using CarPool.Common.Tests;
 using CarPool.Common.Enums;
-using CarPool.DAL.Entities;
+
 using Microsoft.EntityFrameworkCore;
+
 using Xunit;
 using Xunit.Abstractions;
 
@@ -76,7 +72,7 @@ namespace CarPool.BL.Tests
         }
 
         [Fact]
-        public async Task SeededCar_InsertOrUpdate_IngredientUpdated()
+        public async Task SeededCar_InsertOrUpdate_LicensePlateAndRegistrationDateUpdated()
         {
             //Arrange
             var car = new CarModel

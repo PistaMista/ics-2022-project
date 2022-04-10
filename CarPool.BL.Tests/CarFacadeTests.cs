@@ -1,7 +1,7 @@
 using CarPool.BL.Models;
 using DAL;
 using DAL.Factories;
-using DAL.Seeds;
+using DAL.Tests.Seeds;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -34,10 +34,45 @@ namespace CarPool.BL.Tests
                 LicensePlate: @"12345SPZ",
                 SeatCount: 4,
                 PhotoUrl: @"url",
-                RegistrationDate: DateTime.MinValue
+                RegistrationDate: DateTime.MinValue,
+                CarOwnerId: UserSeeds.UserEntity.Id
             );
 
             var _ = await _carFacadeSut.SaveAsync(model);
+        }
+
+        [Fact]
+        public async Task GetAll_Single_SeededSkoda()
+        {
+            var cars = await _carFacadeSut.GetAsync();
+            var car = cars.Single(i => i.Id == CarSeeds.CarEntity.Id);
+
+            DeepAssert.Equal(Mapper.Map<CarInfoModel>(CarSeeds.CarEntity), car);
+        }
+
+        [Fact]
+        public async Task GetById_SeededSkoda()
+        {
+            var car = await _carFacadeSut.GetAsync(CarSeeds.CarEntity.Id);
+
+            DeepAssert.Equal(Mapper.Map<CarModel>(CarSeeds.CarEntity), car);
+        }
+
+        [Fact]
+        public async Task GetById_NonExistent()
+        {
+            var car = await _carFacadeSut.GetAsync(Guid.Empty);
+
+            Assert.Null(car);
+        }
+
+        [Fact]
+        public async Task SeededSkoda_DeleteById_Deleted()
+        {
+            await _carFacadeSut.DeleteAsync(CarSeeds.CarEntity.Id);
+
+            await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
+            Assert.False(await dbxAssert.Cars.AnyAsync(i => i.Id == CarSeeds.CarEntity.Id));
         }
     }
 }

@@ -4,19 +4,20 @@ using DAL.Entities;
 namespace CarPool.BL.Models;
 public record UserProfileModel(
         string FirstName,
-        string LastName) : ModelBase
+        string LastName,
+        string PhotoUrl) : ModelBase
 {
-    public string FirstName { get; set; } = FirstName;
-    public string LastName { get; set; } = LastName;
-    public string? PhotoUrl { get; set; }
+    public string FirstName { get; } = FirstName;
+    public string LastName { get; } = LastName;
+    public string PhotoUrl { get; } = PhotoUrl;
 
     public class MapperProfile : Profile
     {
         public MapperProfile()
         {
-            CreateMap<UserEntity, UserListModel>()
+            CreateMap<UserEntity, UserProfileModel>()
                 .ReverseMap();
         }
     }
-    public static UserProfileModel Empty => new(string.Empty, string.Empty);
+    public static UserProfileModel Empty => new(string.Empty, string.Empty, string.Empty);
 }

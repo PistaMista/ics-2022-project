@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using DAL.Seeds;
+using DAL.Tests.Seeds;
 using DAL.Entities;
 using Common.Tests;
 
@@ -24,9 +24,10 @@ public class DbContextUserTests : DbContextTestsBase
     [Fact]
     public async Task AddNew_UserWithoutCarsOrRides_Persisted()
     {
-        var marie = UserSeeds.Marie with
+        var marie = UserSeeds.EmptyUserEntity with
         {
-            Id = Guid.NewGuid()
+            FirstName = "Marie",
+            LastName = "Testova"
         };
 
         CarRideDbContextSUT.Add(marie);
@@ -41,17 +42,19 @@ public class DbContextUserTests : DbContextTestsBase
     [Fact]
     public async Task AddNew_UserWithCar_Persisted()
     {
-        var jane = UserSeeds.Marie with
+        var jane = UserSeeds.EmptyUserEntity with
         {
-            Id = Guid.NewGuid(),
             FirstName = "Jane",
+            LastName = "Novakova",
             Cars = new List<CarEntity>()
         };
 
-        var skoda = CarSeeds.Skoda with
+        var skoda = CarSeeds.EmptyCarEntity with
         {
-            Id = Guid.NewGuid()
+            Manufacturer = "Skoda",
+            Type = Common.Enums.CarType.Kombi
         };
+
         jane.Cars.Add(skoda);
 
         CarRideDbContextSUT.Add(jane);
@@ -68,21 +71,25 @@ public class DbContextUserTests : DbContextTestsBase
     [Fact]
     public async Task AddNew_Driver_Persisted()
     {
-        var lubomir = UserSeeds.Lubomir with
+        var lubomir = UserSeeds.EmptyUserEntity with
         {
-            Id = Guid.NewGuid(),
+            FirstName = "Lubomir",
+            LastName = "Slanina",
             Cars = new List<CarEntity>(),
             RidesDriver = new List<RideEntity>()
         };
 
-        var mercedes = CarSeeds.Mercedes with
+        var mercedes = CarSeeds.EmptyCarEntity with
         {
-            Id = Guid.NewGuid()
+            Manufacturer = "Mercedes",
+            Type = Common.Enums.CarType.Kabriolet
         };
 
-        var praha_brno = RideSeeds.praha_brno with
+        var praha_brno = RideSeeds.EmptyRideEntity with
         {
-            Id = Guid.NewGuid()
+            StartLocation = "Praha",
+            EndLocation = "Brno",
+            Car = mercedes
         };
 
         lubomir.Cars.Add(mercedes);

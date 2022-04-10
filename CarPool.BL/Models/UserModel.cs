@@ -1,5 +1,5 @@
 using AutoMapper;
-using DAL.Entities;
+using CarPool.DAL.Entities;
 
 namespace CarPool.BL.Models;
 public record UserModel(

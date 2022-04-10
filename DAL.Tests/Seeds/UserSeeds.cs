@@ -25,10 +25,18 @@ public static class UserSeeds
         PhotoUrl: @"https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwp-media.familytoday.com%2F2016%2F04%2FfeaturedImageId23471.jpg&f=1&nofb=1"
         );
 
+    public static readonly UserEntity UserEntity2 = new UserEntity(
+        Id: Guid.Parse("6381cda0-6d59-45f1-a425-376d3ae2586c"),
+        FirstName: "Pasek",
+        LastName: "Pasazer",
+        PhotoUrl: @"https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwp-media.familytoday.com%2F2016%2F04%2FfeaturedImageId23471.jpg&f=1&nofb=1"
+        );
+
     public static void Seed(this ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<UserEntity>().HasData(
-           UserEntity
+           UserEntity,
+           UserEntity2
        );
     }
 }

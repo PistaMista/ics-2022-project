@@ -140,4 +140,29 @@ public class DbContextUserTests : DbContextTestsBase
 
         DeepAssert.Equal(entity, actualEntity);
     }
+
+    [Fact]
+    public async Task Delete_User_Deleted()
+    {
+        var entity = UserSeeds.UserEntity;
+
+        CarRideDbContextSUT.Users.Remove(entity);
+        await CarRideDbContextSUT.SaveChangesAsync();
+
+        Assert.False(await CarRideDbContextSUT.Users.AnyAsync(u => u.Id == entity.Id));
+    }
+
+    [Fact]
+    public async Task DeleteById_User_Deleted()
+    {
+        var entity = UserSeeds.UserEntity;
+
+        CarRideDbContextSUT.Users.Remove(
+            entity:
+                CarRideDbContextSUT.Users.Single(u => u.Id == entity.Id)
+        );
+        await CarRideDbContextSUT.SaveChangesAsync();
+
+        Assert.False(await CarRideDbContextSUT.Users.AnyAsync(u => u.Id == entity.Id));
+    }
 }

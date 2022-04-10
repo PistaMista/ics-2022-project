@@ -12,7 +12,7 @@ using Xunit;
 using Xunit.Abstractions;
 using Microsoft.EntityFrameworkCore;
 
-namespace DAL.Tests.Tests;
+namespace DAL.Tests;
 
 public class DbContextRideTests : DbContextTestsBase
 {
@@ -121,65 +121,65 @@ public class DbContextRideTests : DbContextTestsBase
         DeepAssert.Equal(prahaBrno, actualPrahaBrno);
     }
 
-    //[Fact]
-    //public async Task GetById_User()
-    //{
-    //    var entity = await CarRideDbContextSUT.Users.SingleAsync(u => u.Id == UserSeeds.UserEntity.Id);
+    [Fact]
+    public async Task GetById_Ride()
+    {
+        var entity = await CarRideDbContextSUT.Rides.SingleAsync(u => u.Id == RideSeeds.RideEntity.Id);
 
-    //    DeepAssert.Equal(
-    //        expected:
-    //            UserSeeds.UserEntity with
-    //            {
-    //                RidesDriver = new List<RideEntity>(),
-    //                RidesPassenger = new List<RideEntity>(),
-    //                Cars = new List<CarEntity>()
-    //            },
-    //        actual:
-    //            entity
-    //    );
-    //}
+        DeepAssert.Equal(
+            expected:
+                RideSeeds.RideEntity with
+                {
+                    Car = null,
+                    Driver = null,
+                    Passengers = new List<UserEntity>()
+                },
+            actual:
+                entity
+        );
+    }
 
-    //[Fact]
-    //public async Task Update_User_Persisted()
-    //{
-    //    var baseEntity = UserSeeds.UserEntity;
-    //    var entity = baseEntity with
-    //    {
-    //        FirstName = baseEntity.FirstName + "netta",
-    //        LastName = baseEntity.LastName + "vaci"
-    //    };
+    [Fact]
+    public async Task Update_Ride_Persisted()
+    {
+        var baseEntity = RideSeeds.RideEntity;
+        var entity = baseEntity with
+        {
+            StartLocation = baseEntity + " 2",
+            EndLocation = baseEntity + "pe"
+        };
 
-    //    CarRideDbContextSUT.Users.Update(entity);
-    //    await CarRideDbContextSUT.SaveChangesAsync();
+        CarRideDbContextSUT.Rides.Update(entity);
+        await CarRideDbContextSUT.SaveChangesAsync();
 
-    //    await using var dbx = await DbContextFactory.CreateDbContextAsync();
-    //    var actualEntity = await dbx.Users.SingleAsync(u => u.Id == baseEntity.Id);
+        await using var dbx = await DbContextFactory.CreateDbContextAsync();
+        var actualEntity = await dbx.Rides.SingleAsync(r => r.Id == baseEntity.Id);
 
-    //    DeepAssert.Equal(entity, actualEntity);
-    //}
+        DeepAssert.Equal(entity, actualEntity);
+    }
 
-    //[Fact]
-    //public async Task Delete_User_Deleted()
-    //{
-    //    var entity = UserSeeds.UserEntity;
+    [Fact]
+    public async Task Delete_Ride_Deleted()
+    {
+        var entity = RideSeeds.RideEntity;
 
-    //    CarRideDbContextSUT.Users.Remove(entity);
-    //    await CarRideDbContextSUT.SaveChangesAsync();
+        CarRideDbContextSUT.Rides.Remove(entity);
+        await CarRideDbContextSUT.SaveChangesAsync();
 
-    //    Assert.False(await CarRideDbContextSUT.Users.AnyAsync(u => u.Id == entity.Id));
-    //}
+        Assert.False(await CarRideDbContextSUT.Rides.AnyAsync(r => r.Id == entity.Id));
+    }
 
-    //[Fact]
-    //public async Task DeleteById_User_Deleted()
-    //{
-    //    var entity = UserSeeds.UserEntity;
+    [Fact]
+    public async Task DeleteById_Ride_Deleted()
+    {
+        var entity = RideSeeds.RideEntity;
 
-    //    CarRideDbContextSUT.Users.Remove(
-    //        entity:
-    //            CarRideDbContextSUT.Users.Single(u => u.Id == entity.Id)
-    //    );
-    //    await CarRideDbContextSUT.SaveChangesAsync();
+        CarRideDbContextSUT.Rides.Remove(
+            entity:
+                CarRideDbContextSUT.Rides.Single(r => r.Id == entity.Id)
+        );
+        await CarRideDbContextSUT.SaveChangesAsync();
 
-    //    Assert.False(await CarRideDbContextSUT.Users.AnyAsync(u => u.Id == entity.Id));
-    //}
+        Assert.False(await CarRideDbContextSUT.Users.AnyAsync(u => u.Id == entity.Id));
+    }
 }

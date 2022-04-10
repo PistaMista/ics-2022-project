@@ -162,7 +162,7 @@ public class DbContextRideTests : DbContextTestsBase
     public async Task Delete_Ride_Deleted()
     {
         var entity = RideSeeds.RideEntity;
-
+        
         CarRideDbContextSUT.Rides.Remove(entity);
         await CarRideDbContextSUT.SaveChangesAsync();
 
@@ -180,6 +180,6 @@ public class DbContextRideTests : DbContextTestsBase
         );
         await CarRideDbContextSUT.SaveChangesAsync();
 
-        Assert.False(await CarRideDbContextSUT.Users.AnyAsync(u => u.Id == entity.Id));
+        Assert.False(await CarRideDbContextSUT.Rides.AnyAsync(r => r.Id == entity.Id));
     }
 }

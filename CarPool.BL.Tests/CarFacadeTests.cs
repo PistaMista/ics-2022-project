@@ -74,5 +74,35 @@ namespace CarPool.BL.Tests
             await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
             Assert.False(await dbxAssert.Cars.AnyAsync(i => i.Id == CarSeeds.CarEntity.Id));
         }
+
+        [Fact]
+        public async Task SeededCar_InsertOrUpdate_IngredientUpdated()
+        {
+            //Arrange
+            var car = new CarModel
+            (
+                Manufacturer: CarSeeds.CarEntity.Manufacturer,
+                Type: CarSeeds.CarEntity.Type,
+                LicensePlate: CarSeeds.CarEntity.LicensePlate,
+                SeatCount: CarSeeds.CarEntity.SeatCount,
+                PhotoUrl: CarSeeds.CarEntity.PhotoUrl,
+                RegistrationDate: CarSeeds.CarEntity.RegistrationDate,
+                CarOwnerId: CarSeeds.CarEntity.CarOwnerId
+            )
+            {
+                Id = CarSeeds.CarEntity.Id
+            };
+
+            car.LicensePlate = "AAAA-02-03";
+            car.RegistrationDate = new DateTime(year: 2016, month: 12, day: 01);
+
+            //Act
+            await _carFacadeSut.SaveAsync(car);
+
+            //Assert
+            await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
+            var carFromDb = await dbxAssert.Cars.SingleAsync(i => i.Id == car.Id);
+            DeepAssert.Equal(car, Mapper.Map<CarModel>(carFromDb));
+        }
     }
 }

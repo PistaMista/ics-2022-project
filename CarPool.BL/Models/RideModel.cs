@@ -8,8 +8,8 @@ public record RideModel(
     string EndLocation,
     DateTime StartTime,
     uint Duration,
-    UserInfoModel Driver,
-    Guid CarId) : ModelBase
+    Guid CarId,
+    Guid DriverId) : ModelBase
 {
 
     public string StartLocation { get; set; } = StartLocation;
@@ -17,7 +17,7 @@ public record RideModel(
     public DateTime StartTime { get; set; } = StartTime;
     public uint Duration { get; set; } = Duration;
     public Guid CarId { get; set; } = CarId;
-    public UserInfoModel Driver { get; set; } = Driver;
+    public Guid DriverId { get; set; } = DriverId;
     public List<UserInfoModel> Passengers { get; init; } = new();
 
     public class MapperProfile : Profile
@@ -28,5 +28,11 @@ public record RideModel(
                 .ReverseMap();
         }
     }
-    public static RideModel Empty => new(string.Empty, string.Empty, DateTime.MinValue , 0, UserInfoModel.Empty, Guid.Empty);
+    public static RideModel Empty => new(
+        string.Empty,
+        string.Empty,
+        DateTime.MinValue,
+        0,
+        Guid.Empty,
+        Guid.Empty);
 }

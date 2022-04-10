@@ -121,4 +121,23 @@ public class DbContextUserTests : DbContextTestsBase
                 entity
         );
     }
+
+    [Fact]
+    public async Task Update_User_Persisted()
+    {
+        var baseEntity = UserSeeds.UserEntity;
+        var entity = baseEntity with
+        {
+            FirstName = baseEntity.FirstName + "netta",
+            LastName = baseEntity.LastName + "vaci"
+        };
+
+        CarRideDbContextSUT.Users.Update(entity);
+        await CarRideDbContextSUT.SaveChangesAsync();
+
+        await using var dbx = await DbContextFactory.CreateDbContextAsync();
+        var actualEntity = await dbx.Users.SingleAsync(u => u.Id == baseEntity.Id);
+
+        DeepAssert.Equal(entity, actualEntity);
+    }
 }

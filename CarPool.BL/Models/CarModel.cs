@@ -11,19 +11,19 @@ public record CarModel(
     string PhotoUrl,
     DateTime RegistrationDate) : ModelBase
 {
-    public string Manufacturer { get; } = Manufacturer;
-    public CarType Type { get; } = Type;
-    public string LicensePlate { get; } = LicensePlate;
-    public int SeatCount { get; } = SeatCount;
-    public string PhotoUrl { get; } = PhotoUrl;
+    public string Manufacturer { get; set; } = Manufacturer;
+    public CarType Type { get; set; } = Type;
+    public string LicensePlate { get; set; } = LicensePlate;
+    public int SeatCount { get; set; } = SeatCount;
+    public string PhotoUrl { get; set; } = PhotoUrl;
+    public DateTime RegistrationDate { get; set; } = RegistrationDate;
 
     public class MapperProfile : Profile
     {
         public MapperProfile()
         {
             CreateMap<CarEntity, CarModel>()
-                .ReverseMap(); 
-
+                .ReverseMap();
         }
     }
     public static CarModel Empty => new(string.Empty, CarType.None, string.Empty, 0, string.Empty, DateTime.MinValue);

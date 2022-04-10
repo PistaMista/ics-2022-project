@@ -2,7 +2,7 @@ using AutoMapper;
 using DAL.Entities;
 
 namespace CarPool.BL.Models;
-public record RidesListModel(
+public record RideInfoModel(
     DateTime StartTime,
     string StartLocation,
     string EndLocation,
@@ -17,7 +17,7 @@ public record RidesListModel(
     {
         public MapperProfile()
         {
-            CreateMap<RideEntity, RidesListModel>();
+            CreateMap<RideEntity, RideInfoModel>();
         }
     }
 }

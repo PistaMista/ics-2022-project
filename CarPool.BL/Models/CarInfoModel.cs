@@ -10,11 +10,11 @@ public record CarInfoModel(
     int SeatCount,
     string PhotoUrl) : ModelBase
 {
-    public string Manufacturer { get; } = Manufacturer;
-    public CarType Type { get; } = Type;
-    public string LicensePlate { get; } = LicensePlate;
-    public int SeatCount { get; } = SeatCount;
-    public string PhotoUrl { get; } = PhotoUrl;
+    public string Manufacturer { get; set; } = Manufacturer;
+    public CarType Type { get; set; } = Type;
+    public string LicensePlate { get; set; } = LicensePlate;
+    public int SeatCount { get; set; } = SeatCount;
+    public string PhotoUrl { get; set; } = PhotoUrl;
 
     public class MapperProfile : Profile
     {

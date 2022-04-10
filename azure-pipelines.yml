@@ -24,8 +24,18 @@ steps:
 - task: DotNetCoreCLI@2
   inputs:
     command: 'build'
-    projects: '/project.sln'
+    projects: '/CarPool.BL.Tests/*.csproj'
 - task: DotNetCoreCLI@2
   inputs:
     command: 'test'
-    projects: '/project.sln'
+    projects: '/CarPool.BL.Tests/*.csproj'
+
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'build'
+    projects: '/CarPool.DAL.Tests/*.csproj'
+
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'test'
+    projects: '/CarPool.DAL.Tests/*.csproj'

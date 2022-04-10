@@ -1,6 +1,6 @@
 using AutoMapper;
-using DAL.Entities;
-using Common.Enums;
+using CarPool.DAL.Entities;
+using CarPool.Common.Enums;
 
 namespace CarPool.BL.Models;
 public record RideModel(

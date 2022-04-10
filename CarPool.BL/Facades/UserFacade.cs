@@ -1,7 +1,7 @@
 using AutoMapper;
 using CarPool.BL.Models;
-using DAL.Entities;
-using DAL.UnitOfWork;
+using CarPool.DAL.Entities;
+using CarPool.DAL.UnitOfWork;
 
 namespace CarPool.BL.Facades;
 

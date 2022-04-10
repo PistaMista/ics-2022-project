@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 using AutoMapper;
 using AutoMapper.EntityFrameworkCore;
 using CarPool.BL.Models;
-using DAL;
-using DAL.UnitOfWork;
-using DAL.Entities;
+using CarPool.DAL;
+using CarPool.DAL.UnitOfWork;
+using CarPool.DAL.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace CarPool.BL.Facades;

@@ -1,4 +1,4 @@
-﻿<Window x:Class="CarPool.App.MainWindow"
+<Window x:Class="CarPool.App.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -7,6 +7,8 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        <Button x:Name="btn_sign_up" Content="Vytvořit účet" HorizontalAlignment="Left" Margin="272,87,0,0" VerticalAlignment="Top" Height="64" Width="200" Click="btn_sign_up_Click"/>
+        <Button x:Name="btn_login" Content="Přihlásit se" HorizontalAlignment="Left" Height="64" Margin="272,189,0,0" VerticalAlignment="Top" Width="200"/>
 
     </Grid>
 </Window>

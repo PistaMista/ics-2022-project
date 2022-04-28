@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace CarPool.App
+namespace CarPool.App.Views
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for CreateAccountPage.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class CreateAccountPage : Page
     {
-        public MainWindow()
+        public CreateAccountPage()
         {
             InitializeComponent();
         }

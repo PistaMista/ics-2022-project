@@ -1,0 +1,25 @@
+<Window x:Class="CarPool.App.Views.AddCarDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CarPool.App.Views"
+        mc:Ignorable="d"
+        Title="CreateRideDialog" Height="450" Width="800">
+    <Grid>
+        <Label Content="Výrobce:" HorizontalAlignment="Left" Height="26" Margin="56,50,0,0" VerticalAlignment="Top" Width="77"/>
+        <Label Content="Typ:" HorizontalAlignment="Left" Height="26" Margin="56,91,0,0" VerticalAlignment="Top" Width="77"/>
+        <Label Content="Rok výroby:" HorizontalAlignment="Left" Height="26" Margin="56,131,0,0" VerticalAlignment="Top" Width="77"/>
+        <Label Content="SPZ:" HorizontalAlignment="Left" Height="44" Margin="56,173,0,0" VerticalAlignment="Top" Width="151"/>
+        <Label Content="Fotografie:&#xD;&#xA;" HorizontalAlignment="Left" Height="26" Margin="56,258,0,0" VerticalAlignment="Top" Width="77"/>
+        <Button Content="open" HorizontalAlignment="Left" Height="23" Margin="160,268,0,0" VerticalAlignment="Top" Width="63" Click="Button_Click"/>
+        <TextBox HorizontalAlignment="Left" Height="22" Margin="151,54,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="144"/>
+        <TextBox HorizontalAlignment="Left" Height="22" Margin="151,91,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="144"/>
+        <TextBox HorizontalAlignment="Left" Height="22" Margin="151,131,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="144"/>
+        <TextBox HorizontalAlignment="Left" Height="22" Margin="151,173,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="144"/>
+        <Button x:Name="btn_add_ride" Content="Vytvořit jízdu" HorizontalAlignment="Left" Height="47" Margin="94,364,0,0" VerticalAlignment="Top" Width="162"/>
+        <Label Content="Počet míst:" HorizontalAlignment="Left" Height="44" Margin="56,209,0,0" VerticalAlignment="Top" Width="151"/>
+        <TextBox HorizontalAlignment="Left" Height="22" Margin="151,217,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="144"/>
+    </Grid>
+</Window>
+

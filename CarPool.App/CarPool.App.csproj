@@ -8,9 +8,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Views\profile.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\CarPool.BL\CarPool.BL.csproj" />
     <ProjectReference Include="..\CarPool.Common\CarPool.Common.csproj" />
     <ProjectReference Include="..\CarPool.DAL\CarPool.DAL.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Views\profile.jpg" />
   </ItemGroup>
 
 </Project>

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using CarPool.App.ViewModels;
 
 namespace CarPool.App.Views
 {
@@ -19,9 +20,10 @@ namespace CarPool.App.Views
     /// </summary>
     public partial class AddCarDialog : Window
     {
-        public AddCarDialog()
+        public AddCarDialog(CarInfoViewModel model)
         {
             InitializeComponent();
+            DataContext = model;
         }
     }
 }

@@ -61,9 +61,11 @@ namespace CarPool.App
 
             services.AddSingleton<MainWindow>();
 
+
             services.AddSingleton<IMessageDialogService, MessageDialogService>();
             services.AddSingleton<IMediator, Mediator>();
 
+            services.AddSingleton<CreateAccountViewModel>();
             services.AddSingleton<CarInfoViewModel>();
 
 

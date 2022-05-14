@@ -59,7 +59,7 @@ namespace CarPool.App
                 return new SqliteDbContextFactory(/*dalSettings.ConnectionString!, dalSettings.SkipMigrationAndSeedDemoData*/);
             });
 
-            services.AddSingleton<AddCarDialog>();
+            services.AddSingleton<MainWindow>();
 
             services.AddSingleton<IMessageDialogService, MessageDialogService>();
             services.AddSingleton<IMediator, Mediator>();
@@ -96,7 +96,7 @@ namespace CarPool.App
                 }
             }
 
-            var mainWindow = _host.Services.GetRequiredService<AddCarDialog>();
+            var mainWindow = _host.Services.GetRequiredService<MainWindow>();
             mainWindow.Show();
 
             base.OnStartup(e);

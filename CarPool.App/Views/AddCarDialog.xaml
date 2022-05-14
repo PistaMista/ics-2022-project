@@ -3,16 +3,18 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewModels="clr-namespace:CarPool.App.ViewModels"
         xmlns:local="clr-namespace:CarPool.App.Views"
         mc:Ignorable="d"
-        Title="CreateRideDialog" Height="450" Width="800">
+        Title="CreateRideDialog" Height="450" Width="800"
+        d:DataContext="{d:DesignInstance viewModels:CarInfoViewModel}">
     <Grid>
         <Label Content="Výrobce:" HorizontalAlignment="Left" Height="26" Margin="56,50,0,0" VerticalAlignment="Top" Width="77"/>
         <Label Content="Typ:" HorizontalAlignment="Left" Height="26" Margin="56,91,0,0" VerticalAlignment="Top" Width="77"/>
         <Label Content="Rok výroby:" HorizontalAlignment="Left" Height="26" Margin="56,131,0,0" VerticalAlignment="Top" Width="77"/>
         <Label Content="SPZ:" HorizontalAlignment="Left" Height="44" Margin="56,173,0,0" VerticalAlignment="Top" Width="151"/>
         <Label Content="Fotografie:&#xD;&#xA;" HorizontalAlignment="Left" Height="26" Margin="56,258,0,0" VerticalAlignment="Top" Width="77"/>
-        <Button Content="open" HorizontalAlignment="Left" Height="23" Margin="160,268,0,0" VerticalAlignment="Top" Width="63" Click="Button_Click"/>
+        <Button Content="open" HorizontalAlignment="Left" Height="23" Margin="160,268,0,0" VerticalAlignment="Top" Width="63"/>
         <TextBox HorizontalAlignment="Left" Height="22" Margin="151,54,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="144"/>
         <TextBox HorizontalAlignment="Left" Height="22" Margin="151,91,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="144"/>
         <TextBox HorizontalAlignment="Left" Height="22" Margin="151,131,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="144"/>

@@ -24,5 +24,11 @@ namespace CarPool.App.Views
         {
             InitializeComponent();
         }
+
+        private void btn_registruj_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow.myRides.Visibility = Visibility.Visible;
+            Visibility = Visibility.Hidden;
+        }
     }
 }

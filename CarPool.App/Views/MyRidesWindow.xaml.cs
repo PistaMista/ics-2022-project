@@ -17,7 +17,7 @@ namespace CarPool.App.Views
     /// <summary>
     /// Interaction logic for MyRidesWindow.xaml
     /// </summary>
-    public partial class MyRidesWindow : Window
+    public partial class MyRidesWindow : UserControl
     {
         public MyRidesWindow()
         {

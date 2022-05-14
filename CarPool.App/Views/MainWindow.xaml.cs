@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using CarPool.App.Views;
 
 namespace CarPool.App
 {
@@ -20,19 +21,21 @@ namespace CarPool.App
     /// </summary>
     public partial class MainWindow : Window
     {
+        public static MyRidesWindow? myRides;
         public MainWindow()
         {
             InitializeComponent();
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
+            myRides = MyRides;
         }
 
         private void btn_sign_up_Click(object sender, RoutedEventArgs e)
         {
             CreateAccount.Visibility = Visibility.Visible;
+        }
+
+        private void btn_login_Click(object sender, RoutedEventArgs e)
+        {
+            Login.Visibility = Visibility.Visible;
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,11 +18,17 @@ namespace CarPool.App.Views
     /// <summary>
     /// Interaction logic for LoginPage.xaml
     /// </summary>
-    public partial class LoginPage : Page
+    public partial class LoginPage : UserControl
     {
         public LoginPage()
         {
             InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow.myRides.Visibility = Visibility.Visible;
+            Visibility = Visibility.Hidden;
         }
     }
 }

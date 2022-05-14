@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Runtime.CompilerServices;
 
-namespace CookBook.App.Wrappers
+namespace CarPool.App.Wrappers
 {
     public abstract class ModelWrapper<T> : ViewModelBase, IModel, IValidatableObject
         where T : IModel

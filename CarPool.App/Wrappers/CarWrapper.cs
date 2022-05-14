@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using CarPool.Common.Enums;
-using CookBook.App.Wrappers;
+using CarPool.App.Wrappers;
 
 namespace CarPool.App.Wrappers
 {
@@ -13,13 +13,6 @@ namespace CarPool.App.Wrappers
             : base(model)
         {
         }
-
-        public Guid CarId
-        {
-            get => GetValue<Guid>();
-            set => SetValue(value);
-        }
-
 
         public string? Manufacturer
         {

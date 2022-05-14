@@ -39,6 +39,12 @@ namespace CarPool.App.Wrappers
             set => SetValue(value);
         }
 
+        public DateTime? RegistrationDate
+        {
+            get => GetValue<DateTime>();
+            set => SetValue(value);
+        }
+
         public int? SeatCount
         {
             get => GetValue<int>();

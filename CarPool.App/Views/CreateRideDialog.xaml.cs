@@ -17,7 +17,7 @@ namespace CarPool.App.Views
     /// <summary>
     /// Interaction logic for CreateRideDialog.xaml
     /// </summary>
-    public partial class CreateRideDialog : Window
+    public partial class CreateRideDialog : UserControl
     {
         public CreateRideDialog()
         {
@@ -30,6 +30,11 @@ namespace CarPool.App.Views
         }
 
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
 
         }

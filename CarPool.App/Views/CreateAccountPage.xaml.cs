@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,7 +18,7 @@ namespace CarPool.App.Views
     /// <summary>
     /// Interaction logic for CreateAccountPage.xaml
     /// </summary>
-    public partial class CreateAccountPage : Page
+    public partial class CreateAccountPage : UserControl
     {
         public CreateAccountPage()
         {

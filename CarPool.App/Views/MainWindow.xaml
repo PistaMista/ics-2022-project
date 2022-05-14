@@ -5,10 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CarPool.App"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800"
+        xmlns:controls="clr-namespace:CarPool.App.Views;assembly=CarPool.App.Views"
+>
     <Grid>
         <Button x:Name="btn_sign_up" Content="Vytvořit účet" HorizontalAlignment="Left" Margin="272,87,0,0" VerticalAlignment="Top" Height="64" Width="200" Click="btn_sign_up_Click"/>
         <Button x:Name="btn_login" Content="Přihlásit se" HorizontalAlignment="Left" Height="64" Margin="272,189,0,0" VerticalAlignment="Top" Width="200"/>
 
     </Grid>
+
 </Window>

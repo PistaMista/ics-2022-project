@@ -1,11 +1,10 @@
-<Window x:Class="CarPool.App.Views.CreateRideDialog"
+<UserControl x:Class="CarPool.App.Views.CreateRideDialog"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:CarPool.App.Views"
-        mc:Ignorable="d"
-        Title="CreateRideDialog" Height="450" Width="800">
+        xmlns:local="clr-namespace:CarPool.App.Views"     
+        mc:Ignorable="d">
     <Grid>
         <Label Content="Start:" HorizontalAlignment="Left" Height="26" Margin="56,50,0,0" VerticalAlignment="Top" Width="77"/>
         <Label Content="Cíl:" HorizontalAlignment="Left" Height="26" Margin="56,91,0,0" VerticalAlignment="Top" Width="77"/>
@@ -16,8 +15,10 @@
         <Button Content="Vybrat" HorizontalAlignment="Left" Height="23" Margin="232,280,0,0" VerticalAlignment="Top" Width="63" Click="Button_Click"/>
         <TextBox HorizontalAlignment="Left" Height="22" Margin="151,54,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="144"/>
         <TextBox HorizontalAlignment="Left" Height="22" Margin="151,91,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="144"/>
-        <TextBox HorizontalAlignment="Left" Height="22" Margin="151,131,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="144"/>
+        <TextBox HorizontalAlignment="Left" Height="22" Margin="151,131,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="144" TextChanged="TextBox_TextChanged"/>
         <TextBox HorizontalAlignment="Left" Height="22" Margin="151,184,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="144"/>
         <Button x:Name="btn_add_ride" Content="Vytvořit jízdu" HorizontalAlignment="Left" Height="47" Margin="94,364,0,0" VerticalAlignment="Top" Width="162"/>
+        <Label Content="5/1/2008 8:30:52 AM" HorizontalAlignment="Left" Height="23
+               " Margin="300,131,0,0" VerticalAlignment="Top" Width="144"/>
     </Grid>
-</Window>
+</UserControl>

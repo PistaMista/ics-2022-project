@@ -32,7 +32,7 @@ namespace CarPool.App
 
         private void btn_sign_up_Click(object sender, RoutedEventArgs e)
         {
-
+            CreateAccount.Visibility = Visibility.Visible;
         }
     }
 }

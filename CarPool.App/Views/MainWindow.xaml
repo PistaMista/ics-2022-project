@@ -12,6 +12,7 @@ xmlns:Views="clr-namespace:CarPool.App.Views" x:Class="CarPool.App.MainWindow"
     <Grid>
         <Button x:Name="btn_sign_up" Content="Vytvořit účet" HorizontalAlignment="Left" Margin="272,87,0,0" VerticalAlignment="Top" Height="64" Width="200" Click="btn_sign_up_Click"/>
         <Button x:Name="btn_login" Content="Přihlásit se" HorizontalAlignment="Left" Height="64" Margin="272,189,0,0" VerticalAlignment="Top" Width="200"/>
+        <Views:CreateAccountPage x:Name="CreateAccount" HorizontalAlignment="Center" Height="434" VerticalAlignment="Center" Width="800" Visibility="Hidden"/>
 
     </Grid>
 

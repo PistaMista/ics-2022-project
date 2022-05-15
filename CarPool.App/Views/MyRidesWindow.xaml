@@ -8,53 +8,20 @@
     <TabControl HorizontalAlignment="Center" Height="450" VerticalAlignment="Top" Width="800">
         <TabItem Header="Moje jízdy">
             <Grid Background="#FFE5E5E5">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="30*"/>
-                    <ColumnDefinition Width="67*"/>
-                    <ColumnDefinition Width="2*"/>
-                    <ColumnDefinition Width="695*"/>
-                </Grid.ColumnDefinitions>
-                <Label Content="Moje jízdy&#xD;&#xA;" HorizontalAlignment="Left" Height="39" Margin="206,10,0,0" VerticalAlignment="Top" Width="226" Grid.Column="3"/>
-                <ListBox HorizontalAlignment="Left" Height="269" Margin="0,84,0,0" VerticalAlignment="Top" Width="454" d:ItemsSource="{d:SampleData ItemCount=5}" Grid.ColumnSpan="3" Grid.Column="1"/>
-                <Button Grid.Column="3" Content="Vytvořit jízdu" HorizontalAlignment="Left" Height="77" Margin="466,276,0,0" VerticalAlignment="Top" Width="171" Click="Button_Click_1"/>
-                <local:CreateRideDialog x:Name="CreateRide" HorizontalAlignment="Left" Height="469" VerticalAlignment="Center" Width="489" Grid.Column="3" Margin="254,0,0,0" Visibility="Hidden"/>
+                <local:MyRideUserControl HorizontalAlignment="Left" Height="422" Margin="-3,0,0,0" VerticalAlignment="Center" Width="797"/>
+
             </Grid>
         </TabItem>
         <TabItem Header="Jízdy">
             <Grid Background="#FFE5E5E5">
-                <ListBox HorizontalAlignment="Left" Height="301" Margin="20,51,0,0" VerticalAlignment="Top" Width="288" d:ItemsSource="{d:SampleData ItemCount=5}"/>
-                <DockPanel HorizontalAlignment="Left" Height="166" LastChildFill="False" Margin="512,108,0,0" VerticalAlignment="Top" Width="166"/>
-                <Label Content="Datum od:" HorizontalAlignment="Left" Height="33" Margin="444,84,0,0" VerticalAlignment="Top" Width="98"/>
-                <Label Content="Datum do:" HorizontalAlignment="Left" Height="33" Margin="444,117,0,0" VerticalAlignment="Top" Width="98"/>
-                <Label Content="Start:" HorizontalAlignment="Left" Height="33" Margin="444,150,0,0" VerticalAlignment="Top" Width="98"/>
-                <Label Content="Cíl:" HorizontalAlignment="Left" Height="33" Margin="444,178,0,0" VerticalAlignment="Top" Width="98"/>
-                <TextBox HorizontalAlignment="Left" Height="17" Margin="519,91,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="133"/>
-                <TextBox HorizontalAlignment="Left" Height="17" Margin="519,191,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="133"/>
-                <TextBox HorizontalAlignment="Left" Height="17" Margin="519,155,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="133"/>
-                <TextBox HorizontalAlignment="Left" Height="17" Margin="519,125,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="133"/>
-                <Button Content="Filtrovat" HorizontalAlignment="Left" Height="38" Margin="476,236,0,0" VerticalAlignment="Top" Width="148" Click="Button_Click"/>
+                <local:RideUserControl/>
+
             </Grid>
         </TabItem>
         <TabItem Header="Správa účtu">
             <Grid Background="#FFE5E5E5">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="41*"/>
-                    <ColumnDefinition Width="356*"/>
-                </Grid.ColumnDefinitions>
-                <Label Content="Jméno:" HorizontalAlignment="Left" Height="28" Margin="10,29,0,0" VerticalAlignment="Top" Width="69"/>
-                <Label Content="Příjmení:&#xD;&#xA;" HorizontalAlignment="Left" Height="28" Margin="10,62,0,0" VerticalAlignment="Top" Width="69"/>
-                <TextBox HorizontalAlignment="Left" Height="22" Margin="71,32,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="111" Grid.ColumnSpan="2"/>
-                <TextBox HorizontalAlignment="Left" Height="24" Margin="71,64,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="111" Grid.ColumnSpan="2"/>
-                <Image HorizontalAlignment="Left" Height="97" Margin="55,108,0,0" VerticalAlignment="Top" Width="95" Source="/Views/profile.jpg" Grid.ColumnSpan="2"/>
-                <Button Content="Open" HorizontalAlignment="Left" Height="18" Margin="44,211,0,0" VerticalAlignment="Top" Width="49" Grid.ColumnSpan="2"/>
-                <Button Content="Změnit" HorizontalAlignment="Left" Height="18" Margin="126,34,0,0" VerticalAlignment="Top" Width="49" Grid.Column="1"/>
-                <Button Content="Změnit" HorizontalAlignment="Left" Height="18" Margin="126,67,0,0" VerticalAlignment="Top" Width="49" Grid.Column="1"/>
-                <ListBox HorizontalAlignment="Left" Height="63" Margin="337,67,0,0" VerticalAlignment="Top" Width="281" d:ItemsSource="{d:SampleData ItemCount=5}" Grid.Column="1"/>
-                <Label Content="Auta:" HorizontalAlignment="Left" Height="33" Margin="337,43,0,0" VerticalAlignment="Top" Width="105" Grid.Column="1"/>
-                <Button Content="Přidat auto" HorizontalAlignment="Left" Height="37" Margin="337,137,0,0" VerticalAlignment="Top" Width="89" Grid.Column="1"/>
-                <Button Content="Odebrat auto" HorizontalAlignment="Left" Height="37" Margin="529,137,0,0" VerticalAlignment="Top" Width="89" Grid.Column="1"/>
-                <Button Content="Zrušit účet" HorizontalAlignment="Left" Height="37" Margin="38,356,0,0" VerticalAlignment="Top" Width="88" Grid.ColumnSpan="2"/>
-                <Button Content="Odhlásit se" HorizontalAlignment="Left" Height="37" Margin="529,351,0,0" VerticalAlignment="Top" Width="89" Grid.Column="1"/>
+                <local:ManageAccountUserControl/>
+
             </Grid>
         </TabItem>
 

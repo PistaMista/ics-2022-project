@@ -32,9 +32,9 @@ namespace CarPool.App.Wrappers
             set => SetValue(value);
         }
 
-        public int? Duration
+        public uint? Duration
         {
-            get => GetValue<int>();
+            get => GetValue<uint>();
             set => SetValue(value);
         }
 
@@ -67,6 +67,16 @@ namespace CarPool.App.Wrappers
             if (StartTime == default(DateTime))
             {
                 yield return new ValidationResult($"{nameof(StartTime)} is required", new[] { nameof(StartTime) });
+            }
+
+            if (DriverId == null)
+            {
+                yield return new ValidationResult($"{nameof(DriverId)} is required", new[] { nameof(DriverId) });
+            }
+
+            if (CarId == null)
+            {
+                yield return new ValidationResult($"{nameof(CarId)} is required", new[] { nameof(CarId) });
             }
         }
 

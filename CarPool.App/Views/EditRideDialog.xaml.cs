@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using CarPool.App.ViewModels;
 
 namespace CarPool.App.Views
 {
@@ -47,6 +48,14 @@ namespace CarPool.App.Views
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             Visibility = Visibility.Hidden;
+        }
+
+        private void CarsListBox_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (DataContext is EditRideViewModel viewModel)
+            {
+                CarsListBox.ItemsSource = viewModel.Cars;
+            }
         }
     }
 }

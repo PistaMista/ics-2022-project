@@ -15,7 +15,7 @@
         <Label Content="Předpokládaná&#xD;&#xA;doba jízdy:" HorizontalAlignment="Left" Height="44" Margin="56,178,0,0" VerticalAlignment="Top" Width="151"/>
         <Label Content="Seznam aut:" HorizontalAlignment="Left" Height="26" Margin="56,230,0,0" VerticalAlignment="Top" Width="77"/>
         
-        <ListBox Name="CarsListBox" HorizontalAlignment="Left" Height="54" Margin="56,261,0,0" VerticalAlignment="Top" Width="160" d:ItemsSource="{Binding Cars}" SelectionChanged="ListBox_SelectionChanged">
+        <ListBox Name="CarsListBox" HorizontalAlignment="Left" Height="54" Margin="56,261,0,0" VerticalAlignment="Top" Width="160" d:ItemsSource="{Binding Cars}" SelectionChanged="ListBox_SelectionChanged" Loaded="CarsListBox_Loaded">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged">
                     <i:InvokeCommandAction Command="{Binding CarSelectedCommand}"

@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using CarPool.App.Commands;
 using CarPool.BL.Facades;
+using System;
 
 namespace CarPool.App.ViewModels
 {
@@ -22,7 +23,7 @@ namespace CarPool.App.ViewModels
             _mediator = mediator;
 
             UserSelectedCommand = new RelayCommand<UserInfoModel>(UserSelected);
-            SignInCommand = new RelayCommand(() => { }, () => isUserSelected);
+            SignInCommand = new RelayCommand(UserSignedIn, () => selectedUserId != null);
 
 
             mediator.Register<UpdateMessage<UserWrapper>>(UserUpdated);
@@ -33,13 +34,20 @@ namespace CarPool.App.ViewModels
 
         public ICommand SignInCommand { get;  }
         public ICommand UserSelectedCommand { get; }
+        public ICommand UserSignInCommand { get;  }
 
-        private bool isUserSelected = false;
+        private Guid? selectedUserId;
+
         private void UserSelected(UserInfoModel? user)
         {
-            _mediator.Send(new SelectedMessage<UserWrapper> { Id = user?.Id });
-            isUserSelected = true;
+            selectedUserId = user?.Id;
         }
+
+        private void UserSignedIn()
+        {
+            _mediator.Send(new SelectedMessage<UserWrapper> { Id = selectedUserId });
+        }
+
         private async void UserUpdated(UpdateMessage<UserWrapper> _) => await LoadAsync();
 
         private async void UserDeleted(DeleteMessage<UserWrapper> _) => await LoadAsync();

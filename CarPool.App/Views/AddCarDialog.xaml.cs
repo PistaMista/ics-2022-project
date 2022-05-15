@@ -18,12 +18,15 @@ namespace CarPool.App.Views
     /// <summary>
     /// Interaction logic for AddCarDialog.xaml
     /// </summary>
-    public partial class AddCarDialog : Window
+    public partial class AddCarDialog : UserControl
     {
-        public AddCarDialog(CarInfoViewModel model)
+        public AddCarDialog()
         {
             InitializeComponent();
-            DataContext = model;
+        }
+        private void btn_x_click(object sender, RoutedEventArgs e)
+        {
+            Visibility = Visibility.Hidden;
         }
     }
 }

@@ -46,6 +46,7 @@ namespace CarPool.App.ViewModels
 
             Model = await _userFacade.SaveAsync(Model.Model);
             _mediator.Send(new UpdateMessage<UserWrapper> { Model = Model });
+            _mediator.Send(new SelectedMessage<UserWrapper> { Id = Model.Id });
         }
 
         private bool CanSave() => Model?.IsValid ?? false;

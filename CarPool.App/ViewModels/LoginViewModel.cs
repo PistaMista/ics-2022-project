@@ -22,6 +22,7 @@ namespace CarPool.App.ViewModels
             _mediator = mediator;
 
             UserSelectedCommand = new RelayCommand<UserInfoModel>(UserSelected);
+            SignInCommand = new RelayCommand(() => { }, () => isUserSelected);
 
 
             mediator.Register<UpdateMessage<UserWrapper>>(UserUpdated);
@@ -30,9 +31,15 @@ namespace CarPool.App.ViewModels
 
         public ObservableCollection<UserInfoModel> Users { get; set; } = new();
 
+        public ICommand SignInCommand { get;  }
         public ICommand UserSelectedCommand { get; }
-        private void UserSelected(UserInfoModel? user) => _mediator.Send(new SelectedMessage<UserWrapper> { Id = user?.Id });
 
+        private bool isUserSelected = false;
+        private void UserSelected(UserInfoModel? user)
+        {
+            _mediator.Send(new SelectedMessage<UserWrapper> { Id = user?.Id });
+            isUserSelected = true;
+        }
         private async void UserUpdated(UpdateMessage<UserWrapper> _) => await LoadAsync();
 
         private async void UserDeleted(DeleteMessage<UserWrapper> _) => await LoadAsync();

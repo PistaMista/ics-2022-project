@@ -17,7 +17,7 @@
                 <Label Content="Moje jízdy&#xD;&#xA;" HorizontalAlignment="Left" Height="39" Margin="206,10,0,0" VerticalAlignment="Top" Width="226" Grid.Column="3"/>
                 <ListBox HorizontalAlignment="Left" Height="269" Margin="0,84,0,0" VerticalAlignment="Top" Width="454" d:ItemsSource="{d:SampleData ItemCount=5}" Grid.ColumnSpan="3" Grid.Column="1"/>
                 <Button Grid.Column="3" Content="Vytvořit jízdu" HorizontalAlignment="Left" Height="77" Margin="466,276,0,0" VerticalAlignment="Top" Width="171" Click="Button_Click_1"/>
-                <local:CreateRideDialog x:Name="CreateRide" HorizontalAlignment="Left" Height="469" VerticalAlignment="Center" Width="489" Grid.Column="3" Margin="254,0,0,0" Visibility="Visible"/>
+                <local:CreateRideDialog x:Name="CreateRide" HorizontalAlignment="Left" Height="469" VerticalAlignment="Center" Width="489" Grid.Column="3" Margin="254,0,0,0" Visibility="Hidden"/>
             </Grid>
         </TabItem>
         <TabItem Header="Jízdy">

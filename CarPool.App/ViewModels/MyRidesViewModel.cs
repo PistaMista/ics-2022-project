@@ -25,6 +25,10 @@ namespace CarPool.App.ViewModels
 
             RideSelectedCommand = new RelayCommand<RideInfoModel>(RideSelected);
 
+            NewRideCommand = new AsyncRelayCommand(async () => {
+                await EditRideViewModel.LoadAsync(Guid.Empty);
+            });
+
         }
 
         public ObservableCollection<RideInfoModel> Rides { get; set; } = new();
@@ -32,6 +36,8 @@ namespace CarPool.App.ViewModels
         public EditRideViewModel EditRideViewModel { get; }
 
         public ICommand RideSelectedCommand { get; }
+
+        public ICommand NewRideCommand { get; }
 
         private Guid? selectedUserId;
 

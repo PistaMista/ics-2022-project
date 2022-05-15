@@ -9,6 +9,8 @@ using CarPool.App.Wrappers;
 using CarPool.BL.Facades;
 using CarPool.BL.Models;
 using System.Collections.ObjectModel;
+using System.Linq;
+using CarPool.App.Extensions;
 
 namespace CarPool.App.ViewModels
 {
@@ -16,23 +18,32 @@ namespace CarPool.App.ViewModels
     {
         private readonly IMediator _mediator;
         private readonly RideFacade _rideFacade;
+        private readonly CarFacade _carFacade;
         private readonly IMessageDialogService _messageDialogService;
 
         public EditRideViewModel(
             RideFacade rideFacade,
+            CarFacade carFacade,
             IMessageDialogService messageDialogService,
             IMediator mediator)
         {
             _rideFacade = rideFacade;
+            _carFacade = carFacade;
+
             _messageDialogService = messageDialogService;
             _mediator = mediator;
 
             SaveCommand = new AsyncRelayCommand(SaveAsync, CanSave);
             DeleteCommand = new AsyncRelayCommand(DeleteAsync);
+            CarSelectedCommand = new RelayCommand<CarInfoModel>(CarSelected);
 
             _mediator.Register<SelectedMessage<RideWrapper>>(async x =>
             {
                 await LoadAsync(x.Id ?? Guid.Empty);
+            });
+
+            _mediator.Register<SelectedMessage<UserWrapper>>(async x => {
+                userGuid = x?.Id ?? Guid.Empty;
                 await LoadCarsAsync();
             });
         }
@@ -48,29 +59,40 @@ namespace CarPool.App.ViewModels
         }
 
         public ObservableCollection<CarInfoModel> Cars { get; set; } = new();
+        private Guid userGuid;
 
-        private async void CarSelected(CarInfoModel? model)
+        private void CarSelected(CarInfoModel model)
         {
-            if (model == null)
+            if (model == null || Model == null)
                 return;
 
-            await EditRideViewModel.LoadAsync(model.Id);
+            Model.CarId = model.Id;
+            OnPropertyChanged();
         }
 
         public async Task LoadCarsAsync()
         {
             Cars.Clear();
             var cars = await _carFacade.GetAsync();
-            Cars.AddRange(cars.Where(x => x.CarOwnerId == Model?.Id));
+            Cars.AddRange(cars.Where(x => x.CarOwnerId == userGuid));
+            //Cars.AddRange(cars);
+            OnPropertyChanged();
         }
 
         public ICommand SaveCommand { get; }
         public ICommand DeleteCommand { get; }
+        public ICommand CarSelectedCommand { get; }
 
 
         public async Task LoadAsync(Guid id)
         {
             Model = await _rideFacade.GetAsync(id) ?? RideModel.Empty;
+
+            if (Model.Id == Guid.Empty)
+            {
+                Model.DriverId = userGuid;
+                Model.StartLocation = "BRNO";
+            }
         }
 
 

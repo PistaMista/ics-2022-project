@@ -38,6 +38,19 @@ namespace CarPool.App.Wrappers
             set => SetValue(value);
         }
 
+        public Guid? DriverId
+        {
+            get => GetValue<Guid>();
+            set => SetValue(value);
+        }
+
+        public Guid? CarId
+        {
+            get => GetValue<Guid>();
+            set => SetValue(value);
+        }
+
+
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
 

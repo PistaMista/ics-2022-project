@@ -43,7 +43,7 @@
                         </Grid.ColumnDefinitions>
                         <Label Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Content="{Binding FirstName}" />
                         <Label Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Content="{Binding LastName}" />
-                        <Image Grid.Column="2" Width="50" Source="{Binding PhotoUrl}"/>
+                        <Image Margin="100,0,0,0" Grid.Column="2" Width="50" Source="{Binding PhotoUrl}"/>
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>

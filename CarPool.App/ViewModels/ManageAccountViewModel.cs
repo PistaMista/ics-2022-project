@@ -12,6 +12,7 @@ using CarPool.App.Services.MessageDialog;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Windows;
 using System.Linq;
 
 namespace CarPool.App.ViewModels
@@ -146,6 +147,8 @@ namespace CarPool.App.ViewModels
                 {
                     Model = Model
                 });
+
+                MainWindow.myRides.Visibility = Visibility.Hidden;
             }
         }
     }

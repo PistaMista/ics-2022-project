@@ -67,6 +67,7 @@ namespace CarPool.App
 
             services.AddSingleton<MainViewModel>();
             services.AddSingleton<CreateAccountViewModel>();
+            services.AddSingleton<LoginViewModel>();
             services.AddSingleton<CarInfoViewModel>();
 
 

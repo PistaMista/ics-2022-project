@@ -18,7 +18,7 @@ namespace CarPool.App.Views
     /// <summary>
     /// Interaction logic for LoginPage.xaml
     /// </summary>
-    public partial class LoginPage : UserControl
+    public partial class LoginPage : UserControlBase
     {
         public LoginPage()
         {

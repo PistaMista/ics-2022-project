@@ -1,10 +1,12 @@
-<UserControl x:Class="CarPool.App.Views.LoginPage"
+<local:UserControlBase x:Class="CarPool.App.Views.LoginPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:CarPool.App.Views"
-      mc:Ignorable="d" 
+      xmlns:viewModels="clr-namespace:CarPool.App.ViewModels"
+      mc:Ignorable="d"
+      d:DataContext="{d:DesignInstance viewModels:LoginViewModel}"
       d:DesignHeight="450" d:DesignWidth="800">
 
     <Grid Margin="-10,0,10,0" Background="White">
@@ -24,8 +26,22 @@
                 </TransformGroup>
             </Button.RenderTransform>
         </Button>
-        <ListBox HorizontalAlignment="Left" Height="258" Margin="88,9,0,0" VerticalAlignment="Top" Width="247" d:ItemsSource="{d:SampleData ItemCount=5}" Grid.Row="1" Grid.RowSpan="2" SelectionChanged="ListBox_SelectionChanged"/>
-        <Label Content="Příhlaš se" HorizontalAlignment="Left" Height="38" Margin="332,0,0,0" VerticalAlignment="Center" Width="203" Background="White" RenderTransformOrigin="0.519,0.646" FontSize="20"/>
+        <ListBox x:Name="UserListBox" ItemsSource="{Binding Users}" Margin="98,68,325,40" Grid.RowSpan="3">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Content="{Binding FirstName}" />
+                        <Label Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Content="{Binding LastName}" />
+                        <Image Grid.Column="2" Width="50" Source="{Binding PhotoUrl}"/>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <Label Content="Přihlaš se" HorizontalAlignment="Left" Height="38" Margin="332,0,0,0" VerticalAlignment="Center" Width="203" Background="White" RenderTransformOrigin="0.519,0.646" FontSize="20"/>
 
     </Grid>
-</UserControl>
+</local:UserControlBase>

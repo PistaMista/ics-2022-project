@@ -13,12 +13,14 @@ namespace CarPool.App.ViewModels
 {
     public class MainViewModel
     {
-        public MainViewModel(CreateAccountViewModel m)
+        public MainViewModel(CreateAccountViewModel m, LoginViewModel l)
         {
             CreateAccountViewModel = m;
+            LoginViewModel = l;
         }
 
 
         public CreateAccountViewModel CreateAccountViewModel { get; }
+        public LoginViewModel LoginViewModel { get;  }
     }
 }

@@ -19,8 +19,7 @@
         <TextBox HorizontalAlignment="Left" Height="24" Margin="71,64,0,0" TextWrapping="Wrap" Text="{Binding Model.LastName}" VerticalAlignment="Top" Width="111" Grid.ColumnSpan="2"/>
         <Image HorizontalAlignment="Left" Height="97" Margin="55,108,0,0" VerticalAlignment="Top" Width="95" Source="/Views/profile.jpg" Grid.ColumnSpan="2"/>
         <Button Content="Open" HorizontalAlignment="Left" Height="18" Margin="44,211,0,0" VerticalAlignment="Top" Width="49" Grid.ColumnSpan="2"/>
-        <Button Content="Změnit" HorizontalAlignment="Left" Height="18" Margin="126,34,0,0" VerticalAlignment="Top" Width="49" Grid.Column="1"/>
-        <Button Content="Změnit" HorizontalAlignment="Left" Height="18" Margin="126,67,0,0" VerticalAlignment="Top" Width="49" Grid.Column="1"/>
+        <Button Content="Uložit změny" HorizontalAlignment="Left" Height="18" Margin="44,249,0,0" VerticalAlignment="Top" Width="82" Grid.ColumnSpan="2" Command="{Binding SaveCommand, Mode=OneWay}"/>
         <ListBox HorizontalAlignment="Left" Height="63" Margin="337,67,0,0" VerticalAlignment="Top" Width="281" d:ItemsSource="{d:SampleData ItemCount=5}" Grid.Column="1"/>
         <Label Content="Auta:" HorizontalAlignment="Left" Height="33" Margin="337,43,0,0" VerticalAlignment="Top" Width="105" Grid.Column="1"/>
         <Button Content="Přidat auto" HorizontalAlignment="Left" Height="37" Margin="337,137,0,0" VerticalAlignment="Top" Width="89" Grid.Column="1"/>

@@ -28,6 +28,7 @@ namespace CarPool.App.ViewModels
             _mediator = mediator;
 
             SaveCommand = new AsyncRelayCommand(SaveAsync, CanSave);
+            DeleteCommand = new AsyncRelayCommand(DeleteAsync);
 
             _mediator.Register<SelectedMessage<UserWrapper>>(async x => {
                 await LoadAsync(x.Id ?? Guid.Empty);
@@ -35,6 +36,7 @@ namespace CarPool.App.ViewModels
         }
 
         public ICommand SaveCommand { get;  }
+        public ICommand DeleteCommand { get; }
 
 
         private UserWrapper? _model;
@@ -61,5 +63,42 @@ namespace CarPool.App.ViewModels
             _mediator.Send(new UpdateMessage<UserWrapper> { Model = Model });
         }
         private bool CanSave() => Model?.IsValid ?? false;
+
+        public async Task DeleteAsync()
+        {
+            if (Model is null)
+            {
+                throw new InvalidOperationException("Null model cannot be deleted");
+            }
+
+            if (Model.Id != Guid.Empty)
+            {
+                var delete = _messageDialogService.Show(
+                    $"Delete",
+                    $"Do you want to delete your account?",
+                    MessageDialogButtonConfiguration.YesNo,
+                    MessageDialogResult.No);
+
+                if (delete == MessageDialogResult.No) return;
+
+                try
+                {
+                    await _userFacade.DeleteAsync(Model!.Id);
+                }
+                catch
+                {
+                    var _ = _messageDialogService.Show(
+                        $"Deleting failed!",
+                        "Deleting failed",
+                        MessageDialogButtonConfiguration.OK,
+                        MessageDialogResult.OK);
+                }
+
+                _mediator.Send(new DeleteMessage<UserWrapper>
+                {
+                    Model = Model
+                });
+            }
+        }
     }
 }

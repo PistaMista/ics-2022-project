@@ -10,7 +10,7 @@ using CarPool.BL.Facades;
 using CarPool.BL.Models;
 namespace CarPool.App.ViewModels
 {
-    public class CreateAccountViewModel
+    public class CreateAccountViewModel : ViewModelBase
     {
         private readonly IMediator _mediator;
         private readonly UserFacade _userFacade;
@@ -44,9 +44,12 @@ namespace CarPool.App.ViewModels
                 throw new InvalidOperationException("Null model cannot be saved");
             }
 
-            Model = await _userFacade.SaveAsync(Model.Model);
+            await _userFacade.SaveAsync(Model.Model);
             _mediator.Send(new UpdateMessage<UserWrapper> { Model = Model });
             _mediator.Send(new SelectedMessage<UserWrapper> { Id = Model.Id });
+
+            Model = UserModel.Empty;
+            OnPropertyChanged();
         }
 
         private bool CanSave() => Model?.IsValid ?? false;

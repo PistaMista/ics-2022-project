@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using CarPool.App.ViewModels;
 using CarPool.App.Views;
 
 namespace CarPool.App
@@ -22,10 +23,11 @@ namespace CarPool.App
     public partial class MainWindow : Window
     {
         public static MyRidesWindow? myRides;
-        public MainWindow()
+        public MainWindow(MainViewModel m)
         {
             InitializeComponent();
             myRides = MyRides;
+            DataContext = m;
         }
 
         private void btn_sign_up_Click(object sender, RoutedEventArgs e)

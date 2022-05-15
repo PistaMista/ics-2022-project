@@ -26,6 +26,7 @@ namespace CarPool.App.ViewModels
             _mediator = mediator;
 
             SaveCommand = new AsyncRelayCommand(SaveAsync, CanSave);
+            Model = UserModel.Empty;
         }
 
         public UserWrapper? Model { get; private set; }

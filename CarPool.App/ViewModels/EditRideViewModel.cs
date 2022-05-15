@@ -46,6 +46,9 @@ namespace CarPool.App.ViewModels
                 userGuid = x?.Id ?? Guid.Empty;
                 await LoadCarsAsync();
             });
+
+            _mediator.Register<UpdateMessage<CarWrapper>>(async _ => await LoadCarsAsync());
+            _mediator.Register<DeleteMessage<CarWrapper>>(async _ => await LoadCarsAsync());
         }
 
         private RideWrapper? _model;

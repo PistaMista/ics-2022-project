@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CarPool.App.Views"
         xmlns:viewModels="clr-namespace:CarPool.App.ViewModels"
-        mc:Ignorable="d">
+        mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance viewModels:EditRideViewModel}">
     <Grid Background="#FFE5E5E5" Width="355">
         <Label Content="Start:" HorizontalAlignment="Left" Height="26" Margin="56,50,0,0" VerticalAlignment="Top" Width="77"/>
         <Label Content="Cíl:" HorizontalAlignment="Left" Height="26" Margin="56,91,0,0" VerticalAlignment="Top" Width="77"/>
@@ -14,11 +15,11 @@
         <Label Content="Seznam aut:" HorizontalAlignment="Left" Height="26" Margin="56,230,0,0" VerticalAlignment="Top" Width="77"/>
         <ListBox HorizontalAlignment="Left" Height="54" Margin="56,261,0,0" VerticalAlignment="Top" Width="160" d:ItemsSource="{d:SampleData ItemCount=5}" SelectionChanged="ListBox_SelectionChanged"/>
         <Button Content="Vybrat" HorizontalAlignment="Left" Height="23" Margin="232,280,0,0" VerticalAlignment="Top" Width="63" Click="Button_Click"/>
-        <TextBox HorizontalAlignment="Left" Height="22" Margin="151,54,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="144"/>
-        <TextBox HorizontalAlignment="Left" Height="22" Margin="151,91,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="144"/>
-        <TextBox HorizontalAlignment="Left" Height="22" Margin="151,131,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="144" TextChanged="TextBox_TextChanged"/>
-        <TextBox HorizontalAlignment="Left" Height="22" Margin="151,190,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="144"/>
-        <Button x:Name="btn_add_ride" Content="Vytvořit jízdu" HorizontalAlignment="Left" Height="47" Margin="94,364,0,0" VerticalAlignment="Top" Width="162" Click="btn_add_ride_Click"/>
+        <TextBox HorizontalAlignment="Left" Height="22" Margin="151,54,0,0" TextWrapping="Wrap" Text="{Binding Model.StartLocation}" VerticalAlignment="Top" Width="144"/>
+        <TextBox HorizontalAlignment="Left" Height="22" Margin="151,91,0,0" TextWrapping="Wrap" Text="{Binding Model.EndLocation}" VerticalAlignment="Top" Width="144"/>
+        <TextBox HorizontalAlignment="Left" Height="22" Margin="151,131,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="144" TextChanged="TextBox_TextChanged" Text="TODO"/>
+        <TextBox HorizontalAlignment="Left" Height="22" Margin="151,190,0,0" TextWrapping="Wrap" Text="{Binding Model.Duration}" VerticalAlignment="Top" Width="144"/>
+        <Button x:Name="btn_add_ride" Content="Vytvořit jízdu" HorizontalAlignment="Left" Height="47" Margin="94,364,0,0" VerticalAlignment="Top" Width="162" Click="btn_add_ride_Click" Command="{Binding SaveCommand, Mode=OneWay}"/>
         <Label Content="(formát: DD/MM/YYYY HH:MM)" HorizontalAlignment="Center" Height="38" Margin="0,153,0,0" VerticalAlignment="Top" Width="246" Foreground="Navy" FontSize="10px"/>
         <Button Content="X" HorizontalAlignment="Left" Height="19" Margin="321,34,0,0" VerticalAlignment="Top" Width="17" Click="Button_Click_1"/>
 

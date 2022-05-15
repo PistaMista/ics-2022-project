@@ -19,7 +19,7 @@
         <TextBox HorizontalAlignment="Left" Height="22" Margin="151,91,0,0" TextWrapping="Wrap" Text="{Binding Model.Type}" VerticalAlignment="Top" Width="144"/>
         <TextBox HorizontalAlignment="Left" Height="22" Margin="151,131,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="144"/>
         <TextBox HorizontalAlignment="Left" Height="22" Margin="151,173,0,0" TextWrapping="Wrap" Text="{Binding Model.LicensePlate}" VerticalAlignment="Top" Width="144"/>
-        <Button x:Name="btn_add_ride" Content="Uložit auto" HorizontalAlignment="Left" Height="47" Margin="94,364,0,0" VerticalAlignment="Top" Width="162" Command="{Binding SaveCommand, Mode=OneWay}"/>
+        <Button x:Name="btn_add_ride" Content="Uložit auto" HorizontalAlignment="Left" Height="47" Margin="94,364,0,0" VerticalAlignment="Top" Width="162" Command="{Binding SaveCommand, Mode=OneWay}" Click="btn_add_ride_Click"/>
         <Label Content="Počet míst:" HorizontalAlignment="Left" Height="44" Margin="56,209,0,0" VerticalAlignment="Top" Width="151"/>
         <TextBox HorizontalAlignment="Left" Height="22" Margin="151,217,0,0" TextWrapping="Wrap" Text="{Binding Model.SeatCount}" VerticalAlignment="Top" Width="144"/>
         <Button Content="X" HorizontalAlignment="Left" Height="20" Margin="316,22,0,0" VerticalAlignment="Top" Width="17" Click="btn_x_click" RenderTransformOrigin="0.5,0.5"/>

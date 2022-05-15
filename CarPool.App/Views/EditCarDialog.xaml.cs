@@ -28,5 +28,10 @@ namespace CarPool.App.Views
         {
             Visibility = Visibility.Hidden;
         }
+
+        private void btn_add_ride_Click(object sender, RoutedEventArgs e)
+        {
+            Visibility = Visibility.Hidden;
+        }
     }
 }

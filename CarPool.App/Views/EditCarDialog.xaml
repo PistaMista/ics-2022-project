@@ -6,7 +6,7 @@
         xmlns:viewModels="clr-namespace:CarPool.App.ViewModels"
         xmlns:local="clr-namespace:CarPool.App.Views"
         mc:Ignorable="d"
-        d:DataContext="{d:DesignInstance viewModels:CarInfoViewModel}">
+        d:DataContext="{d:DesignInstance viewModels:EditCarViewModel}">
     <Grid  Background="#FFE5E5E5" Width="355">
 
         <Label Content="Výrobce:" HorizontalAlignment="Left" Height="26" Margin="56,50,0,0" VerticalAlignment="Top" Width="77"/>
@@ -17,9 +17,9 @@
         <Button Content="open" HorizontalAlignment="Left" Height="23" Margin="160,268,0,0" VerticalAlignment="Top" Width="63"/>
         <TextBox HorizontalAlignment="Left" Height="22" Margin="151,54,0,0" TextWrapping="Wrap" Text="{Binding Model.Manufacturer}" VerticalAlignment="Top" Width="144"/>
         <TextBox HorizontalAlignment="Left" Height="22" Margin="151,91,0,0" TextWrapping="Wrap" Text="{Binding Model.Type}" VerticalAlignment="Top" Width="144"/>
-        <TextBox HorizontalAlignment="Left" Height="22" Margin="151,131,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="144"/>
+        <TextBox HorizontalAlignment="Left" Height="22" Margin="151,131,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="144"/>
         <TextBox HorizontalAlignment="Left" Height="22" Margin="151,173,0,0" TextWrapping="Wrap" Text="{Binding Model.LicensePlate}" VerticalAlignment="Top" Width="144"/>
-        <Button x:Name="btn_add_ride" Content="Přidat auto" HorizontalAlignment="Left" Height="47" Margin="94,364,0,0" VerticalAlignment="Top" Width="162" Command="{Binding SaveCommand, Mode=OneWay}"/>
+        <Button x:Name="btn_add_ride" Content="Uložit auto" HorizontalAlignment="Left" Height="47" Margin="94,364,0,0" VerticalAlignment="Top" Width="162" Command="{Binding SaveCommand, Mode=OneWay}"/>
         <Label Content="Počet míst:" HorizontalAlignment="Left" Height="44" Margin="56,209,0,0" VerticalAlignment="Top" Width="151"/>
         <TextBox HorizontalAlignment="Left" Height="22" Margin="151,217,0,0" TextWrapping="Wrap" Text="{Binding Model.SeatCount}" VerticalAlignment="Top" Width="144"/>
         <Button Content="X" HorizontalAlignment="Left" Height="20" Margin="316,22,0,0" VerticalAlignment="Top" Width="17" Click="btn_x_click" RenderTransformOrigin="0.5,0.5"/>

@@ -11,13 +11,13 @@ using CarPool.BL.Models;
 
 namespace CarPool.App.ViewModels
 {
-    public class CarInfoViewModel : ViewModelBase
+    public class EditCarViewModel : ViewModelBase
     {
         private readonly IMediator _mediator;
         private readonly CarFacade _carFacade;
         private readonly IMessageDialogService _messageDialogService;
 
-        public CarInfoViewModel(
+        public EditCarViewModel(
             CarFacade carFacade,
             IMessageDialogService messageDialogService,
             IMediator mediator)
@@ -28,9 +28,23 @@ namespace CarPool.App.ViewModels
 
             SaveCommand = new AsyncRelayCommand(SaveAsync, CanSave);
             DeleteCommand = new AsyncRelayCommand(DeleteAsync);
+
+            _mediator.Register<SelectedMessage<CarWrapper>>(async x =>
+            {
+                await LoadAsync(x.Id ?? Guid.Empty);
+            });
         }
 
-        public CarWrapper? Model { get; private set; }
+        private CarWrapper? _model;
+        public CarWrapper? Model
+        {
+            get => _model; private set
+            {
+                _model = value;
+                OnPropertyChanged();
+            }
+        }
+
         public ICommand SaveCommand { get; }
         public ICommand DeleteCommand { get; }
 
@@ -39,6 +53,7 @@ namespace CarPool.App.ViewModels
         {
             Model = await _carFacade.GetAsync(id) ?? CarModel.Empty;
         }
+
 
         public async Task SaveAsync()
         {

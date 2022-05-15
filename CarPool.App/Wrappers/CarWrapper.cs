@@ -20,6 +20,12 @@ namespace CarPool.App.Wrappers
             set => SetValue(value);
         }
 
+        public Guid? CarOwnerId
+        {
+            get => GetValue<Guid>();
+            set => SetValue(value);
+        }
+
         public CarType? Type
         {
             get => GetValue<CarType>();

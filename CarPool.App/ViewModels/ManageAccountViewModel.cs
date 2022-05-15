@@ -10,6 +10,8 @@ using CarPool.App.Commands;
 using CarPool.BL.Facades;
 using CarPool.App.Services.MessageDialog;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace CarPool.App.ViewModels
 {
@@ -21,22 +23,32 @@ namespace CarPool.App.ViewModels
 
         public ManageAccountViewModel(UserFacade userFacade,
             IMessageDialogService messageDialogService,
-            IMediator mediator)
+            IMediator mediator,
+            EditCarViewModel editCarViewModel)
         {
             _userFacade = userFacade;
             _messageDialogService = messageDialogService;
             _mediator = mediator;
+            EditCarViewModel = editCarViewModel;
 
             SaveCommand = new AsyncRelayCommand(SaveAsync, CanSave);
             DeleteCommand = new AsyncRelayCommand(DeleteAsync);
+            NewCarCommand = new AsyncRelayCommand(async () => {
+                await EditCarViewModel.LoadAsync(Guid.Empty);
+                EditCarViewModel.Model.CarOwnerId = Model.Id;
+            });
 
             _mediator.Register<SelectedMessage<UserWrapper>>(async x => {
                 await LoadAsync(x.Id ?? Guid.Empty);
             });
         }
 
+        public EditCarViewModel EditCarViewModel { get; }
+
         public ICommand SaveCommand { get;  }
         public ICommand DeleteCommand { get; }
+
+        public ICommand NewCarCommand { get; }
 
 
         private UserWrapper? _model;

@@ -24,8 +24,8 @@
         <Label Content="Auta:" HorizontalAlignment="Left" Height="33" Margin="337,43,0,0" VerticalAlignment="Top" Width="105" Grid.Column="1"/>
         <Button Content="Odebrat auto" HorizontalAlignment="Left" Height="37" Margin="529,137,0,0" VerticalAlignment="Top" Width="89" Grid.Column="1"/>
         <Button Content="Odhlásit se" HorizontalAlignment="Left" Height="37" Margin="529,351,0,0" VerticalAlignment="Top" Width="89" Grid.Column="1" Click="btn_logout_click"/>
-        <Button Content="Přidat auto" HorizontalAlignment="Left" Height="37" Margin="337,137,0,0" VerticalAlignment="Top" Width="89" Grid.Column="1" Click="btn_addcar_click"/>
-        <local:AddCarDialog x:Name="AddCar" HorizontalAlignment="Left" Height="469" VerticalAlignment="Center" Width="489" Grid.Column="3" Margin="254,0,0,0" Visibility="Hidden"/>
+        <Button Content="Přidat auto" HorizontalAlignment="Left" Height="37" Margin="337,137,0,0" VerticalAlignment="Top" Width="89" Grid.Column="1" Click="btn_addcar_click" Command="{Binding NewCarCommand, Mode=OneWay}"/>
+        <local:AddCarDialog x:Name="AddCar" HorizontalAlignment="Left" Height="469" VerticalAlignment="Center" Width="489" Grid.Column="3" Margin="254,0,0,0" Visibility="Hidden" DataContext="{Binding EditCarViewModel}"/>
         
         <Button Content="Zrušit účet" HorizontalAlignment="Left" Height="37" Margin="38,356,0,0" VerticalAlignment="Top" Width="88" Grid.ColumnSpan="2" Command="{Binding DeleteCommand, Mode=OneWay}"/>
         

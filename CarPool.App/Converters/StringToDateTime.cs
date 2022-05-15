@@ -11,14 +11,24 @@ namespace CarPool.App.Converters
 {
     public class StringToDateTime : IValueConverter
     {
-        public object Convert(object? value, Type targetType, object parameter, CultureInfo culture)
+
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return DateTime.ParseExact(value.ToString(), "dd/MM/yyyy HH:mm", null);
+            DateTime time = DateTime.Now;
+
+            if (value is DateTime)
+            {
+                time = (DateTime)value;
+            }
+
+            return time.ToString("dd.MM.yyyy HH:mm");
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            throw new NotImplementedException();
+            DateTime time;
+            bool success = DateTime.TryParseExact(value.ToString(), "dd.MM.yyyy HH:mm", culture, DateTimeStyles.None, out time);
+            return success ? time : DateTime.Now;
         }
     }
 }

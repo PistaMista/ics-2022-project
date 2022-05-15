@@ -54,7 +54,7 @@ namespace CarPool.App.ViewModels
         private RideWrapper? _model;
         public RideWrapper? Model
         {
-            get => _model; private set
+            get => _model; set
             {
                 _model = value;
                 OnPropertyChanged();
@@ -90,14 +90,14 @@ namespace CarPool.App.ViewModels
         public async Task LoadAsync(Guid id)
         {
             Model = await _rideFacade.GetAsync(id) ?? RideModel.Empty;
-
-            if (Model.Id == Guid.Empty)
-            {
-                Model.DriverId = userGuid;
-                Model.StartLocation = "BRNO";
-            }
         }
 
+        public void LoadEmpty()
+        {
+            Model = RideModel.Empty;
+            Model.DriverId = userGuid;
+            Model.StartLocation = "Brno";
+        }
 
         public async Task SaveAsync()
         {

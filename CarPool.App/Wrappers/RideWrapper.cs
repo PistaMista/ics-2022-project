@@ -69,12 +69,12 @@ namespace CarPool.App.Wrappers
                 yield return new ValidationResult($"{nameof(StartTime)} is required", new[] { nameof(StartTime) });
             }
 
-            if (DriverId == null)
+            if (DriverId == null || DriverId == default(Guid))
             {
                 yield return new ValidationResult($"{nameof(DriverId)} is required", new[] { nameof(DriverId) });
             }
 
-            if (CarId == null)
+            if (CarId == null || CarId == default(Guid))
             {
                 yield return new ValidationResult($"{nameof(CarId)} is required", new[] { nameof(CarId) });
             }

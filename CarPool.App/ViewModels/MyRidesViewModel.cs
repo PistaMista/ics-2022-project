@@ -25,8 +25,8 @@ namespace CarPool.App.ViewModels
 
             RideSelectedCommand = new RelayCommand<RideInfoModel>(RideSelected);
 
-            NewRideCommand = new AsyncRelayCommand(async () => {
-                await EditRideViewModel.LoadAsync(Guid.Empty);
+            NewRideCommand = new RelayCommand(() => {
+                EditRideViewModel.LoadEmpty();
             });
 
         }

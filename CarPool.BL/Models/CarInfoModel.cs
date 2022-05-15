@@ -8,13 +8,16 @@ public record CarInfoModel(
     CarType Type,
     string LicensePlate,
     int SeatCount,
-    string PhotoUrl) : ModelBase
+    string PhotoUrl,
+    Guid CarOwnerId) : ModelBase
 {
     public string Manufacturer { get; set; } = Manufacturer;
     public CarType Type { get; set; } = Type;
     public string LicensePlate { get; set; } = LicensePlate;
     public int SeatCount { get; set; } = SeatCount;
     public string PhotoUrl { get; set; } = PhotoUrl;
+    public Guid CarOwnerId { get; set; } = CarOwnerId;
+
 
     public class MapperProfile : Profile
     {
@@ -23,5 +26,5 @@ public record CarInfoModel(
             CreateMap<CarEntity, CarInfoModel>();
         }
     }
-    public static CarInfoModel Empty => new(string.Empty, CarType.None, string.Empty, 0, string.Empty);
+    public static CarInfoModel Empty => new(string.Empty, CarType.None, string.Empty, 0, string.Empty, Guid.Empty);
 }

@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CarPool.App.Views"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:viewModels="clr-namespace:CarPool.App.ViewModels"
              d:DataContext="{d:DesignInstance viewModels:ManageAccountViewModel}"
              mc:Ignorable="d" 
@@ -20,14 +21,35 @@
         <Image HorizontalAlignment="Left" Height="97" Margin="55,108,0,0" VerticalAlignment="Top" Width="95" Source="/Views/profile.jpg" Grid.ColumnSpan="2"/>
         <Button Content="Open" HorizontalAlignment="Left" Height="18" Margin="44,211,0,0" VerticalAlignment="Top" Width="49" Grid.ColumnSpan="2"/>
         <Button Content="Uložit změny" HorizontalAlignment="Left" Height="18" Margin="44,249,0,0" VerticalAlignment="Top" Width="82" Grid.ColumnSpan="2" Command="{Binding SaveCommand, Mode=OneWay}"/>
-        <ListBox HorizontalAlignment="Left" Height="63" Margin="337,67,0,0" VerticalAlignment="Top" Width="281" d:ItemsSource="{d:SampleData ItemCount=5}" Grid.Column="1"/>
+        <ListBox Name="CarListBox"  HorizontalAlignment="Left" Height="63" Margin="337,67,0,0" VerticalAlignment="Top" Width="281" Grid.RowSpan="2" Grid.Column="1" ItemsSource="{Binding Cars}">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectionChanged">
+                    <i:InvokeCommandAction Command="{Binding CarSelectedCommand}"
+                                           CommandParameter="{Binding ElementName=CarListBox, Path=SelectedItem}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" Width="150" VerticalAlignment="Center" HorizontalAlignment="Left" Content="{Binding Manufacturer}" />
+                        <Label Grid.Column="1" Width="330" VerticalAlignment="Center" HorizontalAlignment="Left" Content="{Binding LicensePlate}" />
+                        <Image Margin="0,0,0,0" Grid.Column="2" Width="50" Source="{Binding PhotoUrl}"/>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
         <Label Content="Auta:" HorizontalAlignment="Left" Height="33" Margin="337,43,0,0" VerticalAlignment="Top" Width="105" Grid.Column="1"/>
         <Button Content="Odebrat auto" HorizontalAlignment="Left" Height="37" Margin="529,137,0,0" VerticalAlignment="Top" Width="89" Grid.Column="1"/>
         <Button Content="Odhlásit se" HorizontalAlignment="Left" Height="37" Margin="529,351,0,0" VerticalAlignment="Top" Width="89" Grid.Column="1" Click="btn_logout_click"/>
         <Button Content="Přidat auto" HorizontalAlignment="Left" Height="37" Margin="337,137,0,0" VerticalAlignment="Top" Width="89" Grid.Column="1" Click="btn_addcar_click" Command="{Binding NewCarCommand, Mode=OneWay}"/>
+        <Button Content="Upravit auto" HorizontalAlignment="Left" Height="37" Margin="433,137,0,0" VerticalAlignment="Top" Width="89" Grid.Column="1" Click="btn_addcar_click"/>
         <local:AddCarDialog x:Name="AddCar" HorizontalAlignment="Left" Height="469" VerticalAlignment="Center" Width="489" Grid.Column="3" Margin="254,0,0,0" Visibility="Hidden" DataContext="{Binding EditCarViewModel}"/>
-        
+
         <Button Content="Zrušit účet" HorizontalAlignment="Left" Height="37" Margin="38,356,0,0" VerticalAlignment="Top" Width="88" Grid.ColumnSpan="2" Command="{Binding DeleteCommand, Mode=OneWay}"/>
-        
+
     </Grid>
 </UserControl>

@@ -9,7 +9,7 @@
         xmlns:viewModels="clr-namespace:CarPool.App.ViewModels"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance viewModels:MainViewModel}"
-        Title="MainWindow" Height="450" Width="800"
+        Title="MainWindow" Height="500" Width="800"
         ResizeMode="NoResize" 
 >
     <Grid>
@@ -17,7 +17,6 @@
         <Button x:Name="btn_login" Content="Přihlásit se" HorizontalAlignment="Left" Height="64" Margin="272,189,0,0" VerticalAlignment="Top" Width="200" Click="btn_login_Click"/>
         <Views:CreateAccountPage x:Name="CreateAccount"  HorizontalAlignment="Center" Height="434" VerticalAlignment="Center" Width="800" Visibility="Hidden" DataContext="{Binding CreateAccountViewModel}"/>
         <Views:LoginPage x:Name="Login" HorizontalAlignment="Center" Height="434" VerticalAlignment="Center" Width="800" Visibility="Hidden" DataContext="{Binding LoginViewModel}"/>
-        <Views:TabbedWindow x:Name="MyRides" HorizontalAlignment="Center" Height="422" VerticalAlignment="Center" Width="800" Visibility="Hidden"/>
+        <Views:TabbedWindow x:Name="MyRides" HorizontalAlignment="Center" Height="480" VerticalAlignment="Top" Width="790" Visibility="Hidden"/>
     </Grid>
-
 </Window>

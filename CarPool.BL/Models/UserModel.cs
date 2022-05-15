@@ -21,5 +21,5 @@ public record UserModel(
                 .ReverseMap();
         }
     }
-    public static UserModel Empty => new(string.Empty, string.Empty,string.Empty);
+    public static UserModel Empty => new(string.Empty, string.Empty, "/Views/profile.jpg");
 }

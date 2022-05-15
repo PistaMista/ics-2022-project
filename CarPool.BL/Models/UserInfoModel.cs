@@ -18,5 +18,5 @@ public record UserInfoModel(
             CreateMap<UserEntity, UserInfoModel>();
         }
     }
-    public static UserInfoModel Empty => new(string.Empty, string.Empty, string.Empty);
+    public static UserInfoModel Empty => new(string.Empty, string.Empty, "/Views/profile.jpg");
 }

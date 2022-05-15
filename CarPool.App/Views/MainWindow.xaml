@@ -8,6 +8,7 @@
 xmlns:Views="clr-namespace:CarPool.App.Views" x:Class="CarPool.App.MainWindow"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800"
+        ResizeMode="NoResize" 
 >
     <Grid>
         <Button x:Name="btn_sign_up" Content="Vytvořit účet" HorizontalAlignment="Left" Margin="272,87,0,0" VerticalAlignment="Top" Height="64" Width="200" Click="btn_sign_up_Click"/>

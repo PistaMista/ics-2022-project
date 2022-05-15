@@ -30,5 +30,10 @@ namespace CarPool.App.Views
             MainWindow.myRides.Visibility = Visibility.Visible;
             Visibility = Visibility.Hidden;
         }
+
+        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            
+        }
     }
 }

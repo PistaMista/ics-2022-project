@@ -24,7 +24,7 @@
                 </TransformGroup>
             </Button.RenderTransform>
         </Button>
-        <ListBox HorizontalAlignment="Left" Height="258" Margin="88,9,0,0" VerticalAlignment="Top" Width="247" d:ItemsSource="{d:SampleData ItemCount=5}" Grid.Row="1" Grid.RowSpan="2"/>
+        <ListBox HorizontalAlignment="Left" Height="258" Margin="88,9,0,0" VerticalAlignment="Top" Width="247" d:ItemsSource="{d:SampleData ItemCount=5}" Grid.Row="1" Grid.RowSpan="2" SelectionChanged="ListBox_SelectionChanged"/>
         <Label Content="Příhlaš se" HorizontalAlignment="Left" Height="38" Margin="332,0,0,0" VerticalAlignment="Center" Width="203" Background="White" RenderTransformOrigin="0.519,0.646" FontSize="20"/>
 
     </Grid>

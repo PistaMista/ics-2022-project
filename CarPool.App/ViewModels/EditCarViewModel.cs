@@ -71,9 +71,7 @@ namespace CarPool.App.ViewModels
         public async Task DeleteAsync()
         {
             if (Model is null)
-            {
-                throw new InvalidOperationException("Null model cannot be deleted");
-            }
+                return;
 
             if (Model.Id != Guid.Empty)
             {

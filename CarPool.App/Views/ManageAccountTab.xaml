@@ -43,7 +43,7 @@
             </ListBox.ItemTemplate>
         </ListBox>
         <Label Content="Auta:" HorizontalAlignment="Left" Height="33" Margin="337,43,0,0" VerticalAlignment="Top" Width="105" Grid.Column="1"/>
-        <Button Content="Odebrat auto" HorizontalAlignment="Left" Height="37" Margin="529,137,0,0" VerticalAlignment="Top" Width="89" Grid.Column="1"/>
+        <Button Content="Odebrat auto" HorizontalAlignment="Left" Height="37" Margin="529,137,0,0" VerticalAlignment="Top" Width="89" Grid.Column="1" Command="{Binding CarDeleteCommand, Mode=OneWay}"/>
         <Button Content="Odhlásit se" HorizontalAlignment="Left" Height="37" Margin="529,351,0,0" VerticalAlignment="Top" Width="89" Grid.Column="1" Click="btn_logout_click"/>
         <Button Content="Přidat auto" HorizontalAlignment="Left" Height="37" Margin="337,137,0,0" VerticalAlignment="Top" Width="89" Grid.Column="1" Click="btn_addcar_click" Command="{Binding NewCarCommand, Mode=OneWay}"/>
         <Button Content="Upravit auto" HorizontalAlignment="Left" Height="37" Margin="433,137,0,0" VerticalAlignment="Top" Width="89" Grid.Column="1" Click="btn_addcar_click"/>

@@ -40,9 +40,14 @@ namespace CarPool.App.ViewModels
 
             SaveCommand = new AsyncRelayCommand(SaveAsync, CanSave);
             DeleteCommand = new AsyncRelayCommand(DeleteAsync);
+
             NewCarCommand = new AsyncRelayCommand(async () => {
                 await EditCarViewModel.LoadAsync(Guid.Empty);
                 EditCarViewModel.Model.CarOwnerId = Model.Id;
+            });
+            CarDeleteCommand = new AsyncRelayCommand(async () =>
+            {
+                await EditCarViewModel.DeleteAsync();
             });
 
             _mediator.Register<SelectedMessage<UserWrapper>>(async x => {
@@ -62,6 +67,7 @@ namespace CarPool.App.ViewModels
 
         public ICommand NewCarCommand { get; }
         public ICommand CarSelectedCommand { get; }
+        public ICommand CarDeleteCommand { get; }
 
 
         private UserWrapper? _model;

@@ -3,7 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:CarPool.App.Views"     
+        xmlns:local="clr-namespace:CarPool.App.Views"
+        xmlns:viewModels="clr-namespace:CarPool.App.ViewModels"
         mc:Ignorable="d">
     <Grid Background="#FFE5E5E5" Width="355">
         <Label Content="Start:" HorizontalAlignment="Left" Height="26" Margin="56,50,0,0" VerticalAlignment="Top" Width="77"/>

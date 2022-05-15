@@ -4,6 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CarPool.App.Views"
+        xmlns:viewModels="clr-namespace:CarPool.App.ViewModels"
+        d:DataContext="{d:DesignInstance viewModels:MainViewModel}"
         mc:Ignorable="d" Height="450" Width="800">
     <TabControl HorizontalAlignment="Center" Height="450" VerticalAlignment="Top" Width="800">
         <TabItem Header="Moje jízdy">
@@ -19,9 +21,9 @@
             </Grid>
         </TabItem>
         <TabItem Header="Správa účtu">
-            <Grid Background="#FFE5E5E5">
-                <local:ManageAccountUserControl/>
 
+            <Grid Background="#FFE5E5E5">
+                <local:ManageAccountUserControl DataContext="{Binding ManageAccountViewModel}"/>
             </Grid>
         </TabItem>
 

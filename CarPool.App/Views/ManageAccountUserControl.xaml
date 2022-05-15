@@ -4,6 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CarPool.App.Views"
+             xmlns:viewModels="clr-namespace:CarPool.App.ViewModels"
+             d:DataContext="{d:DesignInstance viewModels:ManageAccountViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid Background="#FFE5E5E5">
@@ -13,8 +15,8 @@
         </Grid.ColumnDefinitions>
         <Label Content="Jméno:" HorizontalAlignment="Left" Height="28" Margin="10,29,0,0" VerticalAlignment="Top" Width="69"/>
         <Label Content="Příjmení:&#xD;&#xA;" HorizontalAlignment="Left" Height="28" Margin="10,62,0,0" VerticalAlignment="Top" Width="69"/>
-        <TextBox HorizontalAlignment="Left" Height="22" Margin="71,32,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="111" Grid.ColumnSpan="2"/>
-        <TextBox HorizontalAlignment="Left" Height="24" Margin="71,64,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="111" Grid.ColumnSpan="2"/>
+        <TextBox HorizontalAlignment="Left" Height="22" Margin="71,32,0,0" TextWrapping="Wrap" Text="{Binding Model.FirstName}" VerticalAlignment="Top" Width="111" Grid.ColumnSpan="2"/>
+        <TextBox HorizontalAlignment="Left" Height="24" Margin="71,64,0,0" TextWrapping="Wrap" Text="{Binding Model.LastName}" VerticalAlignment="Top" Width="111" Grid.ColumnSpan="2"/>
         <Image HorizontalAlignment="Left" Height="97" Margin="55,108,0,0" VerticalAlignment="Top" Width="95" Source="/Views/profile.jpg" Grid.ColumnSpan="2"/>
         <Button Content="Open" HorizontalAlignment="Left" Height="18" Margin="44,211,0,0" VerticalAlignment="Top" Width="49" Grid.ColumnSpan="2"/>
         <Button Content="Změnit" HorizontalAlignment="Left" Height="18" Margin="126,34,0,0" VerticalAlignment="Top" Width="49" Grid.Column="1"/>

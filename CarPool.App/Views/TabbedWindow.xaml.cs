@@ -10,17 +10,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace CarPool.App.Views
 {
     /// <summary>
-    /// Interakční logika pro RideUserControl.xaml
+    /// Interaction logic for MyRidesWindow.xaml
     /// </summary>
-    public partial class RideUserControl : UserControl
+    public partial class TabbedWindow : UserControl
     {
-        public RideUserControl()
+        public TabbedWindow()
         {
             InitializeComponent();
         }
@@ -28,6 +27,11 @@ namespace CarPool.App.Views
         private void Button_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }

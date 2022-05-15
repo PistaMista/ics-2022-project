@@ -10,28 +10,24 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace CarPool.App.Views
 {
     /// <summary>
-    /// Interaction logic for MyRidesWindow.xaml
+    /// Interakční logika pro MyRideUserControl.xaml
     /// </summary>
-    public partial class MyRidesWindow : UserControl
+    public partial class MyRidesTab : UserControl
     {
-        public MyRidesWindow()
+        public MyRidesTab()
         {
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            
+            CreateRide.Visibility = Visibility.Visible;
         }
     }
 }

@@ -16,18 +16,18 @@ using System.Windows.Shapes;
 namespace CarPool.App.Views
 {
     /// <summary>
-    /// Interakční logika pro MyRideUserControl.xaml
+    /// Interakční logika pro RideUserControl.xaml
     /// </summary>
-    public partial class MyRideUserControl : UserControl
+    public partial class RidesTab : UserControl
     {
-        public MyRideUserControl()
+        public RidesTab()
         {
             InitializeComponent();
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
-            CreateRide.Visibility = Visibility.Visible;
+
         }
     }
 }

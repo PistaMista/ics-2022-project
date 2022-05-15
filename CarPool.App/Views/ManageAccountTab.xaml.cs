@@ -18,9 +18,9 @@ namespace CarPool.App.Views
     /// <summary>
     /// Interakční logika pro ManageAccountUserControl.xaml
     /// </summary>
-    public partial class ManageAccountUserControl : UserControl
+    public partial class ManageAccountTab : UserControl
     {
-        public ManageAccountUserControl()
+        public ManageAccountTab()
         {
             InitializeComponent();
         }

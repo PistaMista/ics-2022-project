@@ -1,4 +1,4 @@
-<UserControl x:Class="CarPool.App.Views.MyRidesWindow"
+<UserControl x:Class="CarPool.App.Views.TabbedWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -10,20 +10,20 @@
     <TabControl HorizontalAlignment="Center" Height="450" VerticalAlignment="Top" Width="800">
         <TabItem Header="Moje jízdy">
             <Grid Background="#FFE5E5E5">
-                <local:MyRideUserControl HorizontalAlignment="Left" Height="422" Margin="-3,0,0,0" VerticalAlignment="Center" Width="797"/>
+                <local:MyRidesTab HorizontalAlignment="Left" Height="422" Margin="-3,0,0,0" VerticalAlignment="Center" Width="797"/>
 
             </Grid>
         </TabItem>
         <TabItem Header="Jízdy">
             <Grid Background="#FFE5E5E5">
-                <local:RideUserControl/>
+                <local:RidesTab/>
 
             </Grid>
         </TabItem>
         <TabItem Header="Správa účtu">
 
             <Grid Background="#FFE5E5E5">
-                <local:ManageAccountUserControl DataContext="{Binding ManageAccountViewModel}"/>
+                <local:ManageAccountTab DataContext="{Binding ManageAccountViewModel}"/>
             </Grid>
         </TabItem>
 

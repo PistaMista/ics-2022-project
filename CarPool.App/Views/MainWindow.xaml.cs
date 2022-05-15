@@ -22,7 +22,7 @@ namespace CarPool.App
     /// </summary>
     public partial class MainWindow : Window
     {
-        public static MyRidesWindow? myRides;
+        public static TabbedWindow? myRides;
         public MainWindow(MainViewModel m)
         {
             InitializeComponent();

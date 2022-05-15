@@ -57,7 +57,7 @@ namespace CarPool.App.ViewModels
         public ObservableCollection<CarInfoModel> Cars { get; set; } = new();
         public EditCarViewModel EditCarViewModel { get; }
 
-        public ICommand SaveCommand { get;  }
+        public ICommand SaveCommand { get; }
         public ICommand DeleteCommand { get; }
 
         public ICommand NewCarCommand { get; }
@@ -75,7 +75,12 @@ namespace CarPool.App.ViewModels
         private async void CarUpdated(UpdateMessage<CarWrapper> _) => await LoadCarsAsync();
 
         private async void CarDeleted(DeleteMessage<CarWrapper> _) => await LoadCarsAsync();
-        private async void CarSelected(CarInfoModel? model) => await EditCarViewModel.LoadAsync(model?.Id ?? Guid.Empty);
+        private async void CarSelected(CarInfoModel? model) {
+            if (model == null)
+                return;
+
+            await EditCarViewModel.LoadAsync(model.Id);
+        }
 
         public async Task LoadCarsAsync()
         {

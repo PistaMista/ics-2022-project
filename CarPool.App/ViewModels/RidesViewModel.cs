@@ -25,8 +25,8 @@ namespace CarPool.App.ViewModels
 
             RideSelectedCommand = new AsyncRelayCommand<RideInfoModel>(RideSelected);
 
-            NewRideCommand = new RelayCommand(() => {
-                EditRideViewModel.LoadEmpty();
+            FilterRidesCommand = new RelayCommand(async () => {
+                await LoadAsync();
             });
 
             _mediator.Register<SelectedMessage<UserWrapper>>(async x => {
@@ -42,9 +42,15 @@ namespace CarPool.App.ViewModels
 
         public EditRideViewModel EditRideViewModel { get; }
 
+        public string FilterStartLocation { get; set; } = "";
+
+        public string FilterEndLocation { get; set; } = "";
+
+        public DateTime FilterStartDate { get; set; } = default(DateTime);
+
         public ICommand RideSelectedCommand { get; }
 
-        public ICommand NewRideCommand { get; }
+        public ICommand FilterRidesCommand { get; }
 
         private Guid? selectedUserId;
 
@@ -60,7 +66,7 @@ namespace CarPool.App.ViewModels
         public async Task LoadAsync()
         {
             Rides.Clear();
-            var rides = await _rideFacade.GetAsync();
+            var rides = await _rideFacade.FilterOfRides(FilterStartLocation, FilterEndLocation, FilterStartDate);
             Rides.AddRange(rides);
         }
 

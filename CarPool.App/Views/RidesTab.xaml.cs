@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using CarPool.App.ViewModels;
+
 
 namespace CarPool.App.Views
 {
@@ -28,6 +30,14 @@ namespace CarPool.App.Views
         private void Button_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void ListBox_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (DataContext is RidesViewModel viewModel)
+            {
+                AllRidesListBox.ItemsSource = viewModel.Rides;
+            }
         }
     }
 }

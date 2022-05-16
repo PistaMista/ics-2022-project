@@ -16,7 +16,7 @@
         </TabItem>
         <TabItem Header="Jízdy">
             <Grid Background="#FFE5E5E5">
-                <local:RidesTab/>
+                <local:RidesTab DataContext="{Binding RidesViewModel}"/>
 
             </Grid>
         </TabItem>

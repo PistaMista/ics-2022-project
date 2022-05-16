@@ -34,7 +34,7 @@ namespace CarPool.App.ViewModels
             _mediator = mediator;
 
             SaveCommand = new AsyncRelayCommand(SaveAsync, CanSave);
-            DeleteCommand = new AsyncRelayCommand(DeleteAsync);
+            DeleteCommand = new AsyncRelayCommand(DeleteAsync, CanDelete);
             CarSelectedCommand = new RelayCommand<CarInfoModel>(CarSelected);
 
             _mediator.Register<SelectedMessage<RideWrapper>>(async x =>
@@ -111,6 +111,7 @@ namespace CarPool.App.ViewModels
         }
 
         private bool CanSave() => (Model != null && Model.IsValid && Model.DriverId == userGuid);
+        private bool CanDelete() => (Model != null && Model.Id != default(Guid) && Model.DriverId == userGuid);
 
         public async Task DeleteAsync()
         {
@@ -144,6 +145,8 @@ namespace CarPool.App.ViewModels
                 {
                     Model = Model
                 });
+
+                MainWindow.myRides.MyRides.CreateRide.Visibility = System.Windows.Visibility.Hidden;
             }
         }
 

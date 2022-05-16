@@ -29,6 +29,13 @@ namespace CarPool.App.ViewModels
                 EditRideViewModel.LoadEmpty();
             });
 
+            _mediator.Register<SelectedMessage<UserWrapper>>(async x => {
+                selectedUserId = x.Id;
+                await LoadAsync();
+            });
+
+            _mediator.Register<UpdateMessage<RideWrapper>>(async x => await LoadAsync());
+            _mediator.Register<DeleteMessage<RideWrapper>>(async x => await LoadAsync());
         }
 
         public ObservableCollection<RideInfoModel> Rides { get; set; } = new();
@@ -49,8 +56,8 @@ namespace CarPool.App.ViewModels
         public async Task LoadAsync()
         {
             Rides.Clear();
-            var users = await _rideFacade.GetAsync();
-            Rides.AddRange(users);
+            var rides = await _rideFacade.GetAsync();
+            Rides.AddRange(rides);
         }
 
         public override void LoadInDesignMode()

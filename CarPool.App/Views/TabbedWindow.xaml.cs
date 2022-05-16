@@ -33,5 +33,10 @@ namespace CarPool.App.Views
         {
             
         }
+
+        private void RidesTab_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

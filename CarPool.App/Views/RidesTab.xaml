@@ -32,9 +32,9 @@
         <Label Content="Datum od:" HorizontalAlignment="Left" Height="33" Margin="444,106,0,0" VerticalAlignment="Top" Width="98"/>
         <Label Content="Start:" HorizontalAlignment="Left" Height="33" Margin="444,150,0,0" VerticalAlignment="Top" Width="98"/>
         <Label Content="Cíl:" HorizontalAlignment="Left" Height="33" Margin="444,178,0,0" VerticalAlignment="Top" Width="98"/>
-        <TextBox HorizontalAlignment="Left" Height="17" Margin="519,111,0,0" TextWrapping="Wrap" Text="{Binding FilterStartDate, Converter={StaticResource StringToDateTime}}" VerticalAlignment="Top" Width="133"/>
-        <TextBox HorizontalAlignment="Left" Height="17" Margin="519,191,0,0" TextWrapping="Wrap" Text="{Binding FilterEndLocation}" VerticalAlignment="Top" Width="133"/>
-        <TextBox HorizontalAlignment="Left" Height="17" Margin="519,155,0,0" TextWrapping="Wrap" Text="{Binding FilterStartLocation}" VerticalAlignment="Top" Width="133"/>
+        <TextBox HorizontalAlignment="Left" Height="17" Margin="519,111,0,0" TextWrapping="Wrap" Text="{Binding FilterStartDate, Converter={StaticResource StringToDateTime}}" VerticalAlignment="Top" Width="96"/>
+        <TextBox HorizontalAlignment="Left" Height="17" Margin="519,191,0,0" TextWrapping="Wrap" Text="{Binding FilterEndLocation}" VerticalAlignment="Top" Width="96"/>
+        <TextBox HorizontalAlignment="Left" Height="17" Margin="519,155,0,0" TextWrapping="Wrap" Text="{Binding FilterStartLocation}" VerticalAlignment="Top" Width="96"/>
         <Button Content="Filtrovat" HorizontalAlignment="Left" Height="38" Margin="476,236,0,0" VerticalAlignment="Top" Width="148" Click="Button_Click" Command="{Binding FilterRidesCommand, Mode=OneWay}"/>
         <Label Content="(formát: DD/MM/YYYY HH:MM)" HorizontalAlignment="Left" Height="38" Margin="445,124,0,0" VerticalAlignment="Top" Width="246" Foreground="Navy" FontSize="10px"/>
         <Button Content="Přidat se k jízdě" HorizontalAlignment="Left" Height="50" Margin="80,359,0,0" VerticalAlignment="Top" Width="169"/>

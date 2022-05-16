@@ -15,6 +15,7 @@ namespace CarPool.App.Wrappers
         public RideWrapper(RideModel model)
             : base(model)
         {
+            InitializeCollectionProperties(model);
         }
 
         public string? StartLocation

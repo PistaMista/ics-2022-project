@@ -110,7 +110,7 @@ namespace CarPool.App.ViewModels
             _mediator.Send(new UpdateMessage<RideWrapper> { Model = Model });
         }
 
-        private bool CanSave() => Model?.IsValid ?? false;
+        private bool CanSave() => (Model != null && Model.IsValid && Model.DriverId == userGuid);
 
         public async Task DeleteAsync()
         {

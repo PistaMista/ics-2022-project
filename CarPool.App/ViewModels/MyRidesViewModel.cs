@@ -23,7 +23,7 @@ namespace CarPool.App.ViewModels
             _mediator = mediator;
             EditRideViewModel = editRideViewModel;
 
-            RideSelectedCommand = new RelayCommand<RideInfoModel>(RideSelected);
+            RideSelectedCommand = new AsyncRelayCommand<RideInfoModel>(RideSelected);
 
             NewRideCommand = new RelayCommand(() => {
                 EditRideViewModel.LoadEmpty();
@@ -48,9 +48,13 @@ namespace CarPool.App.ViewModels
 
         private Guid? selectedUserId;
 
-        private void RideSelected(RideInfoModel? user)
+        private async Task RideSelected(RideInfoModel? ride)
         {
-            // TODO: ride select logic
+            if (ride == null)
+                return;
+
+            MainWindow.myRides.MyRides.CreateRide.Visibility = System.Windows.Visibility.Visible;
+            await EditRideViewModel.LoadAsync(ride.Id);
         }
 
         public async Task LoadAsync()

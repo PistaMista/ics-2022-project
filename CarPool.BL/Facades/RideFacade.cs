@@ -13,6 +13,28 @@ public class RideFacade : CrudFacade<RideEntity, RideInfoModel, RideModel>
         _unitOfWorkFactory = unitOfWorkFactory;
         _mapper = mapper;
     }
+    public async Task<IEnumerable<RideInfoModel>> FilterOfRides(string originCity, string DestinationCity, DateTime date)
+    {
+        await using var uow = _unitOfWorkFactory.Create();
+
+        var query = uow.
+            GetRepository<RideEntity>()
+            .Get();
+        if(originCity != "")
+        {
+            query = query.Where(e => e.StartLocation.ToLower() == originCity.ToLower());
+        }
+        if (DestinationCity != "")
+        {
+            query = query.Where(e => e.EndLocation.ToLower() == DestinationCity.ToLower());
+        }
+        if (date != default(DateTime))
+        {
+            query = query.Where(e => e.StartTime >= date);
+        }
+
+        return await _mapper.ProjectTo<RideInfoModel>(query).ToArrayAsync().ConfigureAwait(false);
+    }
     public async Task<IEnumerable<RideInfoModel>> FilterByOrigin(string originCity)
     {
         await using var uow = _unitOfWorkFactory.Create();

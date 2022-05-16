@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using CarPool.Common.Enums;
 using CarPool.App.Wrappers;
+using System.Linq;
+using System.Collections.ObjectModel;
+using CarPool.App.Extensions;
 
 namespace CarPool.App.Wrappers
 {
@@ -48,6 +51,18 @@ namespace CarPool.App.Wrappers
         {
             get => GetValue<Guid>();
             set => SetValue(value);
+        }
+
+        public ObservableCollection<UserWrapper> Passengers { get; set; } = new();
+        private void InitializeCollectionProperties(RideModel model)
+        {
+            if (model.Passengers == null)
+            {
+                throw new ArgumentException("Passengers cannot be null");
+            }
+            Passengers.AddRange(model.Passengers.Select(e => new UserWrapper(e)));
+
+            RegisterCollection(Passengers, model.Passengers);
         }
 
 

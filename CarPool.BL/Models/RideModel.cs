@@ -18,7 +18,7 @@ public record RideModel(
     public uint Duration { get; set; } = Duration;
     public Guid CarId { get; set; } = CarId;
     public Guid DriverId { get; set; } = DriverId;
-    public List<UserInfoModel> Passengers { get; init; } = new();
+    public List<UserModel> Passengers { get; init; } = new();
 
     public class MapperProfile : Profile
     {

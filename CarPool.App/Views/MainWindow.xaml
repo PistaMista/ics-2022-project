@@ -9,7 +9,7 @@
         xmlns:viewModels="clr-namespace:CarPool.App.ViewModels"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance viewModels:MainViewModel}"
-        Title="MainWindow" Height="500" Width="800"
+        Title="Carpool" Height="500" Width="800"
         ResizeMode="NoResize" 
 >
     <Grid>

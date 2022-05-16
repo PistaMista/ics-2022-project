@@ -9,6 +9,7 @@ using System.Windows.Input;
 using CarPool.App.Commands;
 using CarPool.BL.Facades;
 using System;
+using System.Linq;
 
 namespace CarPool.App.ViewModels
 {
@@ -61,7 +62,7 @@ namespace CarPool.App.ViewModels
         {
             Rides.Clear();
             var rides = await _rideFacade.GetAsync();
-            Rides.AddRange(rides);
+            Rides.AddRange(rides.Where(x => x.DriverId == selectedUserId || x.Passengers.Exists(y => y.Id == selectedUserId)));
         }
 
         public override void LoadInDesignMode()

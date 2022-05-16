@@ -14,6 +14,7 @@ public record RideInfoModel(
     public string EndLocation { get; set; } = EndLocation;
     public Guid CarId { get; set; } = CarId;
     public Guid DriverId { get; set; } = DriverId;
+    public List<UserModel> Passengers { get; init; } = new();
 
     public class MapperProfile : Profile
     {

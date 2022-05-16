@@ -1,0 +1,54 @@
+<local:UserControlBase x:Class="CarPool.App.Views.LoginPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:CarPool.App.Views"
+      xmlns:viewModels="clr-namespace:CarPool.App.ViewModels"
+      mc:Ignorable="d"
+      d:DataContext="{d:DesignInstance viewModels:LoginViewModel}"
+      d:DesignHeight="450" d:DesignWidth="800">
+
+    <Grid Margin="-10,0,10,0" Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="87*"/>
+            <RowDefinition Height="142*"/>
+            <RowDefinition Height="207*"/>
+            <RowDefinition Height="14*"/>
+        </Grid.RowDefinitions>
+        <Button Content="Přihlásit se" HorizontalAlignment="Left" Height="58" Margin="549,109,0,0" VerticalAlignment="Top" Width="176" RenderTransformOrigin="0.5,0.5" Grid.Row="1" Grid.RowSpan="2" Click="Button_Click" Command="{Binding SignInCommand, Mode=OneWay}">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-0.235"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+        </Button>
+        <ListBox x:Name="UserListBox" ItemsSource="{Binding Users}" Margin="98,68,325,40" Grid.RowSpan="3">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectionChanged">
+                    <i:InvokeCommandAction Command="{Binding UserSelectedCommand}"
+                                           CommandParameter="{Binding ElementName=UserListBox, Path=SelectedItem}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" Width="150" VerticalAlignment="Center" HorizontalAlignment="Left" Content="{Binding FirstName}" />
+                        <Label Grid.Column="1" Width="330" VerticalAlignment="Center" HorizontalAlignment="Left" Content="{Binding LastName}" />
+                        <Image Margin="0,0,0,0" Grid.Column="2" Width="50" Source="{Binding PhotoUrl}"/>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <Label Content="Přihlaš se" HorizontalAlignment="Left" Height="38" Margin="332,0,0,0" VerticalAlignment="Center" Width="203" Background="White" RenderTransformOrigin="0.519,0.646" FontSize="20"/>
+        <Button Content="X" HorizontalAlignment="Left" Height="20" Margin="754,24,0,0" VerticalAlignment="Top" Width="17" Click="Button_Click_1" RenderTransformOrigin="0.5,0.5"/>
+    </Grid>
+</local:UserControlBase>

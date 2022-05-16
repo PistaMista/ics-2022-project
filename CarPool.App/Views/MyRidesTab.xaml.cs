@@ -1,0 +1,42 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+using CarPool.App.ViewModels;
+
+namespace CarPool.App.Views
+{
+    /// <summary>
+    /// Interakční logika pro MyRideUserControl.xaml
+    /// </summary>
+    public partial class MyRidesTab : UserControl
+    {
+        public MyRidesTab()
+        {
+            InitializeComponent();
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            CreateRide.Visibility = Visibility.Visible;
+        }
+
+        private void RidesListBox_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (DataContext is MyRidesViewModel viewModel)
+            {
+                RidesListBox.ItemsSource = viewModel.Rides;
+            }
+        }
+    }
+}

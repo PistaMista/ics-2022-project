@@ -1,0 +1,31 @@
+<UserControl x:Class="CarPool.App.Views.TabbedWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CarPool.App.Views"
+        xmlns:viewModels="clr-namespace:CarPool.App.ViewModels"
+        d:DataContext="{d:DesignInstance viewModels:MainViewModel}"
+        mc:Ignorable="d" Height="450" Width="800">
+    <TabControl HorizontalAlignment="Center" Height="450" VerticalAlignment="Top" Width="800">
+        <TabItem Header="Moje jízdy">
+            <Grid Background="#FFE5E5E5">
+                <local:MyRidesTab x:Name="MyRides" HorizontalAlignment="Left" Height="422" Margin="-3,0,0,0" VerticalAlignment="Center" Width="797" DataContext="{Binding MyRidesViewModel}"/>
+
+            </Grid>
+        </TabItem>
+        <TabItem Header="Jízdy">
+            <Grid Background="#FFE5E5E5">
+                <local:RidesTab DataContext="{Binding RidesViewModel}"/>
+
+            </Grid>
+        </TabItem>
+        <TabItem Header="Správa účtu">
+
+            <Grid Background="#FFE5E5E5">
+                <local:ManageAccountTab DataContext="{Binding ManageAccountViewModel}"/>
+            </Grid>
+        </TabItem>
+
+    </TabControl>
+</UserControl>

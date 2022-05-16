@@ -46,7 +46,7 @@
         <TextBox HorizontalAlignment="Left" Height="22" Margin="151,91,0,0" TextWrapping="Wrap" Text="{Binding Model.EndLocation}" VerticalAlignment="Top" Width="144"/>
         <TextBox HorizontalAlignment="Left" Height="22" Margin="151,131,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="144" TextChanged="TextBox_TextChanged" Text="{Binding Model.StartTime, Converter={StaticResource StringToDateTime}}"/>
         <TextBox HorizontalAlignment="Left" Height="22" Margin="151,190,0,0" TextWrapping="Wrap" Text="{Binding Model.Duration}" VerticalAlignment="Top" Width="144"/>
-        <Button x:Name="btn_add_ride" Content="Vytvořit jízdu" HorizontalAlignment="Left" Height="47" Margin="94,364,0,0" VerticalAlignment="Top" Width="162" Click="btn_add_ride_Click" Command="{Binding SaveCommand, Mode=OneWay}"/>
+        <Button x:Name="btn_add_ride" Content="Uložit jízdu" HorizontalAlignment="Left" Height="47" Margin="94,364,0,0" VerticalAlignment="Top" Width="162" Click="btn_add_ride_Click" Command="{Binding SaveCommand, Mode=OneWay}"/>
         <Label Content="(formát: DD.MM.YYYY HH:MM)" HorizontalAlignment="Center" Height="38" Margin="0,153,0,0" VerticalAlignment="Top" Width="246" Foreground="Navy" FontSize="10px"/>
         <Button Content="X" HorizontalAlignment="Left" Height="19" Margin="321,34,0,0" VerticalAlignment="Top" Width="17" Click="Button_Click_1"/>
 

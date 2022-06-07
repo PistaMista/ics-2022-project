@@ -31,11 +31,6 @@ namespace CarPool.App.Views
             Visibility = Visibility.Hidden;
         }
 
-        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            
-        }
-
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             Visibility = Visibility.Hidden;

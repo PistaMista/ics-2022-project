@@ -26,18 +26,5 @@ namespace CarPool.App.Views
         {
             InitializeComponent();
         }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void ListBox_Loaded(object sender, RoutedEventArgs e)
-        {
-            if (DataContext is RidesViewModel viewModel)
-            {
-                AllRidesListBox.ItemsSource = viewModel.Rides;
-            }
-        }
     }
 }

@@ -49,13 +49,5 @@ namespace CarPool.App.Views
         {
             Visibility = Visibility.Hidden;
         }
-
-        private void CarsListBox_Loaded(object sender, RoutedEventArgs e)
-        {
-            if (DataContext is EditRideViewModel viewModel)
-            {
-                CarsListBox.ItemsSource = viewModel.Cars;
-            }
-        }
     }
 }

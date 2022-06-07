@@ -30,13 +30,5 @@ namespace CarPool.App.Views
         {
             CreateRide.Visibility = Visibility.Visible;
         }
-
-        private void RidesListBox_Loaded(object sender, RoutedEventArgs e)
-        {
-            if (DataContext is MyRidesViewModel viewModel)
-            {
-                RidesListBox.ItemsSource = viewModel.Rides;
-            }
-        }
     }
 }

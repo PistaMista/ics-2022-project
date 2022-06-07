@@ -31,6 +31,7 @@ public class SqliteDbContextFactory : IDbContextFactory<CarRideDbContext>
         var optionsBuilder = new DbContextOptionsBuilder<CarRideDbContext>();
         optionsBuilder.UseSqlite(_connectionString);
 
+
         return new CarRideDbContext(optionsBuilder.Options, _seedDemoData);
     }
 }

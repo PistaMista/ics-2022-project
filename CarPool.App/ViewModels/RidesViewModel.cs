@@ -14,14 +14,14 @@ namespace CarPool.App.ViewModels
 {
     public class RidesViewModel : ViewModelBase, IListViewModel
     {
+        private readonly PassengerFacade _passangerFacade;
         private readonly RideFacade _rideFacade;
-        private readonly UserFacade _userFacade;
         private readonly IMediator _mediator;
 
-        public RidesViewModel( RideFacade rideFacade, UserFacade userFacade, IMediator mediator)
+        public RidesViewModel(RideFacade rideFacade, PassengerFacade passangerFacade, IMediator mediator)
         {
             _rideFacade = rideFacade;
-            _userFacade = userFacade;
+            _passangerFacade = passangerFacade;
             _mediator = mediator;
  
             RideSelectedCommand = new AsyncRelayCommand<RideInfoModel>(RideSelected);
@@ -90,12 +90,9 @@ namespace CarPool.App.ViewModels
             if (selectedRideId == null || selectedUserId == null)
                 return;
 
-            RideWrapper ride = await _rideFacade.GetAsync((Guid)selectedRideId) ?? RideModel.Empty;
-            UserWrapper user = await _userFacade.GetAsync((Guid)selectedUserId) ?? UserModel.Empty;
-
-            ride.Passengers.Add(user);
-            await _rideFacade.SaveAsync(ride);
+            await _passangerFacade.AddUserToRide(userId: (Guid)selectedUserId, rideId: (Guid)selectedRideId);
             await LoadAsync();
+            _mediator.Send(new UpdateMessage<RideWrapper>());
         }
 
         private bool CanJoinRide() => selectedRideId != null && selectedUserId != null;

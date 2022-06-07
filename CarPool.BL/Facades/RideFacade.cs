@@ -35,49 +35,5 @@ public class RideFacade : CrudFacade<RideEntity, RideInfoModel, RideModel>
 
         return await _mapper.ProjectTo<RideInfoModel>(query).ToArrayAsync().ConfigureAwait(false);
     }
-    public async Task<IEnumerable<RideInfoModel>> FilterByDriver(Guid id)
-    {
-        await using var uow = _unitOfWorkFactory.Create();
-
-        var query = uow.
-            GetRepository<RideEntity>()
-            .Get()
-            .Where(e => e.DriverId == id);
-
-        return await _mapper.ProjectTo<RideInfoModel>(query).ToArrayAsync().ConfigureAwait(false);
-    }
-    public async Task<IEnumerable<RideInfoModel>> FilterByOrigin(string originCity)
-    {
-        await using var uow = _unitOfWorkFactory.Create();
-        
-        var query = uow.
-            GetRepository<RideEntity>()
-            .Get()
-            .Where(e => e.StartLocation.ToLower() == originCity.ToLower());
-
-        return await _mapper.ProjectTo<RideInfoModel>(query).ToArrayAsync().ConfigureAwait(false);
-    }
-    public async Task<IEnumerable<RideInfoModel>> FilterByDestination(string DestinationCity)
-    {
-        await using var uow = _unitOfWorkFactory.Create();
-
-        var query = uow.
-            GetRepository<RideEntity>()
-            .Get()
-            .Where(e => e.EndLocation.ToLower() == DestinationCity.ToLower());
-
-        return await _mapper.ProjectTo<RideInfoModel>(query).ToArrayAsync().ConfigureAwait(false);
-    }
-    public async Task<IEnumerable<RideInfoModel>> FilterByOlderThan(string date)
-    {
-        await using var uow = _unitOfWorkFactory.Create();
-        DateTime dateTime = DateTime.ParseExact(date, "dd/MM/yyyy HH:mm", null);
-        var query = uow.
-            GetRepository<RideEntity>()
-            .Get()
-            .Where(e => e.StartTime >= dateTime);
-
-        return await _mapper.ProjectTo<RideInfoModel>(query).ToArrayAsync().ConfigureAwait(false);
-    }
 }
 

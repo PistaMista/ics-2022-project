@@ -24,6 +24,8 @@ namespace CarPool.BL.Tests
             _rideFacadeSut = new RideFacade(UnitOfWorkFactory, Mapper);
         }
 
+        
+
         [Fact]
         public async Task Create_WithNonExistingItem_DoesNotThrow()
         {

@@ -18,12 +18,14 @@ namespace CarPool.BL.Tests
     public sealed class PassengerFacadeTests : CrudFacadeTestsBase
     {
         private readonly PassengerFacade _passengerFacadeSUT;
+        private readonly RideFacade _rideFacadeSUT;
 
         public PassengerFacadeTests(ITestOutputHelper output) : base(output)
         {
+            _rideFacadeSUT = new RideFacade(UnitOfWorkFactory, Mapper);
             _passengerFacadeSUT = new PassengerFacade(
                 new UserFacade(UnitOfWorkFactory, Mapper),
-                new RideFacade(UnitOfWorkFactory, Mapper),
+                _rideFacadeSUT,
                 Mapper);
         }
 
@@ -32,7 +34,12 @@ namespace CarPool.BL.Tests
         [Fact]
         public async Task AddUserToRide_Persisted()
         {
-            await _passengerFacadeSUT.AddUserToRide(UserSeeds.UserEntity.Id, RideSeeds.RideEntity.Id);
+            await _passengerFacadeSUT.AddPassengerToRide(UserSeeds.UserEntity2.Id, RideSeeds.RideEntity.Id);
+
+            RideModel ride = await _rideFacadeSUT.GetAsync(RideSeeds.RideEntity.Id);
+            UserModel addedPassenger = ride.Passengers.SingleOrDefault(x => x.Id == UserSeeds.UserEntity2.Id);
+
+            Assert.NotNull(addedPassenger);
         }
     }
 }

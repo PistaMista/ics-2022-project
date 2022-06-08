@@ -90,7 +90,7 @@ namespace CarPool.App.ViewModels
             if (selectedRideId == null || selectedUserId == null)
                 return;
 
-            await _passangerFacade.AddUserToRide(userId: (Guid)selectedUserId, rideId: (Guid)selectedRideId);
+            await _passangerFacade.AddPassengerToRide(userId: (Guid)selectedUserId, rideId: (Guid)selectedRideId);
             await LoadAsync();
             _mediator.Send(new UpdateMessage<RideWrapper>());
         }

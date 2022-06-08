@@ -26,15 +26,25 @@ namespace CarPool.BL.Facades
             _mapper = mapper;
         }
 
-        public async Task<RideInfoModel> AddUserToRide(Guid userId, Guid rideId)
+        public async Task<RideModel?> AddPassengerToRide(Guid userId, Guid rideId)
         {
-            RideModel ride = await _rideFacade.GetAsync(rideId);
-            UserModel user = await _userFacade.GetAsync(userId);
+            RideModel? ride = await _rideFacade.GetAsync(rideId);
+            UserModel? user = await _userFacade.GetAsync(userId);
+
+            if (ride == null || user == null || ride.DriverId == user.Id)
+                return null;
 
             ride.Passengers.Add(user);
-            await _rideFacade.SaveAsync(ride);
+            try
+            {
+                await _rideFacade.SaveAsync(ride);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
 
-            return _mapper.Map<RideInfoModel>(ride);
+            return ride;
         }
     }
 }

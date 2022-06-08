@@ -48,6 +48,7 @@ namespace CarPool.App.ViewModels
         private void UserSignedIn()
         {
             _mediator.Send(new UserSignedInMessage<UserWrapper> { Id = selectedUserId });
+            Users = null;
         }
 
         public async Task LoadAsync()

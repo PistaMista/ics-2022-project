@@ -11,11 +11,9 @@ namespace CarPool.App.Converters
 {
     public class NullToVisibilityConverter : IValueConverter
     {
-        public bool Invert { get; set; } = false;
-
         public object Convert(object? value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (Invert)
+            if (parameter != null)
             {
                 return value != null ? Visibility.Collapsed : Visibility.Visible;
             }

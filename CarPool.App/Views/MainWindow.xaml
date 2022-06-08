@@ -5,20 +5,25 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CarPool.App"
         xmlns:controls="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:Views="clr-namespace:CarPool.App.Views" x:Class="CarPool.App.MainWindow"
+        xmlns:Views="clr-namespace:CarPool.App.Views"
         xmlns:viewModels="clr-namespace:CarPool.App.ViewModels"
+        xmlns:Converters="clr-namespace:CarPool.App.Converters" x:Class="CarPool.App.MainWindow"
         mc:Ignorable="d"
-        d:DataContext="{d:DesignInstance viewModels:MainViewModel}"
+        controls:DataContext="{controls:DesignInstance {x:Type viewModels:MainViewModel}}"
         Title="Carpool" Height="503" Width="781"
         ResizeMode="CanResize" 
 >
+    <Window.Resources>
+        <Converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+        <Converters:NullToVisibilityConverter x:Key="NullToVisibilityConverter"/>
+    </Window.Resources>
     <Grid>
-        <Grid x:Name="TitleButtons" HorizontalAlignment="Center" Height="166" VerticalAlignment="Center">
+        <Grid x:Name="TitleButtons" HorizontalAlignment="Center" Height="166" VerticalAlignment="Center" Visibility="{Binding LoginViewModel.Users, ConverterParameter=invert, Converter={StaticResource NullToVisibilityConverter}}">
             <Button x:Name="btn_sign_up" Content="Vytvořit účet" HorizontalAlignment="Left" VerticalAlignment="Top" Height="64" Width="200"/>
-            <Button x:Name="btn_login" Content="Přihlásit se" HorizontalAlignment="Left" Height="64" Margin="0,102,0,0" VerticalAlignment="Top" Width="200"/>
+            <Button x:Name="btn_login" Content="Přihlásit se" HorizontalAlignment="Left" Height="64" Margin="0,102,0,0" VerticalAlignment="Top" Width="200" Command="{Binding SignInCommand, Mode=OneWay}"/>
         </Grid>
-        <Views:CreateAccountPage x:Name="CreateAccount"  HorizontalAlignment="Center" Height="434" VerticalAlignment="Center" Width="800" Visibility="Hidden" DataContext="{Binding CreateAccountViewModel}"/>
-        <Views:LoginPage x:Name="Login" HorizontalAlignment="Center" Height="434" VerticalAlignment="Center" Width="800" Visibility="Hidden" DataContext="{Binding LoginViewModel}"/>
-        <Views:TabbedWindow x:Name="Tabs" HorizontalAlignment="Center" Height="480" VerticalAlignment="Top" Width="790" Visibility="Hidden"/>
+        <Views:CreateAccountPage x:Name="CreateAccount"  HorizontalAlignment="Center" Height="434" VerticalAlignment="Center" Width="800" Visibility="Hidden" DataContext="{Binding CreateAccountViewModel}" controls:IsHidden="True"/>
+        <Views:LoginPage x:Name="Login" HorizontalAlignment="Center" Height="434" VerticalAlignment="Center" Width="800" Visibility="{Binding Users, Converter={StaticResource NullToVisibilityConverter}, Mode=OneWay}" DataContext="{Binding LoginViewModel}" controls:IsHidden="True"/>
+        <Views:TabbedWindow x:Name="Tabs" HorizontalAlignment="Center" Height="480" VerticalAlignment="Top" Width="790" Visibility="{Binding isUserSignedIn, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}" controls:IsHidden="True"/>
     </Grid>
 </Window>

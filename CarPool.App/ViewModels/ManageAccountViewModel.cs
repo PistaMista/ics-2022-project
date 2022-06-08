@@ -37,32 +37,35 @@ namespace CarPool.App.ViewModels
             _mediator = mediator;
             EditCarViewModel = editCarViewModel;
 
-            CarSelectedCommand = new RelayCommand<CarInfoModel>(CarSelected);
+            SignoutCommand = new RelayCommand(() => _mediator.Send(new UserSignedOutMessage<UserWrapper>()));
 
-            SaveCommand = new AsyncRelayCommand(SaveAsync, CanSave);
-            DeleteCommand = new AsyncRelayCommand(DeleteAsync);
+            //CarSelectedCommand = new RelayCommand<CarInfoModel>(CarSelected);
 
-            NewCarCommand = new AsyncRelayCommand(async () => {
-                await EditCarViewModel.LoadAsync(Guid.Empty);
-                EditCarViewModel.Model.CarOwnerId = Model.Id;
-            });
-            CarDeleteCommand = new AsyncRelayCommand(async () =>
-            {
-                await EditCarViewModel.DeleteAsync();
-            });
+            //SaveCommand = new AsyncRelayCommand(SaveAsync, CanSave);
+            //DeleteCommand = new AsyncRelayCommand(DeleteAsync);
 
-            _mediator.Register<SelectedMessage<UserWrapper>>(async x => {
-                await LoadAsync(x.Id ?? Guid.Empty);
-                await LoadCarsAsync();
-            });
+            //NewCarCommand = new AsyncRelayCommand(async () => {
+            //    await EditCarViewModel.LoadAsync(Guid.Empty);
+            //    EditCarViewModel.Model.CarOwnerId = Model.Id;
+            //});
+            //CarDeleteCommand = new AsyncRelayCommand(async () =>
+            //{
+            //    await EditCarViewModel.DeleteAsync();
+            //});
 
-            mediator.Register<UpdateMessage<CarWrapper>>(CarUpdated);
-            mediator.Register<DeleteMessage<CarWrapper>>(CarDeleted);
+            //_mediator.Register<SelectedMessage<UserWrapper>>(async x => {
+            //    await LoadAsync(x.Id ?? Guid.Empty);
+            //    await LoadCarsAsync();
+            //});
+
+            //mediator.Register<UpdateMessage<CarWrapper>>(CarUpdated);
+            //mediator.Register<DeleteMessage<CarWrapper>>(CarDeleted);
         }
 
         public ObservableCollection<CarInfoModel> Cars { get; set; } = new();
         public EditCarViewModel EditCarViewModel { get; }
 
+        public ICommand SignoutCommand { get; }
         public ICommand SaveCommand { get; }
         public ICommand DeleteCommand { get; }
 

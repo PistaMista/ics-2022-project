@@ -19,11 +19,13 @@
     </Window.Resources>
     <Grid>
         <Grid x:Name="NotTabs" HorizontalAlignment="Stretch" Height="434" VerticalAlignment="Stretch" Width="800" Visibility="{Binding isUserSignedIn, ConverterParameter=invert, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}">
-            <Grid x:Name="TitleButtons" HorizontalAlignment="Center" Height="166" VerticalAlignment="Center" Visibility="{Binding LoginViewModel.Users, ConverterParameter=invert, Converter={StaticResource NullToVisibilityConverter}}">
-                <Button x:Name="btn_sign_up" Content="Vytvořit účet" HorizontalAlignment="Left" VerticalAlignment="Top" Height="64" Width="200"/>
-                <Button x:Name="btn_login" Content="Přihlásit se" HorizontalAlignment="Left" Height="64" Margin="0,102,0,0" VerticalAlignment="Top" Width="200" Command="{Binding SignInCommand, Mode=OneWay}"/>
+            <Grid x:Name="TitleButtons1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Visibility="{Binding CreateAccountViewModel.Model, ConverterParameter=invert, Converter={StaticResource NullToVisibilityConverter}, Mode=OneWay}">
+                <Grid x:Name="TitleButtons" HorizontalAlignment="Center" Height="166" VerticalAlignment="Center" Visibility="{Binding LoginViewModel.Users, ConverterParameter=invert, Converter={StaticResource NullToVisibilityConverter}}">
+                    <Button x:Name="btn_sign_up" Content="Vytvořit účet" HorizontalAlignment="Left" VerticalAlignment="Top" Height="64" Width="200" Command="{Binding RegisterCommand, Mode=OneWay}"/>
+                    <Button x:Name="btn_login" Content="Přihlásit se" HorizontalAlignment="Left" Height="64" Margin="0,102,0,0" VerticalAlignment="Top" Width="200" Command="{Binding SignInCommand, Mode=OneWay}"/>
+                </Grid>
             </Grid>
-            <Views:CreateAccountPage x:Name="CreateAccount"  HorizontalAlignment="Center" Height="434" VerticalAlignment="Center" Width="800" Visibility="Hidden" DataContext="{Binding CreateAccountViewModel}" controls:IsHidden="True"/>
+            <Views:CreateAccountPage x:Name="CreateAccount"  HorizontalAlignment="Center" Height="434" VerticalAlignment="Center" Width="800" Visibility="{Binding Model, Converter={StaticResource NullToVisibilityConverter}, Mode=OneWay}" DataContext="{Binding CreateAccountViewModel}"/>
             <Views:LoginPage x:Name="Login" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Visibility="{Binding Users, Converter={StaticResource NullToVisibilityConverter}, Mode=OneWay}" DataContext="{Binding LoginViewModel}"/>
         </Grid>
         <Views:TabbedWindow x:Name="Tabs" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Visibility="{Binding isUserSignedIn, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}"/>

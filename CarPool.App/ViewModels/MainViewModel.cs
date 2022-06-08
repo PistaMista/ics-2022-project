@@ -27,6 +27,7 @@ namespace CarPool.App.ViewModels
             mediator.Register<UserSignedOutMessage<UserWrapper>>(x => isUserSignedIn = false);
 
             SignInCommand = new AsyncRelayCommand(LoginViewModel.LoadAsync);
+            RegisterCommand = new RelayCommand(CreateAccountViewModel.StartRegistration);
         }
 
         private bool _isUserSignedIn = false;

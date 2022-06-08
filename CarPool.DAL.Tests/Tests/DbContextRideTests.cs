@@ -95,9 +95,12 @@ public class DbContextRideTests : DbContextTestsBase
             StartTime = new DateTime(year: 2022, month: 12, day: 10, hour: 12, minute: 20, second: 2),
             Driver = await CarRideDbContextSUT.Users.SingleAsync(x => x.Id == UserSeeds.UserEntity.Id),
             Car = await CarRideDbContextSUT.Cars.SingleAsync(x => x.Id == CarSeeds.CarEntity.Id),
-            Passengers = new List<UserEntity>()
+            Passengers = new List<PassengerEntity>()
             {
-                await CarRideDbContextSUT.Users.SingleAsync(x => x.Id == UserSeeds.UserEntity2.Id)
+                new PassengerEntity() with
+                {
+                    Passenger = await CarRideDbContextSUT.Users.SingleAsync(x => x.Id == UserSeeds.UserEntity2.Id)
+                }
             }
         };
 
@@ -109,6 +112,7 @@ public class DbContextRideTests : DbContextTestsBase
             .Include(r => r.Driver)
             .Include(r => r.Car)
             .Include(r => r.Passengers)
+            .ThenInclude(r => r.Passenger)
             .SingleAsync(r => r.Id == prahaBrno.Id);
 
         DeepAssert.Equal(prahaBrno, actualPrahaBrno);
@@ -125,7 +129,7 @@ public class DbContextRideTests : DbContextTestsBase
                 {
                     Car = null,
                     Driver = null,
-                    Passengers = new List<UserEntity>()
+                    Passengers = new List<PassengerEntity>()
                 },
             actual:
                 entity

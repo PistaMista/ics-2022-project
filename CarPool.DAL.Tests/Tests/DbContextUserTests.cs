@@ -108,7 +108,7 @@ public class DbContextUserTests : DbContextTestsBase
                 UserSeeds.UserEntity with
                 {
                     RidesDriver = new List<RideEntity>(),
-                    RidesPassenger = new List<RideEntity>(),
+                    RidesPassenger = new List<PassengerEntity>(),
                     Cars = new List<CarEntity>()
                 },
             actual:

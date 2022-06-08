@@ -12,5 +12,5 @@ public record UserEntity (
 
     public ICollection<CarEntity> Cars { get; init; } = new List<CarEntity>();
     public ICollection<RideEntity> RidesDriver { get; init; } = new List<RideEntity>();
-    public ICollection<RideEntity> RidesPassenger { get; init; } = new List<RideEntity>();
+    public ICollection<PassengerEntity> RidesPassenger { get; init; } = new List<PassengerEntity>();
 }

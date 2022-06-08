@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace CarPool.DAL.Entities;
@@ -15,5 +15,5 @@ public record RideEntity(
 
     public CarEntity? Car { get; init; }
     public UserEntity? Driver { get; init; }
-    public ICollection<UserEntity> Passengers { get; init; } = new List<UserEntity>();
+    public ICollection<PassengerEntity> Passengers { get; init; } = new List<PassengerEntity>();
 }

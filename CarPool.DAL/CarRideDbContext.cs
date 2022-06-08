@@ -21,6 +21,7 @@ public class CarRideDbContext : DbContext
     public DbSet<CarEntity> Cars => Set<CarEntity>();
     public DbSet<UserEntity> Users => Set<UserEntity>();
     public DbSet<RideEntity> Rides => Set<RideEntity>();
+    public DbSet<PassengerEntity> Passengers => Set<PassengerEntity>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

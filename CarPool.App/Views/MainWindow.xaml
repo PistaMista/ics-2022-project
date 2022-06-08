@@ -9,14 +9,16 @@
         xmlns:viewModels="clr-namespace:CarPool.App.ViewModels"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance viewModels:MainViewModel}"
-        Title="Carpool" Height="500" Width="800"
-        ResizeMode="NoResize" 
+        Title="Carpool" Height="503" Width="781"
+        ResizeMode="CanResize" 
 >
     <Grid>
-        <Button x:Name="btn_sign_up" Content="Vytvořit účet" HorizontalAlignment="Left" Margin="272,87,0,0" VerticalAlignment="Top" Height="64" Width="200"/>
-        <Button x:Name="btn_login" Content="Přihlásit se" HorizontalAlignment="Left" Height="64" Margin="272,189,0,0" VerticalAlignment="Top" Width="200"/>
+        <Grid x:Name="TitleButtons" HorizontalAlignment="Center" Height="166" VerticalAlignment="Center">
+            <Button x:Name="btn_sign_up" Content="Vytvořit účet" HorizontalAlignment="Left" VerticalAlignment="Top" Height="64" Width="200"/>
+            <Button x:Name="btn_login" Content="Přihlásit se" HorizontalAlignment="Left" Height="64" Margin="0,102,0,0" VerticalAlignment="Top" Width="200"/>
+        </Grid>
         <Views:CreateAccountPage x:Name="CreateAccount"  HorizontalAlignment="Center" Height="434" VerticalAlignment="Center" Width="800" Visibility="Hidden" DataContext="{Binding CreateAccountViewModel}"/>
         <Views:LoginPage x:Name="Login" HorizontalAlignment="Center" Height="434" VerticalAlignment="Center" Width="800" Visibility="Hidden" DataContext="{Binding LoginViewModel}"/>
-        <Views:TabbedWindow x:Name="MyRides" HorizontalAlignment="Center" Height="480" VerticalAlignment="Top" Width="790" Visibility="Hidden"/>
+        <Views:TabbedWindow x:Name="Tabs" HorizontalAlignment="Center" Height="480" VerticalAlignment="Top" Width="790" Visibility="Hidden"/>
     </Grid>
 </Window>

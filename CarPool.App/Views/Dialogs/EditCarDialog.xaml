@@ -23,7 +23,14 @@
             <Label Content="SPZ:" Height="23" Width="151" HorizontalAlignment="Left"/>
             <TextBox x:Name="LicensePlate" Height="22" TextWrapping="Wrap" Text="{Binding Model.LicensePlate}"/>
             <Label Content="Počet míst:" HorizontalAlignment="Left"/>
-            <TextBox x:Name="SeatCount" Height="22" TextWrapping="Wrap" Text="{Binding Model.SeatCount}"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="23*"/>
+                    <ColumnDefinition Width="128*"/>
+                </Grid.ColumnDefinitions>
+                <Label HorizontalAlignment="Center" VerticalAlignment="Center" Height="20" Width="30" Content="{Binding Model.SeatCount}" FontSize="8"/>
+                <Slider Maximum="20" Value="{Binding Model.SeatCount}" Minimum="1" Margin="10,0,1,0" Grid.Column="1"/>
+            </Grid>
             <Label Content="URL Fotografie:" Height="26" HorizontalAlignment="Left"/>
             <TextBox x:Name="ImageUrl" Height="22" TextWrapping="Wrap" Text="{Binding Model.PhotoUrl}"/>
         </StackPanel>

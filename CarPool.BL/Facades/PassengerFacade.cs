@@ -13,38 +13,16 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CarPool.BL.Facades
 {
-    public class PassengerFacade
+    public class PassengerFacade : CrudFacade<PassengerEntity, PassengerInfoModel, PassengerModel>
     {
-        private readonly UserFacade _userFacade;
-        private readonly RideFacade _rideFacade;
-        private readonly IMapper _mapper;
-
-        public PassengerFacade(UserFacade userFacade, RideFacade rideFacade, IMapper mapper)
+        public PassengerFacade(IUnitOfWorkFactory unitOfWorkFactory, IMapper mapper) : base(unitOfWorkFactory, mapper)
         {
-            _userFacade = userFacade;
-            _rideFacade = rideFacade;
-            _mapper = mapper;
         }
 
-        public async Task<RideModel?> AddPassengerToRide(Guid userId, Guid rideId)
+        public async Task<PassengerModel> AddPassengerToRide(Guid userId, Guid rideId)
         {
-            RideModel? ride = await _rideFacade.GetAsync(rideId);
-            UserModel? user = await _userFacade.GetAsync(userId);
-
-            if (ride == null || user == null || ride.DriverId == user.Id)
-                return null;
-
-            ride.Passengers.Add(user);
-            try
-            {
-                await _rideFacade.SaveAsync(ride);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-
-            return ride;
+            PassengerModel passenger = PassengerModel.Empty with { RideId = rideId, PassengerId = userId };
+            return await SaveAsync(passenger);
         }
     }
 }

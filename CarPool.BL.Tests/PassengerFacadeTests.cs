@@ -23,10 +23,7 @@ namespace CarPool.BL.Tests
         public PassengerFacadeTests(ITestOutputHelper output) : base(output)
         {
             _rideFacadeSUT = new RideFacade(UnitOfWorkFactory, Mapper);
-            _passengerFacadeSUT = new PassengerFacade(
-                new UserFacade(UnitOfWorkFactory, Mapper),
-                _rideFacadeSUT,
-                Mapper);
+            _passengerFacadeSUT = new PassengerFacade(UnitOfWorkFactory, Mapper);
         }
 
        
@@ -37,7 +34,7 @@ namespace CarPool.BL.Tests
             await _passengerFacadeSUT.AddPassengerToRide(UserSeeds.UserEntity2.Id, RideSeeds.RideEntity.Id);
 
             RideModel ride = await _rideFacadeSUT.GetAsync(RideSeeds.RideEntity.Id);
-            UserModel addedPassenger = ride.Passengers.SingleOrDefault(x => x.Id == UserSeeds.UserEntity2.Id);
+            PassengerModel addedPassenger = ride.Passengers.SingleOrDefault(x => x.PassengerId == UserSeeds.UserEntity2.Id);
 
             Assert.NotNull(addedPassenger);
         }

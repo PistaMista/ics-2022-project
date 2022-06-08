@@ -24,14 +24,5 @@ namespace CarPool.App.Views
         {
             InitializeComponent();
         }
-        private void btn_x_click(object sender, RoutedEventArgs e)
-        {
-            Visibility = Visibility.Hidden;
-        }
-
-        private void btn_add_ride_Click(object sender, RoutedEventArgs e)
-        {
-            Visibility = Visibility.Hidden;
-        }
     }
 }

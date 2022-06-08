@@ -54,7 +54,6 @@ namespace CarPool.App.ViewModels
             if (ride == null)
                 return;
 
-            MainWindow.myRides.MyRides.CreateRide.Visibility = System.Windows.Visibility.Visible;
             await EditRideViewModel.LoadAsync(ride.Id);
         }
 

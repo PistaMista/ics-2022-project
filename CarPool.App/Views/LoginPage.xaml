@@ -17,7 +17,7 @@
             <RowDefinition Height="207*"/>
             <RowDefinition Height="14*"/>
         </Grid.RowDefinitions>
-        <Button Content="Přihlásit se" HorizontalAlignment="Left" Height="58" Margin="549,109,0,0" VerticalAlignment="Top" Width="176" RenderTransformOrigin="0.5,0.5" Grid.Row="1" Grid.RowSpan="2" Click="Button_Click" Command="{Binding SignInCommand, Mode=OneWay}">
+        <Button Content="Přihlásit se" HorizontalAlignment="Left" Height="58" Margin="549,109,0,0" VerticalAlignment="Top" Width="176" RenderTransformOrigin="0.5,0.5" Grid.Row="1" Grid.RowSpan="2" Command="{Binding SignInCommand, Mode=OneWay}">
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -49,6 +49,6 @@
             </ListBox.ItemTemplate>
         </ListBox>
         <Label Content="Přihlaš se" HorizontalAlignment="Left" Height="38" Margin="332,0,0,0" VerticalAlignment="Center" Width="203" Background="White" RenderTransformOrigin="0.519,0.646" FontSize="20"/>
-        <Button Content="X" HorizontalAlignment="Left" Height="20" Margin="754,24,0,0" VerticalAlignment="Top" Width="17" Click="Button_Click_1" RenderTransformOrigin="0.5,0.5"/>
+        <Button Content="X" HorizontalAlignment="Left" Height="20" Margin="754,24,0,0" VerticalAlignment="Top" Width="17" RenderTransformOrigin="0.5,0.5"/>
     </Grid>
 </local:UserControlBase>

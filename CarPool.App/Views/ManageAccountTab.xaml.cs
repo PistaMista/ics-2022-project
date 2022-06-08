@@ -24,16 +24,5 @@ namespace CarPool.App.Views
         {
             InitializeComponent();
         }
-        private void btn_logout_click(object sender, RoutedEventArgs e)
-        {
-            MainWindow.myRides.Visibility = Visibility.Hidden;
-
-        }
-        private void btn_addcar_click(object sender, RoutedEventArgs e)
-        {
-            AddCar.Visibility = Visibility.Visible;
-        }
     }
-        
-
 }

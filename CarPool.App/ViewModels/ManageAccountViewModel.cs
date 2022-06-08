@@ -147,8 +147,6 @@ namespace CarPool.App.ViewModels
                 {
                     Model = Model
                 });
-
-                MainWindow.myRides.Visibility = Visibility.Hidden;
             }
         }
     }

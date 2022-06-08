@@ -22,24 +22,10 @@ namespace CarPool.App
     /// </summary>
     public partial class MainWindow : Window
     {
-        public static TabbedWindow? myRides;
         public MainWindow(MainViewModel m)
         {
             InitializeComponent();
-            myRides = MyRides;
             DataContext = m;
-        }
-
-        private void btn_sign_up_Click(object sender, RoutedEventArgs e)
-        {
-            CreateAccount.Visibility = Visibility.Visible;
-            
-        }
-
-        private void btn_login_Click(object sender, RoutedEventArgs e)
-        {
-            Login.Visibility = Visibility.Visible;
-            
         }
     }
 }

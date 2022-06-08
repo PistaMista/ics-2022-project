@@ -62,7 +62,7 @@ namespace CarPool.App.ViewModels
         {
             Rides.Clear();
             var rides = await _rideFacade.GetAsync();
-            Rides.AddRange(rides.Where(x => x.DriverId == selectedUserId || x.Passengers.Exists(y => y.Id == selectedUserId)));
+            Rides.AddRange(rides.Where(x => x.DriverId == selectedUserId || x.Passengers.Exists(y => y.PassengerId == selectedUserId)));
         }
 
         public override void LoadInDesignMode()

@@ -54,14 +54,14 @@ namespace CarPool.App.Wrappers
             set => SetValue(value);
         }
 
-        public ObservableCollection<UserWrapper> Passengers { get; set; } = new();
+        public ObservableCollection<PassengerWrapper> Passengers { get; set; } = new();
         private void InitializeCollectionProperties(RideModel model)
         {
             if (model.Passengers == null)
             {
                 throw new ArgumentException("Passengers cannot be null");
             }
-            Passengers.AddRange(model.Passengers.Select(e => new UserWrapper(e)));
+            Passengers.AddRange(model.Passengers.Select(e => new PassengerWrapper(e)));
 
             RegisterCollection(Passengers, model.Passengers);
         }

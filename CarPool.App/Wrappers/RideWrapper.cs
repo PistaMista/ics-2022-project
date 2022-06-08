@@ -54,6 +54,12 @@ namespace CarPool.App.Wrappers
             set => SetValue(value);
         }
 
+        public CarWrapper? Car
+        {
+            get => GetValue<CarWrapper>();
+            set => SetValue(value);
+        }
+
         public ObservableCollection<PassengerWrapper> Passengers { get; set; } = new();
         private void InitializeCollectionProperties(RideModel model)
         {

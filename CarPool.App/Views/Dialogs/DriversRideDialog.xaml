@@ -1,0 +1,69 @@
+<UserControl
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:local="clr-namespace:CarPool.App.Views"
+        xmlns:viewModels="clr-namespace:CarPool.App.ViewModels"
+        xmlns:Converters="clr-namespace:CarPool.App.Converters" x:Class="CarPool.App.Views.CreateRideDialog"
+        mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance {x:Type viewModels:RideDriverViewModel}}" Height="438">
+    <UserControl.Resources>
+        <Converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+        <Converters:StringToDateTime x:Key="StringToDateTime"/>
+    </UserControl.Resources>
+    <ScrollViewer >
+        <StackPanel Background="#FFE5E5E5" Width="355">
+            <StackPanel x:Name="Textboxes" Orientation="Vertical" Height="215" Margin="10,0,10,0">
+                <Label Content="Start:" Height="26" Width="76" HorizontalAlignment="Left"/>
+                <TextBox x:Name="From" Height="22" TextWrapping="Wrap" Text="{Binding Model.StartLocation}"/>
+                <Label Content="Cíl:" Height="26" Width="76" HorizontalAlignment="Left"/>
+                <TextBox x:Name="To" Height="22" TextWrapping="Wrap" Text="{Binding Model.EndLocation}"/>
+                <Label Content="Čas výjezdu:" Height="26" Width="76" HorizontalAlignment="Left"/>
+                <TextBox x:Name="Departure" Height="22" TextWrapping="Wrap" Text="{Binding Model.StartTime, Converter={StaticResource StringToDateTime}}"/>
+                <Label Content="(formát: DD.MM.YYYY HH:MM)" Width="246" Foreground="Navy" FontSize="10px" HorizontalAlignment="Left"/>
+                <Label Content="Předpokládaná doba jízdy:" Width="200" HorizontalAlignment="Left"/>
+                <TextBox x:Name="TravelTime" Height="22" TextWrapping="Wrap" Text="{Binding Model.Duration}"/>
+            </StackPanel>
+            <StackPanel x:Name="CarSelector" Orientation="Vertical" Margin="10,0,10,0">
+                <Label Content="Dostupná auta:" Height="26" Width="90" HorizontalAlignment="Left"/>
+
+                <ListBox x:Name="CarsListBox" ItemsSource="{Binding AvailableCars}" Height="120">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction Command="{Binding CarSelectedCommand}"
+                                CommandParameter="{Binding SelectedItem, ElementName=CarsListBox}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Column="0" Width="150" VerticalAlignment="Center" HorizontalAlignment="Left" Content="{Binding Manufacturer}" />
+                                <Label Grid.Column="1" Width="330" VerticalAlignment="Center" HorizontalAlignment="Left" Content="{Binding LicensePlate}" />
+                                <Image Margin="0,0,0,0" Grid.Column="2" Width="50" Source="{Binding PhotoUrl}"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </StackPanel>
+            <StackPanel x:Name="Passengers" Orientation="Vertical" Margin="10,10,10,0" Visibility="{Binding IsNew, ConverterParameter=invert, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}">
+                <Label Content="Pasažéři:"/>
+
+                <ListBox x:Name="PassengerList" Height="100" d:ItemsSource="{d:SampleData ItemCount=5}"/>
+                <Button x:Name="RemovePassenger" Content="Odebrat pasažéra"/>
+
+            </StackPanel>
+            <StackPanel x:Name="Buttons" Orientation="Horizontal" Width="324" Height="81">
+                <Button x:Name="Save" Content="Uložit jízdu" Height="47" Width="162" Command="{Binding SaveCommand, Mode=OneWay}"/>
+                <Button x:Name="Delete" Content="Odstranit jízdu" Height="47" Width="162" Command="{Binding DeleteCommand, Mode=OneWay}"/>
+
+            </StackPanel>
+
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

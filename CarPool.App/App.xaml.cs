@@ -71,12 +71,13 @@ namespace CarPool.App
             services.AddSingleton<LoginViewModel>();
 
             services.AddSingleton<RidesViewModel>();
+            services.AddSingleton<MyRidesViewModel>();
 
             services.AddSingleton<ManageAccountViewModel>();
             services.AddSingleton<EditCarViewModel>();
 
-            services.AddSingleton<MyRidesViewModel>();
-            services.AddSingleton<EditRideViewModel>();
+            services.AddSingleton<RideDriverViewModel>();
+            services.AddSingleton<RidePassengerViewModel>();
 
 
             //services.AddSingleton<MainViewModel>();

@@ -18,20 +18,20 @@ namespace CarPool.App.ViewModels
         private readonly RideFacade _rideFacade;
         private readonly IMediator _mediator;
 
-        public MyRidesViewModel(RideFacade rideFacade, IMediator mediator, EditRideViewModel editRideViewModel)
+        public MyRidesViewModel(RideFacade rideFacade, IMediator mediator, RideDriverViewModel editRideViewModel)
         {
             _rideFacade = rideFacade;
             _mediator = mediator;
-            EditRideViewModel = editRideViewModel;
+            RideDriverViewModel = editRideViewModel;
 
             RideSelectedCommand = new AsyncRelayCommand<RideInfoModel>(RideSelected);
 
             NewRideCommand = new RelayCommand(() => {
-                EditRideViewModel.LoadEmpty();
+                RideDriverViewModel.NewRide();
             });
 
-            _mediator.Register<SelectedMessage<UserWrapper>>(async x => {
-                selectedUserId = x.Id;
+            _mediator.Register<UserSignedInMessage<UserWrapper>>(async x => {
+                currentUserId = x.Id;
                 await LoadAsync();
             });
 
@@ -41,27 +41,27 @@ namespace CarPool.App.ViewModels
 
         public ObservableCollection<RideInfoModel> Rides { get; set; } = new();
 
-        public EditRideViewModel EditRideViewModel { get; }
+        public RideDriverViewModel RideDriverViewModel { get; }
 
         public ICommand RideSelectedCommand { get; }
 
         public ICommand NewRideCommand { get; }
 
-        private Guid? selectedUserId;
+        private Guid? currentUserId;
 
         private async Task RideSelected(RideInfoModel? ride)
         {
             if (ride == null)
                 return;
 
-            await EditRideViewModel.LoadAsync(ride.Id);
+            _mediator.Send(new SelectedMessage<RideWrapper> { Id = ride.Id});
         }
 
         public async Task LoadAsync()
         {
             Rides.Clear();
             var rides = await _rideFacade.GetAsync();
-            Rides.AddRange(rides.Where(x => x.DriverId == selectedUserId || x.Passengers.Exists(y => y.PassengerId == selectedUserId)));
+            Rides.AddRange(rides.Where(x => x.DriverId == currentUserId || x.Passengers.Exists(y => y.PassengerId == currentUserId)));
         }
 
         public override void LoadInDesignMode()

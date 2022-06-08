@@ -10,7 +10,7 @@
         xmlns:Converters="clr-namespace:CarPool.App.Converters" x:Class="CarPool.App.MainWindow"
         mc:Ignorable="d"
         controls:DataContext="{controls:DesignInstance {x:Type viewModels:MainViewModel}}"
-        Title="Carpool" Height="488" Width="853"
+        Title="Carpool" Height="525" Width="853"
         ResizeMode="CanResize" 
 >
     <Window.Resources>

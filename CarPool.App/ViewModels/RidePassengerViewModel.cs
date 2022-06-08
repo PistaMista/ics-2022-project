@@ -14,14 +14,14 @@ using CarPool.App.Extensions;
 
 namespace CarPool.App.ViewModels
 {
-    public class EditRideViewModel : ViewModelBase
+    public class RidePassengerViewModel : ViewModelBase
     {
         private readonly IMediator _mediator;
         private readonly RideFacade _rideFacade;
         private readonly CarFacade _carFacade;
         private readonly IMessageDialogService _messageDialogService;
 
-        public EditRideViewModel(
+        public RidePassengerViewModel(
             RideFacade rideFacade,
             CarFacade carFacade,
             IMessageDialogService messageDialogService,
@@ -50,6 +50,8 @@ namespace CarPool.App.ViewModels
             _mediator.Register<UpdateMessage<CarWrapper>>(async _ => await LoadCarsAsync());
             _mediator.Register<DeleteMessage<CarWrapper>>(async _ => await LoadCarsAsync());
         }
+
+        private Guid defaultDriverId = default;
 
         private RideWrapper? _model;
         public RideWrapper? Model

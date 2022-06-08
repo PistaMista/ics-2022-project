@@ -10,7 +10,7 @@
     <TabControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         <TabItem Header="Moje jízdy">
             <Grid Background="#FFE5E5E5">
-                <local:MyRidesTab x:Name="MyRides" HorizontalAlignment="Left" Height="422" Margin="-3,0,0,0" VerticalAlignment="Center" Width="797" DataContext="{Binding MyRidesViewModel}"/>
+                <local:MyRidesTab x:Name="MyRides" HorizontalAlignment="Stretch" Margin="-3,0,0,0" VerticalAlignment="Stretch" DataContext="{Binding MyRidesViewModel}"/>
 
             </Grid>
         </TabItem>

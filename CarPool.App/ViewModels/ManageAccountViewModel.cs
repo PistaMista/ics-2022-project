@@ -39,10 +39,13 @@ namespace CarPool.App.ViewModels
 
             SignoutCommand = new RelayCommand(() => _mediator.Send(new UserSignedOutMessage<UserWrapper>()));
 
+            _mediator.Register<UserSignedInMessage<UserWrapper>>(async x => await LoadUserAsync((Guid)x.Id));
+            _mediator.Register<UserSignedOutMessage<UserWrapper>>(x => UserModel = null);
+
             //CarSelectedCommand = new RelayCommand<CarInfoModel>(CarSelected);
 
-            //SaveCommand = new AsyncRelayCommand(SaveAsync, CanSave);
-            //DeleteCommand = new AsyncRelayCommand(DeleteAsync);
+            SaveChangesCommand = new AsyncRelayCommand(SaveUserAsync, CanSaveUser);
+            DeleteAccountCommand = new AsyncRelayCommand(DeleteUserAsync);
 
             //NewCarCommand = new AsyncRelayCommand(async () => {
             //    await EditCarViewModel.LoadAsync(Guid.Empty);
@@ -66,21 +69,23 @@ namespace CarPool.App.ViewModels
         public EditCarViewModel EditCarViewModel { get; }
 
         public ICommand SignoutCommand { get; }
-        public ICommand SaveCommand { get; }
-        public ICommand DeleteCommand { get; }
+        public ICommand SaveChangesCommand { get; }
+        public ICommand DeleteAccountCommand { get; }
 
         public ICommand NewCarCommand { get; }
         public ICommand CarSelectedCommand { get; }
         public ICommand CarDeleteCommand { get; }
 
 
-        private UserWrapper? _model;
-        public UserWrapper? Model { get => _model; private set
+        private UserWrapper? _userModel;
+        public UserWrapper? UserModel { get => _userModel; private set
             {
-                _model = value;
+                _userModel = value;
                 OnPropertyChanged();
             }
         }
+        private bool CanSaveUser() => UserModel?.IsValid ?? false;
+
 
         private async void CarUpdated(UpdateMessage<CarWrapper> _) => await LoadCarsAsync();
 
@@ -96,34 +101,33 @@ namespace CarPool.App.ViewModels
         {
             Cars.Clear();
             var cars = await _carFacade.GetAsync();
-            Cars.AddRange(cars.Where(x => x.CarOwnerId == Model?.Id));
+            Cars.AddRange(cars.Where(x => x.CarOwnerId == UserModel?.Id));
         }
 
-        public async Task LoadAsync(Guid id)
+        public async Task LoadUserAsync(Guid id)
         {
-            Model = await _userFacade.GetAsync(id) ?? UserModel.Empty;
+            UserModel = await _userFacade.GetAsync(id) ?? BL.Models.UserModel.Empty;
         }
 
-        public async Task SaveAsync()
+        public async Task SaveUserAsync()
         {
-            if (Model == null)
+            if (UserModel == null)
             {
                 throw new InvalidOperationException("Null model cannot be saved");
             }
 
-            Model = await _userFacade.SaveAsync(Model.Model);
-            _mediator.Send(new UpdateMessage<UserWrapper> { Model = Model });
+            UserModel = await _userFacade.SaveAsync(UserModel.Model);
+            _mediator.Send(new UpdateMessage<UserWrapper> { Model = UserModel });
         }
-        private bool CanSave() => Model?.IsValid ?? false;
 
-        public async Task DeleteAsync()
+        public async Task DeleteUserAsync()
         {
-            if (Model is null)
+            if (UserModel is null)
             {
                 throw new InvalidOperationException("Null model cannot be deleted");
             }
 
-            if (Model.Id != Guid.Empty)
+            if (UserModel.Id != Guid.Empty)
             {
                 var delete = _messageDialogService.Show(
                     $"Delete",
@@ -135,7 +139,7 @@ namespace CarPool.App.ViewModels
 
                 try
                 {
-                    await _userFacade.DeleteAsync(Model!.Id);
+                    await _userFacade.DeleteAsync(UserModel!.Id);
                 }
                 catch
                 {
@@ -148,8 +152,10 @@ namespace CarPool.App.ViewModels
 
                 _mediator.Send(new DeleteMessage<UserWrapper>
                 {
-                    Model = Model
+                    Model = UserModel
                 });
+
+                _mediator.Send(new UserSignedOutMessage<UserWrapper>());
             }
         }
     }

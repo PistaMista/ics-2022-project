@@ -27,15 +27,15 @@
             <Grid x:Name="Textboxes" VerticalAlignment="Top" Width="172" Margin="5,10,5,0" HorizontalAlignment="Stretch">
                 <Label Content="Jméno:" HorizontalAlignment="Left" Height="28" VerticalAlignment="Top" Width="69"/>
                 <Label Content="Příjmení:&#xA;" HorizontalAlignment="Left" Height="28" Margin="0,33,0,0" VerticalAlignment="Top" Width="69"/>
-                <TextBox x:Name="FirstName" HorizontalAlignment="Left" Height="22" Margin="61,3,0,0" TextWrapping="Wrap" Text="{Binding Model.FirstName}" VerticalAlignment="Top" Width="100"/>
-                <TextBox x:Name="LastName" HorizontalAlignment="Left" Height="24" Margin="61,35,0,0" TextWrapping="Wrap" Text="{Binding Model.LastName}" VerticalAlignment="Top" Width="100"/>
-                <Button x:Name="SaveAccount" Content="Uložit změny" HorizontalAlignment="Left" Height="18" VerticalAlignment="Top" Width="82" Command="{Binding SaveCommand, Mode=OneWay}" Margin="50,140,0,0"/>
+                <TextBox x:Name="FirstName" HorizontalAlignment="Left" Height="22" Margin="61,3,0,0" TextWrapping="Wrap" Text="{Binding UserModel.FirstName}" VerticalAlignment="Top" Width="100"/>
+                <TextBox x:Name="LastName" HorizontalAlignment="Left" Height="24" Margin="61,35,0,0" TextWrapping="Wrap" Text="{Binding UserModel.LastName}" VerticalAlignment="Top" Width="100"/>
+                <Button x:Name="SaveAccount" Content="Uložit změny" HorizontalAlignment="Left" Height="18" VerticalAlignment="Top" Width="82" Command="{Binding SaveChangesCommand, Mode=OneWay}" Margin="50,140,0,0"/>
             </Grid>
             <Grid x:Name="ProfilePicture" HorizontalAlignment="Center" Height="187" VerticalAlignment="Top" Width="168" Grid.Column="1">
                 <Button x:Name="PickProfileImage" Content="Open" HorizontalAlignment="Center" Height="18" Margin="0,169,0,0" VerticalAlignment="Top" Width="49"/>
-                <Image x:Name="ProfileImage" HorizontalAlignment="Center" Height="173" VerticalAlignment="Top" Width="169" Source="/Views/profile.jpg"/>
+                <Image x:Name="ProfileImage" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="169" Source="{Binding UserModel.PhotoUrl}" Margin="0,0,0,20"/>
             </Grid>
-            <Button x:Name="DeleteAccount" Content="Zrušit účet" HorizontalAlignment="Center" Height="37" VerticalAlignment="Bottom" Width="88" Command="{Binding DeleteCommand, Mode=OneWay}" Grid.Row="1" Margin="0,0,-2,50"/>
+            <Button x:Name="DeleteAccount" Content="Zrušit účet" HorizontalAlignment="Center" Height="37" VerticalAlignment="Bottom" Width="88" Command="{Binding DeleteAccountCommand, Mode=OneWay}" Grid.Row="1" Margin="0,0,-2,50"/>
         </Grid>
         <Grid x:Name="Cars" Grid.Column="1" HorizontalAlignment="Stretch">
             <Grid.RowDefinitions>

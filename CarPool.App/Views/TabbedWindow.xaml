@@ -6,8 +6,8 @@
         xmlns:local="clr-namespace:CarPool.App.Views"
         xmlns:viewModels="clr-namespace:CarPool.App.ViewModels"
         d:DataContext="{d:DesignInstance viewModels:MainViewModel}"
-        mc:Ignorable="d" Height="450" Width="800">
-    <TabControl HorizontalAlignment="Center" Height="450" VerticalAlignment="Top" Width="800">
+        mc:Ignorable="d">
+    <TabControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         <TabItem Header="Moje jízdy">
             <Grid Background="#FFE5E5E5">
                 <local:MyRidesTab x:Name="MyRides" HorizontalAlignment="Left" Height="422" Margin="-3,0,0,0" VerticalAlignment="Center" Width="797" DataContext="{Binding MyRidesViewModel}"/>

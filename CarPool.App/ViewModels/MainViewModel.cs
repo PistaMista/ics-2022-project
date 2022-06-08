@@ -11,7 +11,7 @@ using CarPool.BL.Models;
 
 namespace CarPool.App.ViewModels
 {
-    public class MainViewModel
+    public class MainViewModel : ViewModelBase
     {
         public MainViewModel(CreateAccountViewModel m, LoginViewModel l, ManageAccountViewModel manageAccountViewModel, EditCarViewModel editCarViewModel, RidesViewModel ridesViewModel, MyRidesViewModel myRidesViewModel, EditRideViewModel editRideViewModel, IMediator mediator)
         {
@@ -29,7 +29,13 @@ namespace CarPool.App.ViewModels
             SignInCommand = new AsyncRelayCommand(LoginViewModel.LoadAsync);
         }
 
-        public bool isUserSignedIn { get; private set; } = false;
+        private bool _isUserSignedIn = false;
+        public bool isUserSignedIn { get => _isUserSignedIn; private set
+            {
+                _isUserSignedIn = value;
+                OnPropertyChanged();
+            }
+        }
 
         public ICommand SignInCommand { get; }
         public ICommand RegisterCommand { get; }

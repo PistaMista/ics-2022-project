@@ -13,10 +13,12 @@ namespace CarPool.App.Converters
     {
         public object Convert(object? value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is bool b && b)
-                return Visibility.Visible;
+            bool invert = parameter != null;
 
-            return Visibility.Collapsed;
+            if (value is bool b && b)
+                return invert ? Visibility.Collapsed : Visibility.Visible;
+
+            return invert ? Visibility.Visible : Visibility.Collapsed;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

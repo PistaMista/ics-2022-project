@@ -27,7 +27,7 @@ namespace CarPool.App.ViewModels
             CancelCommand = new RelayCommand(() => Users = null);
         }
 
-        public ObservableCollection<UserInfoModel>? _users = null;
+        private ObservableCollection<UserInfoModel>? _users = null;
         public ObservableCollection<UserInfoModel>? Users { get => _users; private set
             {
                 _users = value;
@@ -47,12 +47,8 @@ namespace CarPool.App.ViewModels
 
         private void UserSignedIn()
         {
-            _mediator.Send(new SelectedMessage<UserWrapper> { Id = selectedUserId });
+            _mediator.Send(new UserSignedInMessage<UserWrapper> { Id = selectedUserId });
         }
-
-        //private async void UserUpdated(UpdateMessage<UserWrapper> _) => await LoadAsync();
-
-        //private async void UserDeleted(DeleteMessage<UserWrapper> _) => await LoadAsync();
 
         public async Task LoadAsync()
         {

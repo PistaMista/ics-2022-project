@@ -39,30 +39,18 @@ namespace CarPool.App.ViewModels
 
             SignoutCommand = new RelayCommand(() => _mediator.Send(new UserSignedOutMessage<UserWrapper>()));
 
-            _mediator.Register<UserSignedInMessage<UserWrapper>>(async x => await LoadUserAsync((Guid)x.Id));
-            _mediator.Register<UserSignedOutMessage<UserWrapper>>(x => UserModel = null);
+            _mediator.Register<UserSignedInMessage<UserWrapper>>(async x => await LoadUserAsync(x.Id ?? default));
+            _mediator.Register<UserSignedOutMessage<UserWrapper>>(x => { UserModel = null; });
 
-            //CarSelectedCommand = new RelayCommand<CarInfoModel>(CarSelected);
+            CarSelectedCommand = new RelayCommand<CarInfoModel>(CarSelected);
 
             SaveChangesCommand = new AsyncRelayCommand(SaveUserAsync, CanSaveUser);
             DeleteAccountCommand = new AsyncRelayCommand(DeleteUserAsync);
 
-            //NewCarCommand = new AsyncRelayCommand(async () => {
-            //    await EditCarViewModel.LoadAsync(Guid.Empty);
-            //    EditCarViewModel.Model.CarOwnerId = Model.Id;
-            //});
-            //CarDeleteCommand = new AsyncRelayCommand(async () =>
-            //{
-            //    await EditCarViewModel.DeleteAsync();
-            //});
+            NewCarCommand = new RelayCommand(() => EditCarViewModel.NewCar());
 
-            //_mediator.Register<SelectedMessage<UserWrapper>>(async x => {
-            //    await LoadAsync(x.Id ?? Guid.Empty);
-            //    await LoadCarsAsync();
-            //});
-
-            //mediator.Register<UpdateMessage<CarWrapper>>(CarUpdated);
-            //mediator.Register<DeleteMessage<CarWrapper>>(CarDeleted);
+            mediator.Register<UpdateMessage<CarWrapper>>(async x => await LoadUserAsync(UserModel?.Id ?? default));
+            mediator.Register<DeleteMessage<CarWrapper>>(async x => await LoadUserAsync(UserModel?.Id ?? default));
         }
 
         public ObservableCollection<CarInfoModel> Cars { get; set; } = new();
@@ -74,7 +62,6 @@ namespace CarPool.App.ViewModels
 
         public ICommand NewCarCommand { get; }
         public ICommand CarSelectedCommand { get; }
-        public ICommand CarDeleteCommand { get; }
 
 
         private UserWrapper? _userModel;
@@ -86,10 +73,6 @@ namespace CarPool.App.ViewModels
         }
         private bool CanSaveUser() => UserModel?.IsValid ?? false;
 
-
-        private async void CarUpdated(UpdateMessage<CarWrapper> _) => await LoadCarsAsync();
-
-        private async void CarDeleted(DeleteMessage<CarWrapper> _) => await LoadCarsAsync();
         private async void CarSelected(CarInfoModel? model) {
             if (model == null)
                 return;
@@ -97,16 +80,13 @@ namespace CarPool.App.ViewModels
             await EditCarViewModel.LoadAsync(model.Id);
         }
 
-        public async Task LoadCarsAsync()
-        {
-            Cars.Clear();
-            var cars = await _carFacade.GetAsync();
-            Cars.AddRange(cars.Where(x => x.CarOwnerId == UserModel?.Id));
-        }
-
         public async Task LoadUserAsync(Guid id)
         {
             UserModel = await _userFacade.GetAsync(id) ?? BL.Models.UserModel.Empty;
+
+            Cars.Clear();
+            var cars = await _carFacade.GetAsync();
+            Cars.AddRange(cars.Where(x => x.CarOwnerId == id));
         }
 
         public async Task SaveUserAsync()

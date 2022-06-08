@@ -8,7 +8,11 @@
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance viewModels:EditCarViewModel}">
     <Grid  Background="#FFE5E5E5">
-        <StackPanel HorizontalAlignment="Stretch" Margin="10,0,10,60" Orientation="Vertical" VerticalAlignment="Stretch">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="292*"/>
+            <RowDefinition Height="53*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Margin="10,0,10,5" Orientation="Vertical">
 
             <Label Content="Výrobce:" Height="26" Width="77" HorizontalAlignment="Left"/>
             <TextBox x:Name="Manufacturer" Height="22" TextWrapping="Wrap" Text="{Binding Model.Manufacturer}" HorizontalAlignment="Stretch"/>
@@ -21,9 +25,12 @@
             <Label Content="Počet míst:" HorizontalAlignment="Left"/>
             <TextBox x:Name="SeatCount" Height="22" TextWrapping="Wrap" Text="{Binding Model.SeatCount}"/>
             <Label Content="URL Fotografie:" Height="26" HorizontalAlignment="Left"/>
-            <TextBox x:Name="ImageUrl" Height="22" TextWrapping="Wrap" Text="{Binding Model.SeatCount}"/>
+            <TextBox x:Name="ImageUrl" Height="22" TextWrapping="Wrap" Text="{Binding Model.PhotoUrl}"/>
         </StackPanel>
-        <Button x:Name="Save" Content="Uložit auto" HorizontalAlignment="Center" Height="47" Margin="0,0,0,5" VerticalAlignment="Bottom" Width="162" Command="{Binding SaveCommand, Mode=OneWay}"/>
+        <StackPanel HorizontalAlignment="Center" Orientation="Vertical" Grid.Row="1" VerticalAlignment="Center" Margin="0,0,0,5">
+            <Button x:Name="Save" Content="Uložit auto" Width="162" Command="{Binding SaveCommand, Mode=OneWay}"/>
+            <Button x:Name="Delete" Content="Odstranit auto" Width="162" Command="{Binding DeleteCommand, Mode=OneWay}"/>
+        </StackPanel>
     </Grid>
 </UserControl>
 

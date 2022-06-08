@@ -27,15 +27,20 @@ namespace CarPool.App.ViewModels
             _mediator = mediator;
 
             SaveCommand = new AsyncRelayCommand(SaveAsync, CanSave);
-            DeleteCommand = new AsyncRelayCommand(DeleteAsync);
+            DeleteCommand = new AsyncRelayCommand(DeleteAsync, CanDelete);
 
             _mediator.Register<SelectedMessage<CarWrapper>>(async x =>
             {
                 await LoadAsync(x.Id ?? Guid.Empty);
             });
+
+            _mediator.Register<UserSignedInMessage<UserWrapper>>(x => defaultOwnerId = x.Id ?? default);
+            _mediator.Register<UserSignedOutMessage<UserWrapper>>(x => Model = null);
         }
 
-        private CarWrapper? _model;
+        private Guid defaultOwnerId = default;
+
+        private CarWrapper? _model = null;
         public CarWrapper? Model
         {
             get => _model; private set
@@ -47,7 +52,13 @@ namespace CarPool.App.ViewModels
 
         public ICommand SaveCommand { get; }
         public ICommand DeleteCommand { get; }
+        private bool CanSave() => Model?.IsValid ?? false;
+        private bool CanDelete() => Model != null && Model.Id != default;
 
+        public void NewCar()
+        {
+            Model = CarModel.Empty with { CarOwnerId = defaultOwnerId };
+        }
 
         public async Task LoadAsync(Guid id)
         {
@@ -66,7 +77,6 @@ namespace CarPool.App.ViewModels
             _mediator.Send(new UpdateMessage<CarWrapper> { Model = Model });
         }
 
-        private bool CanSave() => Model?.IsValid ?? false;
 
         public async Task DeleteAsync()
         {
@@ -100,12 +110,9 @@ namespace CarPool.App.ViewModels
                 {
                     Model = Model
                 });
+
+                Model = null;
             }
         }
-
-        //public override void LoadInDesignMode()
-        //{
-        //    base.LoadInDesignMode();
-        //}
     }
 }

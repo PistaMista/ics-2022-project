@@ -32,8 +32,9 @@
                 <Button x:Name="SaveAccount" Content="Uložit změny" HorizontalAlignment="Left" Height="18" VerticalAlignment="Top" Width="82" Command="{Binding SaveChangesCommand, Mode=OneWay}" Margin="50,140,0,0"/>
             </Grid>
             <Grid x:Name="ProfilePicture" HorizontalAlignment="Center" Height="187" VerticalAlignment="Top" Width="168" Grid.Column="1">
-                <Button x:Name="PickProfileImage" Content="Open" HorizontalAlignment="Center" Height="18" Margin="0,169,0,0" VerticalAlignment="Top" Width="49"/>
                 <Image x:Name="ProfileImage" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="169" Source="{Binding UserModel.PhotoUrl}" Margin="0,0,0,20"/>
+                <Label Content="URL:" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="69"/>
+                <TextBox x:Name="ImageURL" HorizontalAlignment="Stretch" Height="22" Margin="40,5,5,0" TextWrapping="Wrap" Text="{Binding UserModel.PhotoUrl}" VerticalAlignment="Bottom"/>
             </Grid>
             <Button x:Name="DeleteAccount" Content="Zrušit účet" HorizontalAlignment="Center" Height="37" VerticalAlignment="Bottom" Width="88" Command="{Binding DeleteAccountCommand, Mode=OneWay}" Grid.Row="1" Margin="0,0,-2,50"/>
         </Grid>

@@ -3,6 +3,7 @@ using System;
 using CarPool.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarPool.DAL.Migrations
 {
     [DbContext(typeof(CarRideDbContext))]
-    partial class CarRideDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220608130543_AddPassenger")]
+    partial class AddPassenger
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.3");

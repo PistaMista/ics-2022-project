@@ -53,11 +53,11 @@ namespace CarPool.App.ViewModels
                 throw new InvalidOperationException("Null model cannot be saved");
             }
 
-            await _userFacade.SaveAsync(Model.Model);
+            Model = await _userFacade.SaveAsync(Model.Model);
             _mediator.Send(new UpdateMessage<UserWrapper> { Model = Model });
             _mediator.Send(new UserSignedInMessage<UserWrapper> { Id = Model.Id });
 
-            Model = UserModel.Empty;
+            Model = null;
             OnPropertyChanged();
         }
 

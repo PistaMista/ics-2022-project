@@ -28,7 +28,7 @@ public class CarRideDbContext : DbContext
         base.OnModelCreating(modelBuilder);
 
         modelBuilder.Entity<UserEntity>().HasMany(x => x.RidesDriver).WithOne(x => x.Driver);
- 
+        modelBuilder.Entity<PassengerEntity>().HasAlternateKey(c => new { c.PassengerId, c.RideId });
 
         if (_seedDemoData)
         {

@@ -39,6 +39,8 @@ namespace CarPool.App.ViewModels
             SaveCommand = new AsyncRelayCommand(SaveAsync, CanSave);
             DeleteCommand = new AsyncRelayCommand(DeleteAsync, CanDelete);
             CarSelectedCommand = new RelayCommand<CarInfoModel>(CarSelected);
+            PassengerSelectedCommand = new RelayCommand<PassengerWrapper>(PassengerSelected);
+            PassengerRemoveCommand = new AsyncRelayCommand(RemoveSelectedPassenger, CanRemovePassenger);
 
             _mediator.Register<SelectedMessage<RideWrapper>>(async x =>
             {
@@ -87,6 +89,15 @@ namespace CarPool.App.ViewModels
             Model.CarId = model.Id;
         }
 
+        private Guid? selectedPassengerId = null;
+        private void PassengerSelected(PassengerWrapper model)
+        {
+            if (model == null)
+                return;
+
+            selectedPassengerId = model.Id;
+        }
+
         public async Task LoadAvailableCarsAsync()
         {
             AvailableCars.Clear();
@@ -97,6 +108,8 @@ namespace CarPool.App.ViewModels
         public ICommand SaveCommand { get; }
         public ICommand DeleteCommand { get; }
         public ICommand CarSelectedCommand { get; }
+        public ICommand PassengerSelectedCommand { get; }
+        public ICommand PassengerRemoveCommand { get; }
         private bool _isNew = false;
         public bool IsNew { get => _isNew; private set
             {
@@ -106,12 +119,7 @@ namespace CarPool.App.ViewModels
         }
         private bool CanSave() => (Model != null && Model.IsValid);
         private bool CanDelete() => (Model != null && !IsNew && Model.DriverId == defaultDriverId);
-
-        public async Task LoadAsync(Guid id)
-        {
-            Model = await _rideFacade.GetAsync(id) ?? RideModel.Empty;
-            IsNew = Model.Id == default;
-        }
+        private bool CanRemovePassenger() => selectedPassengerId != null;
 
         public async void NewRide()
         {
@@ -122,6 +130,15 @@ namespace CarPool.App.ViewModels
             IsNew = Model.Id == default;
             await LoadAvailableCarsAsync();
         }
+
+        public async Task LoadAsync(Guid id)
+        {
+            Model = await _rideFacade.GetAsync(id) ?? RideModel.Empty;
+            IsNew = Model.Id == default;
+            selectedPassengerId = null;
+        }
+
+        
 
         public async Task SaveAsync()
         {
@@ -170,6 +187,16 @@ namespace CarPool.App.ViewModels
             });
 
             Model = null;
+        }
+
+        private async Task RemoveSelectedPassenger()
+        {
+            if (selectedPassengerId == null)
+                return;
+
+            await _passengerFacade.DeleteAsync(PassengerModel.Empty with { Id = (Guid)selectedPassengerId });
+            _mediator.Send(new UpdateMessage<RideWrapper> { Model = Model });
+            await LoadAsync(Model.Id);
         }
     }
 }

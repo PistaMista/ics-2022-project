@@ -55,6 +55,12 @@
                 <Label Content="Pasažéři:"/>
 
                 <ListBox x:Name="PassengerList" Height="100" ItemsSource="{Binding Model.Passengers}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction Command="{Binding PassengerSelectedCommand}"
+                                CommandParameter="{Binding SelectedItem, ElementName=PassengerList}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <Grid>
@@ -70,7 +76,7 @@
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
-                <Button x:Name="RemovePassenger" Content="Odebrat pasažéra"/>
+                <Button x:Name="RemovePassenger" Content="Odebrat pasažéra" Command="{Binding PassengerRemoveCommand, Mode=OneWay}"/>
 
             </StackPanel>
             <StackPanel x:Name="Buttons" Orientation="Horizontal" Width="324" Height="81">

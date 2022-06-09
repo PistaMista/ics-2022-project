@@ -24,5 +24,14 @@ namespace CarPool.BL.Facades
             PassengerModel passenger = PassengerModel.Empty with { RideId = rideId, PassengerId = userId };
             return await SaveAsync(passenger);
         }
+
+        public async Task RemovePassengerFromRide(Guid userId, Guid rideId)
+        {
+            PassengerInfoModel? toDelete = (await GetAsync()).SingleOrDefault(x => x.PassengerId == userId && x.RideId == rideId);
+            if (toDelete != null)
+            {
+                await DeleteAsync(toDelete.Id);
+            }
+        }
     }
 }

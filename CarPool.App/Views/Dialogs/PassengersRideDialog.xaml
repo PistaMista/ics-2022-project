@@ -1,29 +1,41 @@
-<Window x:Class="CarPool.App.Views.RideInfoDialog"
+<UserControl
   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CarPool.App.Views"
         xmlns:viewModels="clr-namespace:CarPool.App.ViewModels"
+        xmlns:b="http://schemas.microsoft.com/xaml/behaviors" xmlns:Converters="clr-namespace:CarPool.App.Converters" x:Class="CarPool.App.Views.RideInfoDialog"
         mc:Ignorable="d"
-        d:DataContext="{d:DesignInstance viewModels:RidePassengerViewModel}"
-        Title="CreateRideDialog" Height="450" Width="800">
-    <Grid>
-        <Label Content="Start:" HorizontalAlignment="Left" Height="26" Margin="56,50,0,0" VerticalAlignment="Top" Width="77"/>
-        <Label Content="Cíl:" HorizontalAlignment="Left" Height="26" Margin="56,91,0,0" VerticalAlignment="Top" Width="77"/>
-        <Label Content="Čas výjezdu:" HorizontalAlignment="Left" Height="26" Margin="56,131,0,0" VerticalAlignment="Top" Width="77"/>
-        <Label Content="Předpokládaná&#xD;&#xA;doba jízdy:" HorizontalAlignment="Left" Height="44" Margin="56,173,0,0" VerticalAlignment="Top" Width="151"/>
-        <Label Content="Auto:" HorizontalAlignment="Left" Height="26" Margin="56,230,0,0" VerticalAlignment="Top" Width="77"/>
-        <TextBox HorizontalAlignment="Left" Height="22" Margin="151,54,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="144"/>
-        <TextBox HorizontalAlignment="Left" Height="22" Margin="151,91,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="144"/>
-        <TextBox HorizontalAlignment="Left" Height="22" Margin="151,131,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="144"/>
-        <TextBox HorizontalAlignment="Left" Height="22" Margin="151,184,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="144"/>
-        <Button x:Name="btn_add_ride" Content="Vytvořit jízdu" HorizontalAlignment="Left" Height="47" Margin="467,354,0,0" VerticalAlignment="Top" Width="162"/>
-        <TextBox HorizontalAlignment="Left" Height="22" Margin="151,234,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="144"/>
-        <Label Content="Řidič:" HorizontalAlignment="Left" Height="26" Margin="56,269,0,0" VerticalAlignment="Top" Width="77"/>
-        <TextBox HorizontalAlignment="Left" Height="22" Margin="151,273,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="144"/>
-        <Label Content="Spolujezdci:" HorizontalAlignment="Left" Height="26" Margin="422,54,0,0" VerticalAlignment="Top" Width="77"/>
-        <ListBox HorizontalAlignment="Left" Height="68" Margin="499,59,0,0" VerticalAlignment="Top" Width="219" d:ItemsSource="{d:SampleData ItemCount=5}"/>
-        <Label Content="TODO&#xD;&#xA;Tlačitka jízd - spolujezdec/nespolujezdec-řidič" HorizontalAlignment="Left" Height="86" Margin="444,157,0,0" VerticalAlignment="Top" Width="274"/>
-    </Grid>
-</Window>
+        d:DataContext="{d:DesignInstance {x:Type viewModels:RidePassengerViewModel}}" Width="375">
+    <UserControl.Resources>
+        <Converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+    </UserControl.Resources>
+    <ScrollViewer >
+        <StackPanel Background="#FFE5E5E5" Width="355">
+            <StackPanel x:Name="Textboxes" Orientation="Vertical" Margin="10,0,10,0">
+                <Label Content="Start:" Height="26" Width="76" HorizontalAlignment="Left"/>
+                <Label x:Name="Start" Content="{Binding Model.StartLocation}" Height="26" HorizontalAlignment="Stretch" FontWeight="Normal"/>
+                <Label Content="Cíl:" Height="26" Width="76" HorizontalAlignment="Left"/>
+                <Label x:Name="To" Content="{Binding Model.EndLocation}" Height="26" FontWeight="Normal"/>
+                <Label Content="Čas výjezdu:" Height="26" Width="76" HorizontalAlignment="Left"/>
+                <Label x:Name="Departure" Content="{Binding Model.StartTime}" Height="26" FontWeight="Normal"/>
+                <Label Content="(formát: DD.MM.YYYY HH:MM)" Width="246" Foreground="Navy" FontSize="10px" HorizontalAlignment="Left"/>
+                <Label Content="Předpokládaná doba jízdy:" Width="200" HorizontalAlignment="Left"/>
+                <Label x:Name="TravelTime" Content="{Binding Model.Duration}" Height="26" FontWeight="Normal"/>
+            </StackPanel>
+            <StackPanel x:Name="Passengers" Orientation="Vertical" Margin="10,10,10,0">
+                <Label Content="Spolujezdci:"/>
+
+                <ListBox x:Name="PassengerList" Height="100" d:ItemsSource="{d:SampleData ItemCount=5}"/>
+
+            </StackPanel>
+            <Grid x:Name="Buttons" Height="81" Width="324">
+                <Button x:Name="Join" Content="Přidat se" Command="{Binding RideJoinCommand, Mode=OneWay}" Margin="0,10,0,10" Visibility="{Binding IsPassenger, ConverterParameter=invert, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}"/>
+                <Button x:Name="Leave" Content="Opustit" Command="{Binding RideLeaveCommand, Mode=OneWay}" Margin="0,10,0,10" Visibility="{Binding IsPassenger, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}"/>
+
+            </Grid>
+
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

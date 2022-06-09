@@ -54,6 +54,7 @@
                 </ListBox.ItemTemplate>
             </ListBox>
         </StackPanel>
-        <local:CreateRideDialog HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1" DataContext="{Binding RideDriverViewModel, Mode=OneWay}" Visibility="{Binding Model, Converter={StaticResource NullToVisibilityConverter}}"/>
+        <local:CreateRideDialog x:Name="DriversInfo" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1" DataContext="{Binding RideDriverViewModel, Mode=OneWay}" Visibility="{Binding Model, Converter={StaticResource NullToVisibilityConverter}}"/>
+        <local:RideInfoDialog x:Name="PassengersInfo" Visibility="{Binding Model, Converter={StaticResource NullToVisibilityConverter}}" Grid.Column="1" Width="361" DataContext="{Binding RidePassengerViewModel, Mode=OneWay}"/>
     </Grid>
 </UserControl>

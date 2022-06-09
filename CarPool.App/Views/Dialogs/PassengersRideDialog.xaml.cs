@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,7 +17,7 @@ namespace CarPool.App.Views
     /// <summary>
     /// Interaction logic for RideInfoDialog.xaml
     /// </summary>
-    public partial class RideInfoDialog : Window
+    public partial class RideInfoDialog : UserControl
     {
         public RideInfoDialog()
         {

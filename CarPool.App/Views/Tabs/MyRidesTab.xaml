@@ -49,5 +49,6 @@
             <Button x:Name="CreateRide" Content="Vytvořit jízdu" HorizontalAlignment="Center" VerticalAlignment="Center" Width="171" Command="{Binding NewRideCommand, Mode=OneWay}" Grid.Row="2" Height="44"/>
         </Grid>
         <local:CreateRideDialog x:Name="DriversInfo" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Visibility="{Binding Model, Converter={StaticResource NullToVisibilityConverter}}"  DataContext="{Binding RideDriverViewModel, Mode=OneWay}" Grid.Column="1" Margin="0,10,0,10"/>
+        <local:RideInfoDialog x:Name="PassengersInfo" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="1" Margin="0,10,0,10" Visibility="{Binding Model, Converter={StaticResource NullToVisibilityConverter}}" Width="433" DataContext="{Binding RidePassengerViewModel, Mode=OneWay}"/>
     </Grid>
 </UserControl>

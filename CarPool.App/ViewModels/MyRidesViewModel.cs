@@ -18,11 +18,15 @@ namespace CarPool.App.ViewModels
         private readonly RideFacade _rideFacade;
         private readonly IMediator _mediator;
 
-        public MyRidesViewModel(RideFacade rideFacade, IMediator mediator, RideDriverViewModel editRideViewModel)
+        public MyRidesViewModel(RideFacade rideFacade,
+            IMediator mediator,
+            RideDriverViewModel editRideViewModel,
+            RidePassengerViewModel ridePassengerViewModel)
         {
             _rideFacade = rideFacade;
             _mediator = mediator;
             RideDriverViewModel = editRideViewModel;
+            RidePassengerViewModel = ridePassengerViewModel;
 
             RideSelectedCommand = new AsyncRelayCommand<RideInfoModel>(RideSelected);
 
@@ -42,7 +46,7 @@ namespace CarPool.App.ViewModels
         public ObservableCollection<RideInfoModel> Rides { get; set; } = new();
 
         public RideDriverViewModel RideDriverViewModel { get; }
-
+        public RidePassengerViewModel RidePassengerViewModel { get; }
         public ICommand RideSelectedCommand { get; }
 
         public ICommand NewRideCommand { get; }

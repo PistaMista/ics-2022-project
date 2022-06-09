@@ -18,43 +18,49 @@ namespace CarPool.App.ViewModels
     {
         private readonly IMediator _mediator;
         private readonly RideFacade _rideFacade;
-        private readonly CarFacade _carFacade;
+        private readonly PassengerFacade _passengerFacade;
         private readonly IMessageDialogService _messageDialogService;
 
         public RidePassengerViewModel(
             RideFacade rideFacade,
-            CarFacade carFacade,
+            PassengerFacade passengerFacade,
             IMessageDialogService messageDialogService,
             IMediator mediator)
         {
             _rideFacade = rideFacade;
-            _carFacade = carFacade;
+            _passengerFacade = passengerFacade;
 
             _messageDialogService = messageDialogService;
             _mediator = mediator;
 
-            SaveCommand = new AsyncRelayCommand(SaveAsync, CanSave);
-            DeleteCommand = new AsyncRelayCommand(DeleteAsync, CanDelete);
-            CarSelectedCommand = new RelayCommand<CarInfoModel>(CarSelected);
+            RideJoinCommand = new AsyncRelayCommand(JoinRide, () => !IsPassenger);
+            RideLeaveCommand = new AsyncRelayCommand(LeaveRide, () => IsPassenger);
 
             _mediator.Register<SelectedMessage<RideWrapper>>(async x =>
             {
-                await LoadAsync(x.Id ?? Guid.Empty);
+                await LoadAsync(x.Id ?? default);
+                if (Model?.DriverId == userGuid)
+                {
+                    Model = null;
+                }
             });
 
-            _mediator.Register<SelectedMessage<UserWrapper>>(async x => {
-                userGuid = x?.Id ?? Guid.Empty;
-                await LoadCarsAsync();
+            _mediator.Register<UserSignedInMessage<UserWrapper>>(x => {
+                userGuid = x?.Id ?? default;
             });
 
-            _mediator.Register<UpdateMessage<CarWrapper>>(async _ => await LoadCarsAsync());
-            _mediator.Register<DeleteMessage<CarWrapper>>(async _ => await LoadCarsAsync());
+            _mediator.Register<UserSignedOutMessage<UserWrapper>>(x =>
+            {
+                userGuid = default;
+                Model = null;
+            });
         }
 
-        private Guid defaultDriverId = default;
+        private Guid userGuid;
 
-        private RideWrapper? _model;
-        public RideWrapper? Model
+
+        private RideModel? _model = null;
+        public RideModel? Model
         {
             get => _model; set
             {
@@ -63,96 +69,45 @@ namespace CarPool.App.ViewModels
             }
         }
 
-        public ObservableCollection<CarInfoModel> Cars { get; set; } = new();
-        private Guid userGuid;
-
-        private void CarSelected(CarInfoModel model)
+        private bool _isPassenger = false;
+        public bool IsPassenger
         {
-            if (model == null || Model == null)
-                return;
-
-            Model.CarId = model.Id;
-            OnPropertyChanged();
+            get => _isPassenger;
+            private set
+            {
+                _isPassenger = value;
+                OnPropertyChanged();
+            }
         }
-
-        public async Task LoadCarsAsync()
-        {
-            Cars.Clear();
-            var cars = await _carFacade.GetAsync();
-            Cars.AddRange(cars.Where(x => x.CarOwnerId == userGuid));
-            //Cars.AddRange(cars);
-            OnPropertyChanged();
-        }
-
-        public ICommand SaveCommand { get; }
-        public ICommand DeleteCommand { get; }
-        public ICommand CarSelectedCommand { get; }
-
+        public ICommand RideJoinCommand { get; }
+        public ICommand RideLeaveCommand { get; }
 
         public async Task LoadAsync(Guid id)
         {
-            Model = await _rideFacade.GetAsync(id) ?? RideModel.Empty;
+            Model = await _rideFacade.GetAsync(id);
+            IsPassenger = Model?.Passengers.Any(x => x.PassengerId == userGuid) ?? false;
         }
 
-        public void LoadEmpty()
-        {
-            Model = RideModel.Empty;
-            Model.DriverId = userGuid;
-            Model.StartLocation = "Brno";
-        }
-
-        public async Task SaveAsync()
+        private async Task JoinRide()
         {
             if (Model == null)
-            {
-                throw new InvalidOperationException("Null model cannot be saved");
-            }
-
-            Model = await _rideFacade.SaveAsync(Model.Model);
-            _mediator.Send(new UpdateMessage<RideWrapper> { Model = Model });
-        }
-
-        private bool CanSave() => (Model != null && Model.IsValid && Model.DriverId == userGuid);
-        private bool CanDelete() => (Model != null && Model.Id != default(Guid) && Model.DriverId == userGuid);
-
-        public async Task DeleteAsync()
-        {
-            if (Model is null)
                 return;
 
-            if (Model.Id != Guid.Empty)
-            {
-                var delete = _messageDialogService.Show(
-                    $"Delete",
-                    $"Do you want to delete the ride?",
-                    MessageDialogButtonConfiguration.YesNo,
-                    MessageDialogResult.No);
+            await _passengerFacade.AddPassengerToRide(userGuid, Model.Id);
+            await LoadAsync(Model.Id);
 
-                if (delete == MessageDialogResult.No) return;
-
-                try
-                {
-                    await _rideFacade.DeleteAsync(Model!.Id);
-                }
-                catch
-                {
-                    var _ = _messageDialogService.Show(
-                        $"Deleting of ride failed!",
-                        "Deleting failed",
-                        MessageDialogButtonConfiguration.OK,
-                        MessageDialogResult.OK);
-                }
-
-                _mediator.Send(new DeleteMessage<RideWrapper>
-                {
-                    Model = Model
-                });
-            }
+            _mediator.Send(new UpdateMessage<RideWrapper> { Id = Model?.Id });
         }
 
-        //public override void LoadInDesignMode()
-        //{
-        //    base.LoadInDesignMode();
-        //}
+        private async Task LeaveRide()
+        {
+            if (Model == null)
+                return;
+
+            await _passengerFacade.RemovePassengerFromRide(userGuid, Model.Id);
+            Model = null;
+
+            _mediator.Send(new UpdateMessage<RideWrapper> { Id = Model?.Id });
+        }
     }
 }

@@ -43,6 +43,10 @@ namespace CarPool.App.ViewModels
             _mediator.Register<SelectedMessage<RideWrapper>>(async x =>
             {
                 await LoadAsync(x.Id ?? default);
+                if (Model?.DriverId != defaultDriverId)
+                {
+                    Model = null;
+                }
             });
 
             _mediator.Register<UserSignedInMessage<UserWrapper>>(async x => {

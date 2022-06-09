@@ -30,7 +30,7 @@ namespace CarPool.App.ViewModels
                 await LoadAsync();
             });
 
-            RideJoinCommand = new AsyncRelayCommand(JoinRide, CanJoinRide);
+            //RideJoinCommand = new AsyncRelayCommand(JoinRide, CanJoinRide);
 
             _mediator.Register<SelectedMessage<UserWrapper>>(async x => {
                 selectedUserId = x.Id;
@@ -53,7 +53,7 @@ namespace CarPool.App.ViewModels
 
         public ICommand FilterRidesCommand { get; }
 
-        public ICommand RideJoinCommand { get; }
+        //public ICommand RideJoinCommand { get; }
 
         private Guid? selectedUserId;
         private Guid? selectedRideId;
@@ -63,7 +63,7 @@ namespace CarPool.App.ViewModels
             if (ride == null)
                 return;
 
-            selectedRideId = ride.Id;
+            _mediator.Send(new SelectedMessage<RideWrapper> { Id = ride.Id });
         }
 
         public async Task LoadAsync()
@@ -85,16 +85,16 @@ namespace CarPool.App.ViewModels
                ));
         }
 
-        public async Task JoinRide()
-        {
-            if (selectedRideId == null || selectedUserId == null)
-                return;
+        //public async Task JoinRide()
+        //{
+        //    if (selectedRideId == null || selectedUserId == null)
+        //        return;
 
-            await _passangerFacade.AddPassengerToRide(userId: (Guid)selectedUserId, rideId: (Guid)selectedRideId);
-            await LoadAsync();
-            _mediator.Send(new UpdateMessage<RideWrapper>());
-        }
+        //    await _passangerFacade.AddPassengerToRide(userId: (Guid)selectedUserId, rideId: (Guid)selectedRideId);
+        //    await LoadAsync();
+        //    _mediator.Send(new UpdateMessage<RideWrapper>());
+        //}
 
-        private bool CanJoinRide() => selectedRideId != null && selectedUserId != null;
+        //private bool CanJoinRide() => selectedRideId != null && selectedUserId != null;
     }
 }

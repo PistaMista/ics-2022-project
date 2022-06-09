@@ -16,8 +16,6 @@
         <Label Content="Jméno: " HorizontalAlignment="Left" Height="24" Margin="70,108,0,0" VerticalAlignment="Top" Width="61"/>
         <Label Content="Příjmení: " HorizontalAlignment="Left" Height="25" Margin="70,176,0,0" VerticalAlignment="Top" Width="61"/>
         <Button x:Name="btn_registruj" Content="Registruj" HorizontalAlignment="Left" Height="66" Margin="238,339,0,0" VerticalAlignment="Top" Width="223" Command="{Binding RegisterCommand, Mode=OneWay}"/>
-        <Image HorizontalAlignment="Left" Height="111" Margin="548,98,0,0" VerticalAlignment="Top" Width="104" Source="/Views/profile.jpg"/>
-        <Button x:Name="btn_open" Content="Open" HorizontalAlignment="Left" Height="22" Margin="575,237,0,0" VerticalAlignment="Top" Width="50"/>
         <Button Content="X" HorizontalAlignment="Left" Height="20" Margin="754,24,0,0" VerticalAlignment="Top" Width="17" RenderTransformOrigin="0.5,0.5" Command="{Binding CancelCommand, Mode=OneWay}"/>
     </Grid>
 </UserControl>

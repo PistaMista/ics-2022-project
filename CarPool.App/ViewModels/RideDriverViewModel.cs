@@ -57,6 +57,7 @@ namespace CarPool.App.ViewModels
             _mediator.Register<UserSignedOutMessage<UserWrapper>>(x =>
             {
                 defaultDriverId = default;
+                Model = null;
                 AvailableCars.Clear();
             });
 

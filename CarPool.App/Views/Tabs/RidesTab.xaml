@@ -11,6 +11,7 @@
              d:DataContext="{d:DesignInstance {x:Type viewModels:RidesViewModel}}"
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
+        <Converters:NullToVisibilityConverter x:Key="NullToVisibilityConverter"/>
         <Converters:StringToDateTime x:Key="StringToDateTime"/>
     </UserControl.Resources>
     <Grid Background="#FFE5E5E5">
@@ -53,5 +54,6 @@
                 </ListBox.ItemTemplate>
             </ListBox>
         </StackPanel>
+        <local:CreateRideDialog HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1" DataContext="{Binding RideDriverViewModel, Mode=OneWay}" Visibility="{Binding Model, Converter={StaticResource NullToVisibilityConverter}}"/>
     </Grid>
 </UserControl>

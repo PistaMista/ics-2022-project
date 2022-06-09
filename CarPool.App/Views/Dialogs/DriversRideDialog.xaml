@@ -54,7 +54,22 @@
             <StackPanel x:Name="Passengers" Orientation="Vertical" Margin="10,10,10,0" Visibility="{Binding IsNew, ConverterParameter=invert, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}">
                 <Label Content="Pasažéři:"/>
 
-                <ListBox x:Name="PassengerList" Height="100" d:ItemsSource="{d:SampleData ItemCount=5}"/>
+                <ListBox x:Name="PassengerList" Height="100" ItemsSource="{Binding Model.Passengers}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Column="0" Width="90" VerticalAlignment="Center" HorizontalAlignment="Left" Content="{Binding Passenger.FirstName}" />
+                                <Label Grid.Column="1" Width="90" VerticalAlignment="Center" HorizontalAlignment="Left" Content="{Binding Passenger.LastName}" />
+                                <Image Margin="0,0,0,0" Grid.Column="2" Width="50" Source="{Binding Passenger.PhotoUrl}"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
                 <Button x:Name="RemovePassenger" Content="Odebrat pasažéra"/>
 
             </StackPanel>

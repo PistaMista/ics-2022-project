@@ -12,6 +12,19 @@ namespace CarPool.App.Wrappers
 {
     public class PassengerWrapper : ModelWrapper<PassengerModel>
     {
+        public UserWrapper? Passenger
+        {
+            get => GetValue<UserModel>();
+            set => SetValue(value);
+        }
+
+        public RideWrapper? Ride
+        {
+            get => GetValue<RideModel>();
+            set => SetValue(value);
+        }
+
+
         public PassengerWrapper(PassengerModel model)
             : base(model)
         {
@@ -22,8 +35,8 @@ namespace CarPool.App.Wrappers
             yield return null;
         }
 
-        public static implicit operator PassengerWrapper(PassengerModel userModel)
-            => new(userModel);
+        public static implicit operator PassengerWrapper(PassengerModel passengerModel)
+            => new(passengerModel);
 
         public static implicit operator PassengerModel(PassengerWrapper wrapper)
             => wrapper.Model;
